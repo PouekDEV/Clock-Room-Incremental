@@ -4,6 +4,7 @@
             background-color: #0a0a0a;
             font-size: 40px;
             font-family: 'Red Hat Mono', monospace;
+            color: white;
         }
         .center{
             text-align: center;
@@ -31,10 +32,10 @@
             align-items: center;
             cursor: pointer;
             text-transform: uppercase;
-            background-color: #ffffff;
+            background-color: #000000;
             border: 1px solid rgba(51, 51, 51, 0.6);
             border-radius: 10px;
-            color: #000000;
+            color: #ffffff;
             font-weight: 400;
             font-size: 15px;
             font-family: inherit;
@@ -124,7 +125,7 @@
     <div class="ascendtree" id="ascendtree">
         <p class="glow" style="font-size: 30px;">Pick your desired upgrades and go back in time for more prestige</p>
         <br>
-        <button onclick="()">
+        <button onclick="goback()">
             <span class="glow" style="font-size: 20px;">Go back</span>
         </button>
         <br>
@@ -179,7 +180,7 @@
                 <div id="hu6">
                     <img src="src/squircle.png" width="50" height="50"><br>
                     Cookie - 10000 prestige points<br>
-                    "Cookie shaped key?"<br>
+                    "Cookie shaped key or key shaped cookie?"<br>
                     <button onclick="buyhu6()" id="hu6b">
                         <span class="glow" style="font-size: 20px;">BUY</span>
                     </button>
@@ -190,6 +191,18 @@
     </div>
     <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
 </body>
+<!--This needs to be first-->
+<script>
+    // Loading page
+    document.getElementById("ascendtree").style.display = "none";
+    document.getElementById("ascend").style.display = "none";
+    document.getElementById("everything").style.display = "none";
+    document.onload = loading();
+    function loading(){
+        document.getElementById("everything").style.display = "block";
+        document.getElementById("loading").style.display = "none";
+    }
+</script>
 <!--Maybe will be helpfull in future-->
 <script type="text/javascript" src="js/break_infinity.js"></script>
 <!--Game engine import-->

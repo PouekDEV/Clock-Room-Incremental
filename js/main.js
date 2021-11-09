@@ -1,13 +1,4 @@
 // There is a ton and I mean a TON of cookie clicker references so be aware of that I guess
-// Loading page
-document.getElementById("ascendtree").style.display = "none";
-document.getElementById("ascend").style.display = "none";
-document.getElementById("everything").style.display = "none";
-document.onload = loading();
-function loading(){
-    document.getElementById("everything").style.display = "block";
-    document.getElementById("loading").style.display = "none";
-}
 // Values that are saved
 var currency = 0;
 var multiplier = 1;
@@ -58,7 +49,12 @@ function ascendstuff(){
 }
 // Go back from ascend tree
 function goback(){
-
+    // Set variables
+    multiplier = startingmultiplier;
+    isascending = false;
+    // Visibility
+    document.getElementById("everything").style.display = "block";
+    document.getElementById("ascendtree").style.display = "none";
 }
 // Ascending buy upgrades functions
 function buyhu1(){
@@ -110,11 +106,11 @@ var GameID = {
 // Short numbers names
 var ranges = [{
     divider: 1e18,
-    suffix: 'Qua'
+    suffix: 'Qui'
  },
  {
     divider: 1e15,
-    suffix: 'Tri'
+    suffix: 'Qua'
  },
  {
     divider: 1e12,
