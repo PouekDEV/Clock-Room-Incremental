@@ -1,0 +1,197 @@
+<html lang="en">
+    <style>
+        body{
+            background-color: #0a0a0a;
+            font-size: 40px;
+            font-family: 'Red Hat Mono', monospace;
+        }
+        .center{
+            text-align: center;
+        }
+        .multi {
+            position: relative;
+            width: 400px;
+            height: 200px;
+            border: 10px solid rgb(24, 24, 24);
+            border-radius: 25px;
+        }
+        .upgrades{
+            overflow: auto;
+            width: 450px;
+            height: 550px;
+        }
+        button {
+            margin: 0;
+            padding: 10px 20px;
+            height: 60px;
+            width: 150px;
+            outline: none;
+            text-decoration: none;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            text-transform: uppercase;
+            background-color: #ffffff;
+            border: 1px solid rgba(51, 51, 51, 0.6);
+            border-radius: 10px;
+            color: #000000;
+            font-weight: 400;
+            font-size: 15px;
+            font-family: inherit;
+            z-index: 0;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+        }
+        .glow {
+            text-shadow: 0 0 20px #fff;
+            font-size: 70px;
+            text-align: center;
+        }
+        .static {
+            position: absolute;
+            top: 30px;
+            left: 600px;
+        }
+        br {
+            line-height: 10px;
+        }
+        .ascendtree{
+            text-align: center;
+        }
+        .upg{
+            position: absolute;
+            top: 200px;
+            left: 600px;
+            font-size: 20px;
+        }
+    </style>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock Room</title>
+    <link rel="icon" href="src/favicon-32x32.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@1,300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="everything" id="everything">
+        <p style="font-size: 35px; text-align: left; position: absolute; top: 0px;" class="glow">Progressive Upgrades</p>
+        <br><br><br><br><br><br><br><br><br><br><br>
+        <div class="upgrades glow">
+            <div class="multi">
+                <p style="font-size: 30px;">Upgrade multiplier</p>
+                <p style="font-size: 15px;" id="multilv">LV. 0</p>
+                <button onclick="upgrademulti()">
+                    <span class="glow" style="font-size: 15px;" id="upgradevalue">Upgrade</span>
+                </button>
+            </div>
+            <br>
+            <div class="multi">
+                <p style="font-size: 30px;">Cheaper Tick Tocks</p>
+                <p style="font-size: 15px;" id="tocklv">LV. 0</p>
+                <button onclick="cheaperticks()">
+                    <span class="glow" style="font-size: 15px;" id="tockupgradevalue">Upgrade</span>
+                </button>
+            </div>
+        </div>
+        <div class="values static">
+            <p style="text-align: center;" class="glow" id="seconds">You have 0 seconds</p>
+            <p style="text-align: center; font-size: 30px;" id="multiplier" class="glow">0x multiplier</p>
+            <br><br>
+            <p style="text-align: center; font-size: 20px;" class="glow" id="showticks">0 tick tocks</p>
+            <div class="center">
+                <img src="src/hourglass.gif" width="100" height="100" title="Time is passing by... Focus!">
+                <p style="text-align: center; font-size: 15px;" id="nexttick">Time left until next Tick Tock</p>
+                <br>
+                <button onclick="triggerascendscreen()">
+                    <span class="glow" style="font-size: 15px;">Rewind Time</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="ascend" id="ascend">
+        <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
+        <p style="position: absolute; top: 300px; left: 500px;">Do you really want to Rewind Time?</p>
+        <button style="position: absolute; top: 400px; left: 800px;" onclick="ascendstuff()">
+            <span class="glow" style="font-size: 20px;">YES</span>
+        </button>
+        <button style="position: absolute; top: 500px; left: 800px;" onclick="noascend()">
+            <span class="glow" style="font-size: 20px;">no</span>
+        </button>
+    </div>
+    <div class="ascendtree" id="ascendtree">
+        <p class="glow" style="font-size: 30px;">Pick your desired upgrades and go back in time for more prestige</p>
+        <br>
+        <button onclick="()">
+            <span class="glow" style="font-size: 20px;">Go back</span>
+        </button>
+        <br>
+        <p style="font-size: 15px;" class="glow" id="showprestige">You have 0 prestige points</p>
+        <br><br><br><br><br>
+        <div class="upgrades glow" id="prestigeupgrades">
+            <br><br><br><br>
+            <div class="upg">
+                <img src="src/squircle.png" width="50" height="50"><br>
+                Gate - 1 prestige point<br>
+                "Your pass to those sweet upgrades"<br>
+                <button onclick="buyhu1()" id="hu1b">
+                    <span class="glow" style="font-size: 20px;">BUY</span>
+                </button>
+                <br><br>
+                <div id="hu2">
+                    <img src="src/squircle.png" width="50" height="50"><br>
+                    Shop - 25 prestige points<br>
+                    "New things"<br>
+                    <button onclick="buyhu2()" id="hu2b">
+                        <span class="glow" style="font-size: 20px;">BUY</span>
+                    </button>
+                </div>
+                <br><br>
+                <div id="hu3">
+                    <img src="src/squircle.png" width="50" height="50"><br>
+                    Sacrificial multiplier - 100 prestige points<br>
+                    "Sacrifice some multiplier for huge amount of seconds"<br>
+                    <button onclick="buyhu3()" id="hu3b">
+                        <span class="glow" style="font-size: 20px;">BUY</span>
+                    </button>
+                </div>
+                <br><br>
+                <div id="hu4">
+                    <img src="src/squircle.png" width="50" height="50"><br>
+                    Time Travel - 100 prestige points<br>
+                    "Get 10% of your seconds that you had before ascending"<br>
+                    <button onclick="buyhu4()" id="hu4b">
+                        <span class="glow" style="font-size: 20px;">BUY</span>
+                    </button>
+                </div>
+                <br><br>
+                <div id="hu5">
+                    <img src="src/squircle.png" width="50" height="50"><br>
+                    Door - 500 prestige points<br>
+                    "Door to a portal to somewhere..."<br>
+                    <button onclick="buyhu5()" id="hu5b">
+                        <span class="glow" style="font-size: 20px;">BUY</span>
+                    </button>
+                </div>
+                <br><br>
+                <div id="hu6">
+                    <img src="src/squircle.png" width="50" height="50"><br>
+                    Cookie - 10000 prestige points<br>
+                    "Cookie shaped key?"<br>
+                    <button onclick="buyhu6()" id="hu6b">
+                        <span class="glow" style="font-size: 20px;">BUY</span>
+                    </button>
+                </div>
+                <br><br><br><br>
+            </div>
+        </div>
+    </div>
+    <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
+</body>
+<!--Maybe will be helpfull in future-->
+<script type="text/javascript" src="js/break_infinity.js"></script>
+<!--Game engine import-->
+<script src="js/main.js"></script>
+</html>
