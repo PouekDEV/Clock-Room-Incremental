@@ -1,4 +1,6 @@
 // There is a ton and I mean a TON of cookie clicker references so be aware of that I guess
+// Also Im Polish so there can occur some grammar mistakes
+// This applies to all files
 // Values that are saved
 var currency = 0;
 var multiplier = 1;
@@ -25,13 +27,28 @@ var hu5b = false;
 var hu6 = false;
 var hu6b = false;
 // Values that are not saved
-//
-// Ascending
-function ascendstuff(){
-    isascending = true;
+var ascendseconds = 0;
+// Ascend blank screen
+function beforeascendscrren(){
+    ascendseconds = 1;
     // Hide game
     document.getElementById("ascend").style.display = "none";
     document.getElementById("everything").style.display = "none";
+    document.getElementById("ap").style.display = "block";
+    ascendmusic();
+}
+setInterval(() => {
+    if(ascendseconds > 0 && ascendseconds < 6){
+        ascendseconds += 1;
+    }
+    if(ascendseconds == 6){
+        ascendseconds = 7;
+        ascendstuff();
+    }
+},1000)
+// Ascending
+function ascendstuff(){
+    isascending = true;
     // Do maths
     currency = 0;
     multiplier = 0;
@@ -46,9 +63,11 @@ function ascendstuff(){
     cheaperticktockslv = 0;
     // Show tree
     document.getElementById("ascendtree").style.display = "block";
+    document.getElementById("ap").style.display = "none";
 }
 // Go back from ascend tree
 function goback(){
+    menumusic();
     // Set variables
     multiplier = startingmultiplier;
     isascending = false;
