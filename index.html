@@ -1,74 +1,4 @@
 <html lang="en">
-    <style>
-        body{
-            background-color: #0a0a0a;
-            font-size: 40px;
-            font-family: 'Red Hat Mono', monospace;
-            color: white;
-        }
-        .center{
-            text-align: center;
-        }
-        .multi {
-            position: relative;
-            width: 400px;
-            height: 200px;
-            border: 10px solid rgb(24, 24, 24);
-            border-radius: 25px;
-        }
-        .upgrades{
-            overflow: auto;
-            width: 450px;
-            height: 550px;
-        }
-        button {
-            margin: 0;
-            padding: 10px 20px;
-            height: 60px;
-            width: 150px;
-            outline: none;
-            text-decoration: none;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            text-transform: uppercase;
-            background-color: #000000;
-            border: 1px solid rgba(51, 51, 51, 0.6);
-            border-radius: 10px;
-            color: #ffffff;
-            font-weight: 400;
-            font-size: 15px;
-            font-family: inherit;
-            z-index: 0;
-            overflow: hidden;
-            transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
-        }
-        .glow {
-            text-shadow: 0 0 20px #fff;
-            font-size: 70px;
-            text-align: center;
-        }
-        .static {
-            position: absolute;
-            top: 30px;
-            left: 600px;
-        }
-        br {
-            line-height: 10px;
-        }
-        .ascendtree{
-            text-align: center;
-        }
-        .upg{
-            position: absolute;
-            top: 200px;
-            left: 600px;
-            font-size: 20px;
-        }
-        .ap{
-            text-align: center;
-        }
-    </style>
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -78,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@1,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body id="body">
     <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
@@ -88,7 +19,7 @@
         Rewinding Time...
     </div>
     <div class="everything" id="everything">
-        <p style="font-size: 35px; text-align: left; position: absolute; top: 0px;" class="glow">Progressive Upgrades</p>
+        <p style="font-size: 35px; text-align: left; position: absolute; top: 0px;" class="glow">Upgrades</p>
         <br><br><br><br><br><br><br><br><br><br><br>
         <div class="upgrades glow">
             <div class="multi">
@@ -100,10 +31,19 @@
             </div>
             <br>
             <div class="multi">
-                <p style="font-size: 30px;">Cheaper Tick Tocks</p>
+                <p style="font-size: 30px;">Less time consuming Tick Tocks</p>
                 <p style="font-size: 15px;" id="tocklv">LV. 0</p>
                 <button onclick="cheaperticks()">
                     <span class="glow" style="font-size: 15px;" id="tockupgradevalue">Upgrade</span>
+                </button>
+            </div>
+        </div>
+        <div class="upgrades glow" id="shop">
+            <p class="glow">Shop</p>
+            <div class="multi">
+                <p style="font-size: 30px;">Sacrificial Multiplier</p>
+                <button onclick="()">
+                    <span class="glow" style="font-size: 15px;" id="sacrificemulti">Upgrade</span>
                 </button>
             </div>
         </div>

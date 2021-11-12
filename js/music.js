@@ -1,3 +1,5 @@
+// My custom music loading script
+// It might be bad for connections that have speed slower than 1MB/s
 // Loading page
 document.getElementById("ascendtree").style.display = "none";
 document.getElementById("ascend").style.display = "none";
@@ -16,6 +18,12 @@ el.onclick = function () {
         fullload();
     }
 }
+document.onkeydown = function(evt) {
+    evt = evt || window.event;
+    if (evt.keyCode == 32 && elevenload > 0) {
+        end();
+    }
+};
 function loading(){
     console.log("[Loader] Page loaded")
     document.getElementById("loadingtext").innerHTML = "Click anywhere to start"
@@ -33,24 +41,43 @@ setInterval(() => {
         loadmusic();
         elevenload = 12;
     }
-},500)
+},10)
 function loadmusic(){
     document.getElementById("loadingtext").innerHTML = "Loading music..."
     console.log("[Loader] Loading music initiated")
     load();
 }
 function load(){
+    player.volume = 0
     document.getElementById("loadingtext").innerHTML = "Loading ambient music (20.1MB)"
     player.setAttribute('src', 'music/sittinginaroom.wav');
     player.load();
+    player.play();
+    setTimeout(() =>{
+        afterambient();
+    },5000)
+}
+function afterambient(){
     console.log("[Loader] Ambient music loaded (20.1MB)")
     document.getElementById("loadingtext").innerHTML = "Loading welcoming ascend music (1.92MB)"
     player.setAttribute('src','music/ascendstart.wav');
     player.load();
-    console.log("[Loader] Welcoming ascend music loaded (1.92MB)")
-    document.getElementById("loadingtext").innerHTML = "Loading ascend music (2.79MB)"
+    player.play();
+    setTimeout(() => {
+        afterwelcomeascend();
+    },2000)
+}
+function afterwelcomeascend(){
+    console.log("[Loader] Ascend music (loop) loaded (1.92MB)")
+    document.getElementById("loadingtext").innerHTML = "Loading looping ascend music (2.79MB)"
     player.setAttribute('src','music/ascendloop.wav');
     player.load();
+    player.play();
+    setTimeout(() => {
+        end();
+    },2000)
+}
+function end(){
     console.log("[Loader] Ascend music (loop) loaded (2.79MB)")
     document.getElementById("loadingtext").innerHTML = "Done"
     menumusic();

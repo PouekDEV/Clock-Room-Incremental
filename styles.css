@@ -1,0 +1,66 @@
+body{
+    background-color: #0a0a0a;
+    font-size: 40px;
+    font-family: 'Red Hat Mono', monospace;
+    color: white;
+}
+.center{
+    text-align: center;
+}
+.multi {
+    position: relative;
+    width: 400px;
+    height: 250px;
+    border: 10px solid rgb(24, 24, 24);
+    border-radius: 25px;
+}
+.upgrades{
+    width: 450px;
+    height: 550px;
+}
+button {
+    margin: 0;
+    padding: 10px 20px;
+    height: 60px;
+    width: 150px;
+    outline: none;
+    text-decoration: none;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    text-transform: uppercase;
+    background-color: #000000;
+    border: 1px solid rgba(51, 51, 51, 0.6);
+    border-radius: 10px;
+    color: #ffffff;
+    font-weight: 400;
+    font-size: 15px;
+    font-family: inherit;
+    z-index: 0;
+    transition: all 0.3s cubic-bezier(0.02, 0.01, 0.47, 1);
+}
+.glow {
+    text-shadow: 0 0 20px #fff;
+    font-size: 70px;
+    text-align: center;
+}
+.static {
+    position: fixed;
+    top: 30px;
+    left: 600px;
+}
+br {
+    line-height: 10px;
+}
+.ascendtree{
+    text-align: center;
+}
+.upg{
+    position: absolute;
+    top: 200px;
+    left: 600px;
+    font-size: 20px;
+}
+.ap{
+    text-align: center;
+}
