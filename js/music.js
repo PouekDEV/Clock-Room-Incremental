@@ -5,10 +5,12 @@ document.getElementById("ascend").style.display = "none";
 document.getElementById("loading").style.display = "none";
 document.getElementById("everything").style.display = "none";
 document.getElementById("ap").style.display = "none";
+loadsetting();
 // Assigning variables
 var elevenload = 0;
 var gamemoment = 0;
 var internetspeed = 0;
+var musicon;
 var player = document.getElementById('audio');
 document.onload = loading();
 var el = document.getElementById('body')
@@ -24,6 +26,34 @@ document.onkeydown = function(evt) {
         end();
     }
 };
+function loadsetting(){
+    var loadedmusic = JSON.parse(localStorage.getItem("clockroomsettings"));
+    if(loadedmusic == undefined){
+        var savemusic = {
+            musicon: true
+        }
+        localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
+    }
+    else{
+        musicon = loadedmusic.musicon;
+    }
+}
+function savesetting(settingvalue){
+    var savemusic = {
+        musicon: settingvalue
+    }
+    localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
+}
+function changemusicstate(){
+    if(musicon){
+        musicon = false;
+        savesetting(false);
+    }
+    else{
+        musicon = true;
+        savesetting(true);
+    }
+}
 function loading(){
     console.log("[Loader] Page loaded")
     document.getElementById("loadingtext").innerHTML = "Click anywhere to start"
@@ -40,6 +70,14 @@ setInterval(() => {
     if(elevenload == 11){
         checkinternetspeed();
         elevenload = 12;
+    }
+    if(musicon){
+        player.volume = 1;
+        document.getElementById("musicswitch").innerHTML = "on";
+    }
+    if(!musicon){
+        player.volume = 0;
+        document.getElementById("musicswitch").innerHTML = "off";
     }
 },10)
 function checkinternetspeed(){
@@ -103,7 +141,9 @@ function end(){
 function menumusic(){
     gamemoment = 1;
     player.setAttribute('src', 'music/sittinginaroom.wav');
-    player.volume = 1
+    if(musicon){
+        player.volume = 1
+    }
     player.load();
     player.play();
 }
@@ -111,7 +151,9 @@ function menumusic(){
 function ascendmusic(){
     gamemoment = 2;
     player.setAttribute('src','music/ascendstart.wav');
-    player.volume = 0.2
+    if(musicon){
+        player.volume = 0.2
+    }
     player.load();
     player.load();
 }
