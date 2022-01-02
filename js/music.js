@@ -1,5 +1,4 @@
 // My custom music loading script
-// It might be bad for connections that have speed slower than 1MB/s
 // Loading page
 document.getElementById("ascendtree").style.display = "none";
 document.getElementById("ascend").style.display = "none";
@@ -9,6 +8,7 @@ document.getElementById("ap").style.display = "none";
 // Assigning variables
 var elevenload = 0;
 var gamemoment = 0;
+var internetspeed = 0;
 var player = document.getElementById('audio');
 document.onload = loading();
 var el = document.getElementById('body')
@@ -38,10 +38,23 @@ setInterval(() => {
         elevenload += 1;
     }
     if(elevenload == 11){
-        loadmusic();
+        checkinternetspeed();
         elevenload = 12;
     }
 },10)
+function checkinternetspeed(){
+    document.getElementById("loadingtext").innerHTML = "Measuring internet speed..."
+    testConnectionSpeed.run(1.5, function(mbps){internetspeed = mbps; continuecheckofinternet();}, function(mbps){internetspeed = mbps; continuecheckofinternet();} )
+}
+function continuecheckofinternet(){
+    console.log("[Loader] " + internetspeed/8 + "MB/s")
+    if(internetspeed > 0.5){
+        end();
+    }
+    else{
+        loadmusic();
+    }
+}
 function loadmusic(){
     document.getElementById("loadingtext").innerHTML = "Loading music..."
     console.log("[Loader] Loading music initiated")

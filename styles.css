@@ -8,14 +8,15 @@ body{
     text-align: center;
 }
 .multi {
-    position: relative;
-    width: 400px;
-    height: 250px;
-    border: 10px solid rgb(24, 24, 24);
-    border-radius: 25px;
+    margin: auto;
+    width: 60%;
+    border: 5px solid #111111;
+    background-color: #1111115d;
+    border-radius:  40px;
+    padding: 10px;
 }
 .upgrades{
-    width: 450px;
+    width: 600px;
     height: 550px;
 }
 button {
@@ -49,6 +50,11 @@ button {
     top: 30px;
     left: 600px;
 }
+.staticnes {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
 br {
     line-height: 10px;
 }
@@ -63,4 +69,10 @@ br {
 }
 .ap{
     text-align: center;
+}
+a:link {
+    color: white;
+  }
+a:visited {
+  color: white;
 }
