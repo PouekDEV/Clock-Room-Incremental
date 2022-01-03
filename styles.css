@@ -55,6 +55,11 @@ button {
     top: 0px;
     left: 0px;
 }
+.getitbutton{
+    position: relative;
+    top: 0px;
+    left: 106px;
+}
 br {
     line-height: 10px;
 }
@@ -69,6 +74,16 @@ br {
 }
 .ap{
     text-align: center;
+}
+.gate{
+    position: fixed;
+    right: 100px;
+}
+.news{
+    text-align: relative;
+    top: 10px;
+    left: 600px;
+    font-size: 30px;
 }
 a:link {
     color: white;

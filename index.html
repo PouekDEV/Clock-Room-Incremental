@@ -13,6 +13,11 @@
 <body id="body">
     <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
     <p style="position: absolute; top: 500px; left: 700px; font-size: 30px;" id="loadingtext" class="glow">Loading crucial game files...</p>
+    <div class="glow static" id="muchnews">
+        <div class="news multi">
+            <p id="news">Wow message such entertain</p>
+        </div>
+    </div>
     <div class="ap" id="ap">
         <img src="src/hourglass.gif" width="100" height="100" title="Rewinding time...">
         <br>
@@ -52,11 +57,12 @@
                 <p style="font-size: 30px;">Past money</p>
                 <p style="font-size: 15px;">Get 10% of seconds you had before rewinding time</p>
                 <p style="font-size: 15px;" id="showhowmuch"></p>
-                <button onclick="" id="onerewindpastmoney">
-                    <span class="glow" style="font-size: 15px;" id="sacrificemulti">Get it</span>
+                <button onclick="get10percent()" class="getitbutton" id="onerewindpastmoney">
+                    <span class="glow" style="font-size: 15px;">Get it</span>
                 </button>
             </div>
         </div>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br>
         <div class="upgrades glow">
             <p class="glow" style="font-size: 50px;">Settings &</p>
             <p class="glow" style="font-size: 50px;">Info</p>
@@ -85,9 +91,10 @@
             <br>
             <div class="multi">
                 <p style="font-size: 30px;">Other things</p>
-                <a href="https://www.pouekdev.one" style="font-size: 15px;">Main website</a>
-                <a href="https://www.squarepatternstudio.com" style="font-size: 15px;">Studio website</a>
+                <a href="https://www.pouekdev.one" style="font-size: 15px;" target="_blank">Main website</a>
+                <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
                 <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
+                <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
             </div>
             <br>
             <div class="multi">
@@ -110,6 +117,59 @@
             </div>
         </div>
     </div>
+    <!--GATE-->
+    <div class="setting" id="setting">
+        <div class="upgrades glow">
+            <p class="glow" style="font-size: 50px;">Settings &</p>
+            <p class="glow" style="font-size: 50px;">Info</p>
+            <div class="multi">
+                <p style="font-size: 30px;">Music</p>
+                <p style="font-size: 15px;">By deafult turned on to feel the ambient</p>
+                <button onclick="changemusicstate()">
+                    <span class="glow" style="font-size: 15px;" id="musicswitch2">on</span>
+                </button>
+            </div>
+            <br>
+            <div class="multi">
+                <p style="font-size: 30px;">Save</p>
+                <p style="font-size: 15px;">Set of things you can do with your save</p>
+                <p style="font-size: 15px;">Keep in mind that game is saved every 30 seconds</p>
+                <button onclick="">
+                    <span class="glow" style="font-size: 15px;">Save</span>
+                </button>
+                <button onclick="">
+                    <span class="glow" style="font-size: 15px;">Load</span>
+                </button>
+                <button onclick="">
+                    <span class="glow" style="font-size: 15px;">Delete</span>
+                </button>
+            </div>
+            <br>
+            <div class="multi">
+                <p style="font-size: 30px;">Other things</p>
+                <a href="https://www.pouekdev.one" style="font-size: 15px;" target="_blank">Main website</a>
+                <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
+                <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
+                <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
+            </div>
+            <br>
+            <div class="multi">
+                <p style="font-size: 30px;">SoundCloud</p>
+                <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1344965158%3Fsecret_token%3Ds-AEwML54DIrm&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/pouek" title="Pouek_" target="_blank" style="color: #cccccc; text-decoration: none;">Pouek_</a> · <a href="https://soundcloud.com/pouek/sets/clock-room-original-soundtrack/s-AEwML54DIrm" title="Clock Room Original Soundtrack" target="_blank" style="color: #cccccc; text-decoration: none;">Clock Room Original Soundtrack</a></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="stuff2 staticnes" id="gate">
+        <div class="gate center">
+            <p style="text-align: fixed; left: 800px;" class="glow" id="timeleft"></p>
+            <p style="text-align: center; font-size: 30px;" class="glow">Until gate opens</p>
+            <img style="text-align: fixed; right: 300px;" src="src/gate.png" width="300" height="300" onclick="" title="click on it when it opens">
+            <br><br><br><br>
+            <img src="src/shard.png" width="100" height="200" title="Maybe click it?" onclick="clickshard()">
+            <p style="text-align: center; font-size: 20px;" id="shardsamount">Shards</p>
+        </div>
+    </div>
     <div class="ascend staticnes" id="ascend">
         <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
         <p style="position: fixed; top: 300px; left: 500px;">Do you really want to Rewind Time?</p>
@@ -129,62 +189,63 @@
         <br>
         <p style="font-size: 15px;" class="glow" id="showprestige">You have 0 prestige points</p>
         <br><br><br><br><br>
-        <div class="staticness"></div>
-        <div class="upgrades glow" id="prestigeupgrades">
-            <br><br><br><br>
-            <div class="upg">
-                <img src="src/squircle.png" width="50" height="50"><br>
-                Gate - 1 prestige point<br>
-                "Your pass to those sweet upgrades"<br>
-                <button onclick="buyhu1()" id="hu1b">
-                    <span class="glow" style="font-size: 20px;">BUY</span>
-                </button>
-                <br><br>
-                <div id="hu2">
-                    <img src="src/squircle.png" width="50" height="50"><br>
-                    Shop - 25 prestige points<br>
-                    "New things"<br>
-                    <button onclick="buyhu2()" id="hu2b">
-                        <span class="glow" style="font-size: 20px;">BUY</span>
-                    </button>
-                </div>
-                <br><br>
-                <div id="hu3">
-                    <img src="src/squircle.png" width="50" height="50"><br>
-                    Sacrificial multiplier - 100 prestige points<br>
-                    "Sacrifice some multiplier for huge amount of seconds"<br>
-                    <button onclick="buyhu3()" id="hu3b">
-                        <span class="glow" style="font-size: 20px;">BUY</span>
-                    </button>
-                </div>
-                <br><br>
-                <div id="hu4">
-                    <img src="src/squircle.png" width="50" height="50"><br>
-                    Time Travel - 100 prestige points<br>
-                    "Get 10% of your seconds that you had before rewinding time"<br>
-                    <button onclick="buyhu4()" id="hu4b">
-                        <span class="glow" style="font-size: 20px;">BUY</span>
-                    </button>
-                </div>
-                <br><br>
-                <div id="hu5">
-                    <img src="src/squircle.png" width="50" height="50"><br>
-                    Gate - 500 prestige points<br>
-                    "Gate to a portal to somewhere..."<br>
-                    <button onclick="buyhu5()" id="hu5b">
-                        <span class="glow" style="font-size: 20px;">BUY</span>
-                    </button>
-                </div>
-                <br><br>
-                <div id="hu6">
-                    <img src="src/squircle.png" width="50" height="50"><br>
-                    Time Shard - 10000 prestige points<br>
-                    "You can see your whole life in it"<br>
-                    <button onclick="buyhu6()" id="hu6b">
-                        <span class="glow" style="font-size: 20px;">BUY</span>
-                    </button>
-                </div>
+        <div class="ascendupgrades">
+            <div class="upgrades glow" id="prestigeupgrades">
                 <br><br><br><br>
+                <div class="upg">
+                    <img src="src/squircle.png" width="50" height="50"><br>
+                    Gate - 1 prestige point<br>
+                    "Your pass to those sweet upgrades"<br>
+                    <button onclick="buyhu1()" id="hu1b">
+                        <span class="glow" style="font-size: 20px;">BUY</span>
+                    </button>
+                    <br><br>
+                    <div id="hu2">
+                        <img src="src/squircle.png" width="50" height="50"><br>
+                        Shop - 25 prestige points<br>
+                        "New things"<br>
+                        <button onclick="buyhu2()" id="hu2b">
+                            <span class="glow" style="font-size: 20px;">BUY</span>
+                        </button>
+                    </div>
+                    <br><br>
+                    <div id="hu3">
+                        <img src="src/squircle.png" width="50" height="50"><br>
+                        Sacrificial multiplier - 100 prestige points<br>
+                        "Sacrifice some multiplier for huge amount of seconds"<br>
+                        <button onclick="buyhu3()" id="hu3b">
+                            <span class="glow" style="font-size: 20px;">BUY</span>
+                        </button>
+                    </div>
+                    <br><br>
+                    <div id="hu4">
+                        <img src="src/squircle.png" width="50" height="50"><br>
+                        Time Travel - 100 prestige points<br>
+                        "Get 10% of your seconds that you had before rewinding time"<br>
+                        <button onclick="buyhu4()" id="hu4b">
+                            <span class="glow" style="font-size: 20px;">BUY</span>
+                        </button>
+                    </div>
+                    <br><br>
+                    <div id="hu5">
+                        <img src="src/squircle.png" width="50" height="50"><br>
+                        Gate - 500 prestige points<br>
+                        "Gate to a portal to somewhere..."<br>
+                        <button onclick="buyhu5()" id="hu5b">
+                            <span class="glow" style="font-size: 20px;">BUY</span>
+                        </button>
+                    </div>
+                    <br><br>
+                    <div id="hu6">
+                        <img src="src/squircle.png" width="50" height="50"><br>
+                        Time Shard - 10000 prestige points<br>
+                        "You can see your whole life in it"<br>
+                        <button onclick="buyhu6()" id="hu6b">
+                            <span class="glow" style="font-size: 20px;">BUY</span>
+                        </button>
+                    </div>
+                    <br><br><br><br>
+                </div>
             </div>
         </div>
     </div>
@@ -195,8 +256,8 @@
             <code>audio</code> element.
     </audio>
 </body>
-<script src="js/safetyinformator.js"></script>
-<script src="js/internetspeedchecker.js"></script>
+<script src="js/console.js"></script>
+<script src="js/bandwidthspeed.js"></script>
 <!--This needs to be here because it will not work-->
 <script src="js/music.js"></script>
 <!--Maybe will be helpfull in future-->
