@@ -33,18 +33,19 @@ var hu6b = false;
 // (Gate phase values they count as values for saving)
 var shards = 1;
 var dust = 0;
+var shardcrushingcost = 1000;
+var dustsmeltingcost = 10;
+var completiontowardskey = 0;
 var currentmessage = 0;
-var timeleftinseconds = 14400;
-var isgateopened = false;
+var iskey = false;
+var timeleftinseconds = 3602;
 var issmelteravailable = false;
 // Values that are not saved
 var ascendseconds = 0;
-var messages = ["You have one shard","You have two shards","Shards begin to break but they don't change the size only duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
+var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
 // Test values and stuff (to be removed)
 currency = 10000
 ticktocks = 100000
-//gate = true;
-//goback()
 // Ascend blank screen
 function beforeascendscrren(){
     ascendseconds = 1;
@@ -150,8 +151,8 @@ function buyhu6(){
 }
 // Some game info
 var GameID = {
-    version: 0.15,
-    vname: "Dev motivation alpha",
+    version: 0.8,
+    vname: "Final alpha before beta",
     beta: 0,
     launch: ""
 }
@@ -181,13 +182,17 @@ var ranges = [{
     suffix: 'K'
  }
 ];
+// Show Game Saved message and call save function
+setInterval(() => {
+    $('.slide-in').toggleClass('show');
+},30000)//30000 - 3s
 // Simulate Ticks
 setInterval(() => {
     if(!isascending){
         currency += (1 * multiplier);
         tickleft -= (1 * multiplier);
     }
-    if(gate){
+    if(gate && timeleftinseconds != 0){
         timeleftinseconds -= 1;
     }
 },1000)
@@ -245,7 +250,41 @@ setInterval(() => {
     if(gate){
         document.getElementById("timeleft").innerHTML = (""+timeleftinseconds+"").toHHMMSS();
         document.getElementById("shardsamount").innerHTML = formatNumber(shards) + " shards";
+        document.getElementById("dustamount").innerHTML = formatNumber(dust) + " dust";
+        document.getElementById("shardcrushingcost").innerHTML = formatNumber(shardcrushingcost) + " Shards";
+        document.getElementById("smeltindustcost").innerHTML = formatNumber(dustsmeltingcost) + " Dust";
+        document.getElementById("howmuchkeydone").innerHTML = parseFloat(completiontowardskey.toFixed(1)) + "% Key done";
         document.getElementById("news").innerHTML = messages[currentmessage];
+        if(shards > 1 && shards < 3 && timeleftinseconds != 0){
+            currentmessage = 1;
+        }
+        if(shards > 2 && shards < 21 && timeleftinseconds != 0){
+            currentmessage = 2;
+        }
+        if(shards > 20 && dust < 101 && timeleftinseconds != 0){
+            currentmessage = 3;
+        }
+        if(dust > 100 && dust < 10001 && timeleftinseconds != 0){
+            currentmessage = 4;
+        }
+        if(dust > 10001 && !iskey && timeleftinseconds != 0){
+            currentmessage = 5;
+            issmelteravailable = true;
+        }
+        if(iskey && timeleftinseconds == 0){
+            currentmessage = 6;
+        }
+        if(timeleftinseconds == 0){
+            document.getElementById("untilgateopens").innerHTML = "It's open";
+            currentmessage = 7;
+        }
+        if(issmelteravailable){
+            document.getElementById("smelter").style.display = "block";
+        }
+        if(completiontowardskey >= 100){
+            completiontowardskey = 100;
+            iskey = true;
+        }
     }
 },100)
 // Update the look of ascend upgrades when looking at tree
@@ -339,7 +378,35 @@ function get10percent(){
 }
 function clickshard(){
     if(gate){
-        shards += shards/2;
+        shards += shards;
+    }
+}
+function crushshards(){
+    if(gate){
+        if(shards >= shardcrushingcost){
+            shards -= shardcrushingcost;
+            shardcrushingcost += 1000;
+            dust += 100;
+        }
+    }
+}
+function smeltdust(){
+    if(gate){
+        if(dust >= dustsmeltingcost && completiontowardskey != 100){
+            dust -= dustsmeltingcost;
+            dustsmeltingcost += 10;
+            completiontowardskey += 0.5;
+        }
+    }
+}
+function endofdagame(){
+    if(timeleftinseconds == 0){
+        hide();
+        document.getElementById("endtext").style.display = "block";
+        document.getElementById("endtext2").style.display = "block";
+    }
+    else if(iskey && timeleftinseconds != 0){
+        timeleftinseconds = 0;
     }
 }
 // Ascend screen

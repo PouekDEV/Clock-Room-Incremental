@@ -9,15 +9,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 </head>
 <body id="body">
     <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
     <p style="position: absolute; top: 500px; left: 700px; font-size: 30px;" id="loadingtext" class="glow">Loading crucial game files...</p>
+    <p style="position: absolute; top: 300px; left: 700px; font-size: 70px;" id="endtext" class="glow">You escaped!</p>
+    <p style="position: absolute; top: 450px; left: 700px; font-size: 30px;" id="endtext2" class="glow">But where did you end up?</p>
     <div class="glow static" id="muchnews">
         <div class="news multi">
             <p id="news">Wow message such entertain</p>
         </div>
     </div>
+    <div class="slide-in from-right glow">
+        <div class="slide-in-content saveanim">
+            <p style="font-size: 20px;">Game Saved</p>
+        </div>
+      </div>
     <div class="ap" id="ap">
         <img src="src/hourglass.gif" width="100" height="100" title="Rewinding time...">
         <br>
@@ -87,6 +95,12 @@
                 <button onclick="">
                     <span class="glow" style="font-size: 15px;">Delete</span>
                 </button>
+                <button onclick="">
+                    <span class="glow" style="font-size: 15px;">Export</span>
+                </button>
+                <button onclick="">
+                    <span class="glow" style="font-size: 15px;">Import</span>
+                </button>
             </div>
             <br>
             <div class="multi">
@@ -95,6 +109,7 @@
                 <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
                 <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
                 <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
+                <p style="font-size: 15px;"><a href="src/credits.txt" target="_blank">Credits</a></p>
             </div>
             <br>
             <div class="multi">
@@ -143,6 +158,12 @@
                 <button onclick="">
                     <span class="glow" style="font-size: 15px;">Delete</span>
                 </button>
+                <button onclick="">
+                    <span class="glow" style="font-size: 15px;">Export</span>
+                </button>
+                <button onclick="">
+                    <span class="glow" style="font-size: 15px;">Import</span>
+                </button>
             </div>
             <br>
             <div class="multi">
@@ -151,6 +172,7 @@
                 <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
                 <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
                 <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
+                <p style="font-size: 15px;"><a href="src/credits.txt" target="_blank">Credits</a></p>
             </div>
             <br>
             <div class="multi">
@@ -163,11 +185,31 @@
     <div class="stuff2 staticnes" id="gate">
         <div class="gate center">
             <p style="text-align: fixed; left: 800px;" class="glow" id="timeleft"></p>
-            <p style="text-align: center; font-size: 30px;" class="glow">Until gate opens</p>
-            <img style="text-align: fixed; right: 300px;" src="src/gate.png" width="300" height="300" onclick="" title="click on it when it opens">
+            <p style="text-align: center; font-size: 30px;" class="glow" id="untilgateopens">Until gate opens</p>
+            <img style="text-align: fixed; right: 300px;" src="src/gate.png" width="300" height="300" onclick="endofdagame()" title="click on it when it opens">
             <br><br><br><br>
             <img src="src/shard.png" width="100" height="200" title="Maybe click it?" onclick="clickshard()">
             <p style="text-align: center; font-size: 20px;" id="shardsamount">Shards</p>
+            <p style="text-align: center; font-size: 20px;" id="dustamount">Dust</p>
+        </div>
+        <div class="smelter glow">
+            <div class="multi">
+                <p style="font-size: 30px;">Crush Shards</p>
+                <p style="font-size: 15px;">Crushing shards gives you 100 dust</p>
+                <button onclick="crushshards()">
+                    <span class="glow" style="font-size: 15px;" id="shardcrushingcost">100k Shards</span>
+                </button>
+            </div>
+        </div>
+        <div class="smelter2 glow" id="smelter">
+            <div class="multi">
+                <p style="font-size: 30px;">Smelt Dust</p>
+                <p style="font-size: 15px;">Smelting dust gives you 0.1% of required mass for key</p>
+                <p style="font-size: 15px;" id="howmuchkeydone">0.0% Key done</p>
+                <button onclick="smeltdust()">
+                    <span class="glow" style="font-size: 15px;" id="smeltindustcost">10k Dust</span>
+                </button>
+            </div>
         </div>
     </div>
     <div class="ascend staticnes" id="ascend">
@@ -193,6 +235,7 @@
             <div class="upgrades glow" id="prestigeupgrades">
                 <br><br><br><br>
                 <div class="upg">
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
                     <img src="src/squircle.png" width="50" height="50"><br>
                     Gate - 1 prestige point<br>
                     "Your pass to those sweet upgrades"<br>

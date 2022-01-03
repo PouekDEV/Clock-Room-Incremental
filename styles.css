@@ -79,15 +79,60 @@ br {
     position: fixed;
     right: 100px;
 }
+.smelter{
+    position: fixed;
+    top: 250px;
+    right: 1000px;
+}
+.smelter2{
+    position: fixed;
+    top: 250px;
+    right: 550px;
+}
 .news{
-    text-align: relative;
+    text-align: absolute;
     top: 10px;
     left: 600px;
     font-size: 30px;
 }
+.saveanim{
+    text-align: fixed;
+    top: 0px;
+    right: 0px;
+}
 a:link {
     color: white;
-  }
+}
 a:visited {
   color: white;
+}
+/* Code by https://stackoverflow.com/users/5095697/w-stoettinger */
+/* Question https://stackoverflow.com/questions/16989585/css-3-slide-in-from-left-transition */
+.slide-in {
+  z-index: 10;
+  position: absolute;
+  overflow: hidden;
+}
+.slide-in.from-left {
+  left: 0;
+}
+.slide-in.from-right {
+  right: 0;
+}
+.slide-in-content {
+  padding: 5px 20px;
+  background: #0a0a0a;
+  transition: transform .5s ease;
+}
+.slide-in.from-left .slide-in-content {
+  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+}
+.slide-in.from-right .slide-in-content {
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+}
+.slide-in.show .slide-in-content {
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
 }

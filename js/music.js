@@ -1,13 +1,19 @@
 // My custom music loading script
 // Loading page
-document.getElementById("ascendtree").style.display = "none";
-document.getElementById("ascend").style.display = "none";
-document.getElementById("loading").style.display = "none";
-document.getElementById("everything").style.display = "none";
-document.getElementById("ap").style.display = "none";
-document.getElementById("gate").style.display = "none";
-document.getElementById("setting").style.display = "none";
-document.getElementById("muchnews").style.display = "none";
+function hide(){
+    document.getElementById("ascendtree").style.display = "none";
+    document.getElementById("ascend").style.display = "none";
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("everything").style.display = "none";
+    document.getElementById("ap").style.display = "none";
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("setting").style.display = "none";
+    document.getElementById("muchnews").style.display = "none";
+    document.getElementById("endtext").style.display = "none";
+    document.getElementById("endtext2").style.display = "none";
+    document.getElementById("smelter").style.display = "none";
+}
+hide();
 loadsetting();
 // Assigning variables
 var elevenload = 0;
