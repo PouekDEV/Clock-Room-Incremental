@@ -376,13 +376,17 @@ function initsave(){
 // Show Game Saved message and call save function
 setInterval(() => {
     if(cansave){
-        save();
-        $('.slide-in').toggleClass('show');
+        if(!isascending){
+            save();
+            $('.slide-in').toggleClass('show');
+        }
     }
 },30000)//30000 - 3s
 setInterval(() => {
     if(cansave){
-        $('.slide-in').toggleClass('show');
+        if(!isascending){
+            $('.slide-in').toggleClass('show');
+        }
     }
 },32000)
 // Simulate Ticks
