@@ -141,13 +141,13 @@ function loadsave(){
             hu6b = loadedclocksave.hu6b
             shards = loadedclocksave.shards
             dust = loadedclocksave.dust
-            shardcrushingcost = shardcrushingcost
-            dustsmeltingcost = dustsmeltingcost
-            completiontowardskey = completiontowardskey
-            currentmessage = currentmessage
-            iskey = iskey
-            timeleftinseconds = timeleftinseconds
-            issmelteravailable = issmelteravailable
+            shardcrushingcost = loadedclocksave.shardcrushingcost
+            dustsmeltingcost = loadedclocksave.dustsmeltingcost
+            completiontowardskey = loadedclocksave.completiontowardskey
+            currentmessage = loadedclocksave.currentmessage
+            iskey = loadedclocksave.iskey
+            timeleftinseconds = loadedclocksave.timeleftinseconds
+            issmelteravailable = loadedclocksave.issmelteravailable
             save();
         }
         else if(loadedclocksave.versionsave <= GameID.version && importingsave){
@@ -182,13 +182,13 @@ function loadsave(){
                 hu6b = loadedclocksave.hu6b
                 shards = loadedclocksave.shards
                 dust = loadedclocksave.dust
-                shardcrushingcost = shardcrushingcost
-                dustsmeltingcost = dustsmeltingcost
-                completiontowardskey = completiontowardskey
-                currentmessage = currentmessage
-                iskey = iskey
-                timeleftinseconds = timeleftinseconds
-                issmelteravailable = issmelteravailable
+                shardcrushingcost = loadedclocksave.shardcrushingcost
+                dustsmeltingcost = loadedclocksave.dustsmeltingcost
+                completiontowardskey = loadedclocksave.completiontowardskey
+                currentmessage = loadedclocksave.currentmessage
+                iskey = loadedclocksave.iskey
+                timeleftinseconds = loadedclocksave.timeleftinseconds
+                issmelteravailable = loadedclocksave.issmelteravailable
                 save();
                 location.reload();
             }
