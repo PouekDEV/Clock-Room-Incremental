@@ -41,11 +41,199 @@ var iskey = false;
 var timeleftinseconds = 3602;
 var issmelteravailable = false;
 // Values that are not saved
+var viewportHeight = window.innerHeight;
+var viewportWidth = window.innerWidth;
 var ascendseconds = 0;
+var cansave = false;
+var importingsave = false;
 var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
 // Test values and stuff (to be removed)
-currency = 10000
-ticktocks = 100000
+//currency = 10000
+//ticktocks = 100000
+// All save functions
+function save(){
+    var clocksave = {
+        currency: currency,
+        currency10percent: currency10percent,
+        percentgot: percentgot,
+        multiplier: multiplier,
+        startingmultiplier: startingmultiplier,
+        multiplierlevel: multiplierlevel,
+        upgrademultivalue: upgrademultivalue,
+        ticktocks: ticktocks,
+        renewticks: renewticks,
+        tickleft: tickleft,
+        cheaperticktockscost: cheaperticktockscost,
+        cheaperticktockslv: cheaperticktockslv,
+        ascendpoints: ascendpoints,
+        sacrificemultipliercost: sacrificemultipliercost,
+        isascending: isascending,
+        gate: gate,
+        hu1b: hu1b,
+        hu2: hu2,
+        hu2b: hu2b,
+        hu3: hu3,
+        hu3b: hu3b,
+        hu4: hu4,
+        hu4b: hu4b,
+        hu5: hu5,
+        hu5b: hu5b,
+        hu6: hu6,
+        hu6b: hu6b,
+        shards: shards,
+        dust: dust,
+        shardcrushingcost: shardcrushingcost,
+        dustsmeltingcost: dustsmeltingcost,
+        completiontowardskey: completiontowardskey,
+        currentmessage: currentmessage,
+        iskey: iskey,
+        timeleftinseconds: timeleftinseconds,
+        issmelteravailable: issmelteravailable,
+        versionsave: GameID.version
+    }
+    localStorage.setItem("clockroomsave",JSON.stringify(clocksave));
+}
+function loadsave(){
+    if(!importingsave){
+        var loadedclocksave = JSON.parse(localStorage.getItem("clockroomsave"));
+    }
+    else{
+        var savecrypted = prompt("Paste your save here");
+        if(savecrypted != null){
+            var savestringed = atob(savecrypted);
+            var loadedclocksave = JSON.parse(savestringed)
+        }
+    }
+    if(loadedclocksave == null){
+        console.log("No save found starting new game")
+    }
+    else{
+        if(loadedclocksave.versionsave > GameID.version && importingsave){
+            alert("This save file was saved in newer version of the game")
+        }
+        else if(loadedclocksave.versionsave <= GameID.version && !importingsave){
+            currency = loadedclocksave.currency
+            currency10percent = loadedclocksave.currency10percent
+            percentgot = loadedclocksave.percentgot
+            multiplier = loadedclocksave.multiplier
+            startingmultiplier = loadedclocksave.startingmultiplier
+            multiplierlevel = loadedclocksave.multiplierlevel
+            upgrademultivalue = loadedclocksave.upgrademultivalue
+            ticktocks = loadedclocksave.ticktocks
+            renewticks = loadedclocksave.renewticks
+            tickleft = loadedclocksave.tickleft
+            cheaperticktockscost = loadedclocksave.cheaperticktockscost
+            cheaperticktockslv = loadedclocksave.cheaperticktockslv
+            ascendpoints = loadedclocksave.ascendpoints
+            sacrificemultipliercost = loadedclocksave.sacrificemultipliercost
+            isascending = loadedclocksave.isascending
+            gate = loadedclocksave.gate
+            hu1b = loadedclocksave.hu1b
+            hu2 = loadedclocksave.hu2
+            hu2b = loadedclocksave.hu2b
+            hu3 = loadedclocksave.hu3
+            hu3b = loadedclocksave.hu3b
+            hu4 = loadedclocksave.hu4
+            hu4b = loadedclocksave.hu4b
+            hu5 = loadedclocksave.hu5
+            hu5b = loadedclocksave.hu5b
+            hu6 = loadedclocksave.hu6
+            hu6b = loadedclocksave.hu6b
+            shards = loadedclocksave.shards
+            dust = loadedclocksave.dust
+            shardcrushingcost = shardcrushingcost
+            dustsmeltingcost = dustsmeltingcost
+            completiontowardskey = completiontowardskey
+            currentmessage = currentmessage
+            iskey = iskey
+            timeleftinseconds = timeleftinseconds
+            issmelteravailable = issmelteravailable
+            save();
+        }
+        else if(loadedclocksave.versionsave <= GameID.version && importingsave){
+            var r = confirm("Save file is correct. Do you want to load it? \n WARNING Loading this save will overwrite your current one")
+            if(r){
+                currency = loadedclocksave.currency
+                currency10percent = loadedclocksave.currency10percent
+                percentgot = loadedclocksave.percentgot
+                multiplier = loadedclocksave.multiplier
+                startingmultiplier = loadedclocksave.startingmultiplier
+                multiplierlevel = loadedclocksave.multiplierlevel
+                upgrademultivalue = loadedclocksave.upgrademultivalue
+                ticktocks = loadedclocksave.ticktocks
+                renewticks = loadedclocksave.renewticks
+                tickleft = loadedclocksave.tickleft
+                cheaperticktockscost = loadedclocksave.cheaperticktockscost
+                cheaperticktockslv = loadedclocksave.cheaperticktockslv
+                ascendpoints = loadedclocksave.ascendpoints
+                sacrificemultipliercost = loadedclocksave.sacrificemultipliercost
+                isascending = loadedclocksave.isascending
+                gate = loadedclocksave.gate
+                hu1b = loadedclocksave.hu1b
+                hu2 = loadedclocksave.hu2
+                hu2b = loadedclocksave.hu2b
+                hu3 = loadedclocksave.hu3
+                hu3b = loadedclocksave.hu3b
+                hu4 = loadedclocksave.hu4
+                hu4b = loadedclocksave.hu4b
+                hu5 = loadedclocksave.hu5
+                hu5b = loadedclocksave.hu5b
+                hu6 = loadedclocksave.hu6
+                hu6b = loadedclocksave.hu6b
+                shards = loadedclocksave.shards
+                dust = loadedclocksave.dust
+                shardcrushingcost = shardcrushingcost
+                dustsmeltingcost = dustsmeltingcost
+                completiontowardskey = completiontowardskey
+                currentmessage = currentmessage
+                iskey = iskey
+                timeleftinseconds = timeleftinseconds
+                issmelteravailable = issmelteravailable
+                save();
+                location.reload();
+            }
+        }   
+    }
+    if(importingsave){
+        importingsave = false;
+    }
+}
+function importsave(){
+    importingsave = true;
+    loadsave();
+}
+function exportsave(){
+    save();
+    var loadedclocksave = JSON.parse(localStorage.getItem("clockroomsave"));
+    var stringsave = JSON.stringify(loadedclocksave);
+    var basesave = btoa(stringsave);
+    navigator.clipboard.writeText(basesave)
+    setTimeout(() => {
+        alert("Copied save to clipboard")
+    },1000)
+}
+function deletesave(){
+    var r = confirm("Do you want to delete save?")
+    if(r){
+        localStorage.removeItem("clockroomsave");
+        location.reload();
+    }
+}
+function checkgate(){
+    if(viewportHeight >= 950 && viewportWidth >= 1800){
+        if(gate){
+            document.getElementById("gate").style.display = "block";
+            document.getElementById("setting").style.display = "block";
+            document.getElementById("muchnews").style.display = "block";
+        }
+        else{
+            document.getElementById("everything").style.display = "block";
+        }
+    }
+    else{
+        alert("Sorry but your screen is too small \n Come back when you will have acces to some computer")
+    }
+}
 // Ascend blank screen
 function beforeascendscrren(){
     ascendseconds = 1;
@@ -182,10 +370,21 @@ var ranges = [{
     suffix: 'K'
  }
 ];
+function initsave(){
+    cansave = true;
+}
 // Show Game Saved message and call save function
 setInterval(() => {
-    $('.slide-in').toggleClass('show');
+    if(cansave){
+        save();
+        $('.slide-in').toggleClass('show');
+    }
 },30000)//30000 - 3s
+setInterval(() => {
+    if(cansave){
+        $('.slide-in').toggleClass('show');
+    }
+},32000)
 // Simulate Ticks
 setInterval(() => {
     if(!isascending){
@@ -378,7 +577,7 @@ function get10percent(){
 }
 function clickshard(){
     if(gate){
-        shards += shards;
+        shards += shards/2;
     }
 }
 function crushshards(){

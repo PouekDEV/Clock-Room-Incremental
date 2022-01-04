@@ -19,7 +19,7 @@ loadsetting();
 var elevenload = 0;
 var gamemoment = 0;
 var internetspeed = 0;
-var localgame = true;
+var localgame = false;
 var musicon;
 var player = document.getElementById('audio');
 var el = document.querySelector('div');
@@ -40,7 +40,7 @@ el.onclick = function () {
 //};
 function loadsetting(){
     var loadedmusic = JSON.parse(localStorage.getItem("clockroomsettings"));
-    if(loadedmusic == undefined){
+    if(loadedmusic == null){
         var savemusic = {
             musicon: true
         }
@@ -73,6 +73,7 @@ function loading(){
 function fullload(){
     elevenload = 1;
     console.log("[Loader] Recieved a click")
+    loadsave();
     document.getElementById("loadingtext").innerHTML = "Please wait..."
 }
 setInterval(() => {
@@ -152,10 +153,12 @@ function end(){
     document.getElementById("loadingtext").innerHTML = "Done"
     menumusic();
     console.log("[Loader] Done")
-    document.getElementById("everything").style.display = "block";
+    //document.getElementById("everything").style.display = "block";
+    checkgate();
     document.getElementById("loading").style.display = "none";
     document.getElementById("loadingtext").style.display = "none";
     el.scrollTop = 0;
+    initsave();
 }
 // Start main ambient
 function menumusic(){
