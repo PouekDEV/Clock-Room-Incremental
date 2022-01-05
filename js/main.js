@@ -436,7 +436,7 @@ setInterval(() => {
         document.getElementById("showhowmuch").innerHTML = "You can get " + formatNumber(currency10percent);
         document.getElementById("onerewindpastmoney").style.display = "block";
     }
-    else if(hu4b && !isascending && !percentgot){
+    else if(!hu4b && !isascending && !percentgot){
         document.getElementById("showhowmuch").innerHTML = "You don't have this upgrade yet!";
         document.getElementById("onerewindpastmoney").style.display = "none";
     }
@@ -458,6 +458,9 @@ setInterval(() => {
         document.getElementById("smeltindustcost").innerHTML = formatNumber(dustsmeltingcost) + " Dust";
         document.getElementById("howmuchkeydone").innerHTML = parseFloat(completiontowardskey.toFixed(1)) + "% Key done";
         document.getElementById("news").innerHTML = messages[currentmessage];
+        if(shards == 0){
+            shards = 1;
+        }
         if(shards > 1 && shards < 3 && timeleftinseconds != 0){
             currentmessage = 1;
         }
