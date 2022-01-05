@@ -6,7 +6,7 @@ or here -
 # Todo list
 - [ ] make save information not scrollable
 - [ ] finish the beta tests
-- [ ] make sound effects
+- [ ] make sound effects (different for clicking, buying upgrades, buying heaven upgrades, crushing shards, smelting shards, clicking shard, opening gate)
 - [ ] when importing save disable save feature for a brief moment
 - [ ] when loading save disable save feature for a brief moment
 - [ ] prepare itch.io page
