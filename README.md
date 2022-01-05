@@ -6,6 +6,8 @@ or here -
 # Todo list
 - [ ] make save information not scrollable
 - [ ] add CSS tooltips to gate and shard
+- [ ] fix prestige upgrade not showing up when buying upgrade 10% first
+- [ ] fix not substracting prestige points by buying last two prestige upgrades
 - [ ] better credits
 - [ ] finish the beta tests
 - [ ] make sound effects (different for clicking, buying upgrades, buying heaven upgrades, crushing shards, smelting shards, clicking shard, opening gate)
