@@ -98,6 +98,7 @@ function loadsave(){
         var loadedclocksave = JSON.parse(localStorage.getItem("clockroomsave"));
     }
     else{
+        cansave = false;
         var savecrypted = prompt("Paste your save here");
         if(savecrypted != null){
             var savestringed = atob(savecrypted);
@@ -112,6 +113,7 @@ function loadsave(){
             alert("This save file was saved in newer version of the game")
         }
         else if(loadedclocksave.versionsave <= GameID.version && !importingsave){
+            cansave = false;
             currency = loadedclocksave.currency
             currency10percent = loadedclocksave.currency10percent
             percentgot = loadedclocksave.percentgot
@@ -148,6 +150,7 @@ function loadsave(){
             iskey = loadedclocksave.iskey
             timeleftinseconds = loadedclocksave.timeleftinseconds
             issmelteravailable = loadedclocksave.issmelteravailable
+            cansave = true;
             save();
         }
         else if(loadedclocksave.versionsave <= GameID.version && importingsave){
