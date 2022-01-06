@@ -9,6 +9,7 @@ or here -
 - [ ] fix prestige upgrade not showing up when buying upgrade 10% first
 - [ ] fix not substracting prestige points by buying last two prestige upgrades
 - [ ] better credits
+- [ ] allow for moding
 - [ ] finish the beta tests
 - [ ] make sound effects (different for clicking, buying upgrades, buying heaven upgrades, crushing shards, smelting shards, clicking shard, opening gate)
 - [ ] when importing save disable save feature for a brief moment
