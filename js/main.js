@@ -345,7 +345,7 @@ function buyhu6(){
 // Some game info
 var GameID = {
     version: 0.8,
-    vname: "Final alpha before beta",
+    vname: "Polishing",
     beta: 0,
     launch: ""
 }
@@ -386,7 +386,7 @@ setInterval(() => {
             $('.slide-in').toggleClass('show');
         }
     }
-},3000)//30000 - 3s
+},30000)//30000 - 3s
 setInterval(() => {
     if(cansave){
         if(!isascending){
@@ -431,10 +431,16 @@ setInterval(() => {
         updateascendupgrades();
         document.getElementById("showprestige").innerHTML = "You have " + formatNumber(ascendpoints) + " prestige points";
     }
-    if(hu3b && !isascending){
+    if(hu3b && !hu4b && !isascending){
         document.getElementById("shop").style.display = "block";
     }
-    else{
+    if(!hu3b && hu4b && !isascending){
+        document.getElementById("shop").style.display = "block";
+    }
+    if(hu3b && hu4b && !isascending){
+        document.getElementById("shop").style.display = "block";
+    }
+    if(!hu3b && !hu4b && !isascending){
         document.getElementById("shop").style.display = "none";
     }
     if(hu4b && !isascending && !percentgot){
@@ -588,8 +594,11 @@ function get10percent(){
     }
 }
 function clickshard(){
-    if(gate){
+    if(gate && shards < 100000000){
         shards += shards/2;
+    }
+    else if(shards > 100000000){
+        shards = 1;
     }
 }
 function crushshards(){

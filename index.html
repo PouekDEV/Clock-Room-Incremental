@@ -186,9 +186,15 @@
         <div class="gate center">
             <p style="text-align: fixed; left: 800px;" class="glow" id="timeleft"></p>
             <p style="text-align: center; font-size: 30px;" class="glow" id="untilgateopens">Until gate opens</p>
-            <img style="text-align: fixed; right: 300px;" src="src/gate.png" width="300" height="300" onclick="endofdagame()" title="click on it when it opens">
+            <div class="tooltip">
+                <img style="text-align: fixed; right: 300px;" src="src/gate.png" width="300" height="300" onclick="endofdagame()" class="gatebutton">
+                <span class="tooltiptext glow" style="font-size: 15px;">Click it when you will have a key to open it or when time reaches 00:00:00 click to enter it</span>
+            </div>
             <br><br><br><br>
-            <img src="src/shard.png" width="100" height="200" title="Maybe click it?" onclick="clickshard()">
+            <div class="tooltip">
+                <img src="src/shard.png" width="100" height="200" onclick="clickshard()" class="shardbutton">
+                <span class="tooltiptext glow" style="font-size: 15px;">Click it to get crystals</span>
+            </div>
             <p style="text-align: center; font-size: 20px;" id="shardsamount">Shards</p>
             <p style="text-align: center; font-size: 20px;" id="dustamount">Dust</p>
         </div>

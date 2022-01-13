@@ -100,14 +100,47 @@ br {
     top: -10px;
     right: 10px;
 }
+.shardbutton:hover{
+    width: 130px;
+    height: 230px;
+}
+.gatebutton:hover{
+    width: 340px;
+    height: 340px;
+}
 a:link {
     color: white;
 }
 a:visited {
   color: white;
 }
+/* https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_left */
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted black;
+}
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 300px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 10px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+  top: 150px;
+  right: 10%;
+}
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
 /* Code by https://stackoverflow.com/users/5095697/w-stoettinger */
 /* Question https://stackoverflow.com/questions/16989585/css-3-slide-in-from-left-transition */
+/* Slightly modified by me */
 .slide-in {
   z-index: 10;
   overflow: hidden;
