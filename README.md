@@ -5,16 +5,17 @@ or here -
 
 # Todo list
 - [x] make save information not scrollable
-- [ ] add CSS tooltips to gate and shard
-- [ ] fix prestige upgrade not showing up when buying upgrade 10% first
+- [x] add CSS tooltips to gate and shard
+- [x] fix prestige upgrade not showing up when buying upgrade 10% first
 - [x] fix not substracting prestige points by buying last two prestige upgrades
+- [ ] mechanic where when you click too much times your crystals reset to 1
 - [ ] better credits
+- [ ] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
 - [ ] allow for moding
-- [ ] finish the beta tests
 - [ ] make sound effects (different for clicking, buying upgrades, buying heaven upgrades, crushing shards, smelting shards, clicking shard, opening gate)
 - [x] when importing save disable save feature for a brief moment
 - [x] when loading save disable save feature for a brief moment
 - [ ] prepare itch.io page
 - [ ] make trailer
-- [ ] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
+- [ ] finish the beta tests
 - [ ] Release the game 🎉
