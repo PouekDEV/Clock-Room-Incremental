@@ -4,11 +4,10 @@ Play it here -
 or here - 
 
 # Todo list
-- [ ] make save information not scrollable
+- [x] make save information not scrollable
 - [ ] add CSS tooltips to gate and shard
-- [ ] Discord Rich presence
 - [ ] fix prestige upgrade not showing up when buying upgrade 10% first
-- [ ] fix not substracting prestige points by buying last two prestige upgrades
+- [x] fix not substracting prestige points by buying last two prestige upgrades
 - [ ] better credits
 - [ ] allow for moding
 - [ ] finish the beta tests
