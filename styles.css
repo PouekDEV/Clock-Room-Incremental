@@ -96,9 +96,9 @@ br {
     font-size: 30px;
 }
 .saveanim{
-    text-align: fixed;
-    top: 0px;
-    right: 0px;
+    position: fixed;
+    top: -10px;
+    right: 10px;
 }
 a:link {
     color: white;
@@ -110,7 +110,6 @@ a:visited {
 /* Question https://stackoverflow.com/questions/16989585/css-3-slide-in-from-left-transition */
 .slide-in {
   z-index: 10;
-  position: absolute;
   overflow: hidden;
 }
 .slide-in.from-left {

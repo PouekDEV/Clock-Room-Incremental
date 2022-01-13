@@ -105,7 +105,7 @@ function checkinternetspeed(){
     }
 }
 function continuecheckofinternet(){
-    console.log("[Loader] " + internetspeed/8 + "MB/s")
+    console.log("[Loader] " + (internetspeed/8) * 10 + "MB/s")
     if(internetspeed/8 >= 0.5){
         end();
     }

@@ -234,7 +234,7 @@ function checkgate(){
         }
     }
     else{
-        alert("Sorry but your screen is too small \n Come back when you will have acces to some computer")
+        alert("Sorry but your screen is too small \n Come back when you will have acces to a biger screen")
     }
 }
 // Ascend blank screen
@@ -331,12 +331,14 @@ function buyhu4(){
 }
 function buyhu5(){
     if(ascendpoints >= 500){
+        ascendpoints -= 500;
         hu5b = true;
         hu6 = true;
     }
 }
 function buyhu6(){
     if(ascendpoints >= 1000){
+        ascendpoints -= 1000;
         hu6b = true;
     }
 }
@@ -384,7 +386,7 @@ setInterval(() => {
             $('.slide-in').toggleClass('show');
         }
     }
-},30000)//30000 - 3s
+},3000)//30000 - 3s
 setInterval(() => {
     if(cansave){
         if(!isascending){
