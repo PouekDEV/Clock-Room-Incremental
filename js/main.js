@@ -30,7 +30,7 @@ var hu5 = false;
 var hu5b = false;
 var hu6 = false;
 var hu6b = false;
-// (Gate phase values they count as values for saving)
+// Gate phase values (they count as values for saving)
 var shards = 1;
 var dust = 0;
 var shardcrushingcost = 1000;
@@ -44,6 +44,7 @@ var issmelteravailable = false;
 var viewportHeight = window.innerHeight;
 var viewportWidth = window.innerWidth;
 var ascendseconds = 0;
+var onesoundofgate = false;
 var cansave = false;
 var importingsave = false;
 var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
@@ -201,11 +202,21 @@ function loadsave(){
         importingsave = false;
     }
 }
+function presave(){
+    upgrade_click_sound();
+    save();
+}
+function preload(){
+    upgrade_click_sound();
+    loadsave();
+}
 function importsave(){
+    upgrade_click_sound();
     importingsave = true;
     loadsave();
 }
 function exportsave(){
+    upgrade_click_sound();
     save();
     var loadedclocksave = JSON.parse(localStorage.getItem("clockroomsave"));
     var stringsave = JSON.stringify(loadedclocksave);
@@ -216,6 +227,7 @@ function exportsave(){
     },1000)
 }
 function deletesave(){
+    upgrade_click_sound();
     var r = confirm("Do you want to delete save?")
     if(r){
         localStorage.removeItem("clockroomsave");
@@ -234,7 +246,7 @@ function checkgate(){
         }
     }
     else{
-        alert("Sorry but your screen is too small \n Come back when you will have acces to a biger screen")
+        alert("Sorry but your screen is too small \n Come back when you will have acces to a bigger screen")
     }
 }
 // Ascend blank screen
@@ -280,6 +292,7 @@ function ascendstuff(){
 }
 // Go back from ascend tree
 function goback(){
+    upgrade_click_sound();
     menumusic();
     // Set variables
     if(hu6b){
@@ -303,6 +316,7 @@ function goback(){
 // Ascending buy upgrades functions
 function buyhu1(){
     if(ascendpoints >= 1){
+        prestige_upgrade_click_sound();
         ascendpoints -= 1;
         hu1b = true;
         hu2 = true;
@@ -311,6 +325,7 @@ function buyhu1(){
 }
 function buyhu2(){
     if(ascendpoints >= 25){
+        prestige_upgrade_click_sound();
         ascendpoints -= 25;
         hu2b = true;
         hu3 = true;
@@ -319,18 +334,21 @@ function buyhu2(){
 }
 function buyhu3(){
     if(ascendpoints >= 100){
+        prestige_upgrade_click_sound();
         ascendpoints -= 100;
         hu3b = true;
     }
 }
 function buyhu4(){
     if(ascendpoints >= 100){
+        prestige_upgrade_click_sound();
         ascendpoints -= 100;
         hu4b = true;
     }
 }
 function buyhu5(){
     if(ascendpoints >= 500){
+        prestige_upgrade_click_sound();
         ascendpoints -= 500;
         hu5b = true;
         hu6 = true;
@@ -338,6 +356,7 @@ function buyhu5(){
 }
 function buyhu6(){
     if(ascendpoints >= 1000){
+        prestige_upgrade_click_sound();
         ascendpoints -= 1000;
         hu6b = true;
     }
@@ -384,16 +403,12 @@ setInterval(() => {
         if(!isascending){
             save();
             $('.slide-in').toggleClass('show');
+            setTimeout(() =>{
+                $('.slide-in').toggleClass('show');
+            },2000)
         }
     }
 },30000)//30000 - 3s
-setInterval(() => {
-    if(cansave){
-        if(!isascending){
-            $('.slide-in').toggleClass('show');
-        }
-    }
-},32000)
 // Simulate Ticks
 setInterval(() => {
     if(!isascending){
@@ -502,6 +517,10 @@ setInterval(() => {
             completiontowardskey = 100;
             iskey = true;
         }
+        if(!onesoundofgate && timeleftinseconds == 0){
+            onesoundofgate = true;
+            gate_open_sound();
+        }
     }
 },100)
 // Update the look of ascend upgrades when looking at tree
@@ -557,6 +576,7 @@ function updateascendupgrades(){
 }
 // Buttons
 function upgrademulti(){
+    upgrade_click_sound();
     if(currency >= upgrademultivalue){
         multiplierlevel += 1;
         multiplier += 0.1;
@@ -565,6 +585,7 @@ function upgrademulti(){
     }
 }
 function cheaperticks(){
+    upgrade_click_sound();
     if(currency >= cheaperticktockscost){
         if(cheaperticktockslv != 100){
             cheaperticktockslv += 1;
@@ -578,6 +599,7 @@ function cheaperticks(){
     }
 }
 function sacrificemultiplier(){
+    upgrade_click_sound();
     var predict = (multiplier - sacrificemultipliercost);
     if(predict >= 1){
         if(multiplier >= sacrificemultipliercost){
@@ -588,22 +610,25 @@ function sacrificemultiplier(){
     }
 }
 function get10percent(){
+    upgrade_click_sound();
     if(!percentgot){
         currency += currency10percent;
         percentgot = true;
     }
 }
 function clickshard(){
-    if(gate && shards < 100000000){
+    shard_click_sound();
+    if(gate && shards < 100000000000){
         shards += shards/2;
     }
-    else if(shards > 100000000){
+    else if(shards > 100000000000){
         shards = 1;
     }
 }
 function crushshards(){
     if(gate){
         if(shards >= shardcrushingcost){
+            crush_shard_sound();
             shards -= shardcrushingcost;
             shardcrushingcost += 1000;
             dust += 100;
@@ -613,6 +638,7 @@ function crushshards(){
 function smeltdust(){
     if(gate){
         if(dust >= dustsmeltingcost && completiontowardskey != 100){
+            smelt_dust_sound();
             dust -= dustsmeltingcost;
             dustsmeltingcost += 10;
             completiontowardskey += 0.5;
@@ -620,6 +646,7 @@ function smeltdust(){
     }
 }
 function endofdagame(){
+    upgrade_click_sound();
     if(timeleftinseconds == 0){
         hide();
         document.getElementById("endtext").style.display = "block";
@@ -631,9 +658,11 @@ function endofdagame(){
 }
 // Ascend screen
 function triggerascendscreen(){
+    upgrade_click_sound();
     document.getElementById("ascend").style.display = "block";
 }
 function noascend(){
+    upgrade_click_sound();
     document.getElementById("ascend").style.display = "none";
 }
 // Function for making numbers look beautifull

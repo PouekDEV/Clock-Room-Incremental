@@ -57,6 +57,7 @@ function savesetting(settingvalue){
     localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
 }
 function changemusicstate(){
+    upgrade_click_sound();
     if(musicon){
         musicon = false;
         savesetting(false);
@@ -110,6 +111,7 @@ function continuecheckofinternet(){
         end();
     }
     else{
+        alert("It appears that you have a slow internet connection \n This can cause music to cut out")
         loadmusic();
     }
 }

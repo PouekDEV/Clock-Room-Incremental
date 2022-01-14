@@ -86,10 +86,10 @@
                 <p style="font-size: 30px;">Save</p>
                 <p style="font-size: 15px;">Set of things you can do with your save</p>
                 <p style="font-size: 15px;">Keep in mind that game is saved every 30 seconds</p>
-                <button onclick="save()">
+                <button onclick="presave()">
                     <span class="glow" style="font-size: 15px;">Save</span>
                 </button>
-                <button onclick="loadsave()">
+                <button onclick="preload()">
                     <span class="glow" style="font-size: 15px;">Load</span>
                 </button>
                 <button onclick="deletesave()">
@@ -109,7 +109,7 @@
                 <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
                 <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
                 <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
-                <p style="font-size: 15px;"><a href="src/credits.txt" target="_blank">Credits</a></p>
+                <p style="font-size: 15px;"><a href="./credits.html" target="_blank">Credits</a></p>
             </div>
             <br>
             <div class="multi">
@@ -149,10 +149,10 @@
                 <p style="font-size: 30px;">Save</p>
                 <p style="font-size: 15px;">Set of things you can do with your save</p>
                 <p style="font-size: 15px;">Keep in mind that game is saved every 30 seconds</p>
-                <button onclick="save()">
+                <button onclick="presave()">
                     <span class="glow" style="font-size: 15px;">Save</span>
                 </button>
-                <button onclick="loadsave()">
+                <button onclick="preload()">
                     <span class="glow" style="font-size: 15px;">Load</span>
                 </button>
                 <button onclick="deletesave()">
@@ -172,7 +172,7 @@
                 <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
                 <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
                 <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
-                <p style="font-size: 15px;"><a href="src/credits.txt" target="_blank">Credits</a></p>
+                <p style="font-size: 15px;"><a href="./credits.html" target="_blank">Credits</a></p>
             </div>
             <br>
             <div class="multi">
@@ -304,13 +304,18 @@
             Your browser does not support the
             <code>audio</code> element.
     </audio>
+    <audio id="sounds" autoplay style="display: none;" controls>
+        <source src="" type="audio/mpeg">
+            Your browser does not support the
+            <code>audio</code> element.
+    </audio>
 </body>
 <script src="js/console.js"></script>
 <script src="js/bandwidthspeed.js"></script>
 <!--This needs to be here because it will not work-->
 <script src="js/music.js"></script>
-<!--Maybe will be helpfull in future-->
-<script type="text/javascript" src="js/break_infinity.js"></script>
+<script src="js/howler.js"></script>
+<script src="js/sounds.js"></script>
 <!--Game engine import-->
 <script src="js/main.js"></script>
 </html>
