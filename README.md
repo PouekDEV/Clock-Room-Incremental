@@ -13,7 +13,7 @@ or here -
 - [x] when loading save disable save feature for a brief moment
 - [x] better credits
 - [x] make sound effects (different for clicking, buying upgrades, buying heaven upgrades, crushing shards, smelting shards, clicking shard, opening gate)
-- [ ] fix sacrificial multiplier button showing when upgrade is not owned by player
+- [x] fix sacrificial multiplier button showing when upgrade is not owned by player
 - [ ] allow for moding
 - [ ] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
 - [ ] prepare itch.io page
