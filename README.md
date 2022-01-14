@@ -11,10 +11,10 @@ or here -
 - [x] mechanic where when you click too much times your crystals reset to 1
 - [x] when importing save disable save feature for a brief moment
 - [x] when loading save disable save feature for a brief moment
-- [ ] better credits
-- [ ] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
+- [x] better credits
 - [ ] make sound effects (different for clicking, buying upgrades, buying heaven upgrades, crushing shards, smelting shards, clicking shard, opening gate)
 - [ ] allow for moding
+- [ ] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
 - [ ] prepare itch.io page
 - [ ] make trailer
 - [ ] finish the beta tests
