@@ -448,12 +448,18 @@ setInterval(() => {
     }
     if(hu3b && !hu4b && !isascending){
         document.getElementById("shop").style.display = "block";
+        document.getElementById("sacrificetext").style.display = "none";
+        document.getElementById("sacrificebutton").style.display = "block";
     }
     if(!hu3b && hu4b && !isascending){
         document.getElementById("shop").style.display = "block";
+        document.getElementById("sacrificetext").style.display = "block";
+        document.getElementById("sacrificebutton").style.display = "none";
     }
     if(hu3b && hu4b && !isascending){
         document.getElementById("shop").style.display = "block";
+        document.getElementById("sacrificetext").style.display = "none";
+        document.getElementById("sacrificebutton").style.display = "block";
     }
     if(!hu3b && !hu4b && !isascending){
         document.getElementById("shop").style.display = "none";
