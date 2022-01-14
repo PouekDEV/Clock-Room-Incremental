@@ -1,7 +1,7 @@
 // Example mod for Clock Room
 var check = false;
 function initializemod(name){
-    if(name == "example2"){
+    if(name == "example2"){ // Mod name
         check = true;
     }
 }

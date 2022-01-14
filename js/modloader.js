@@ -26,5 +26,15 @@ function modloaded(url,name){
     },1000)
 }
 function mods(){
-    console.log("[MODLOADER] There are " + howmanymods + " mods (" + modnames + ")");
+    var word;
+    var word2;
+    if(howmanymods > 1){
+        word = "are";
+        word2 = "mods";
+    }
+    else{
+        word = "is";
+        word2 = "mod";
+    }
+    console.log("[MODLOADER] There " + word + " " + howmanymods + " " + word2 + " (" + modnames + ")");
 }
