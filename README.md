@@ -12,11 +12,11 @@ or here -
 - [x] when importing save disable save feature for a brief moment
 - [x] when loading save disable save feature for a brief moment
 - [x] better credits
-- [ ] make sound effects (different for clicking, buying upgrades, buying heaven upgrades, crushing shards, smelting shards, clicking shard, opening gate)
-- [ ] rework loading music with https://developer.mozilla.org/en-US/docs/Web/Guide/Audio_and_video_delivery/Cross-browser_audio_basics#buffering
+- [x] make sound effects (different for clicking, buying upgrades, buying heaven upgrades, crushing shards, smelting shards, clicking shard, opening gate)
 - [ ] allow for moding
 - [ ] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
 - [ ] prepare itch.io page
 - [ ] make trailer
 - [ ] finish the beta tests
+- [ ] Make soundcloud soundtrack public
 - [ ] Release the game 🎉
