@@ -19,7 +19,7 @@ Use this code in console
 loadmod("https://example.com/mymod.js","mymod");
 ```
 ## Example mods
-I wrote some example mods for you to better understand how they work
+I wrote some example mods for better understanding how they work
 
 This mod after loading asks you a question if the number is equal to 1
 ```js
@@ -63,4 +63,4 @@ Also checkout [this mod](https://github.com/PouekDEV/Clock-Room-Incremental/blob
 ## What next
 Experiment! 
 You can do everything you want there is no limit!
-I will be very happy to see every mod everyone will create
+I will be very happy to see every mod created
