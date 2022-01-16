@@ -14,7 +14,7 @@ function someactivationfunction(){
 ```
 Mod name is required for loader to call your mod after loading it
 ## How to load mods
-Use this code
+Use this code in console
 ```js
 loadmod("https://example.com/mymod.js","mymod");
 ```
