@@ -205,6 +205,10 @@ function loadsave(){
 function presave(){
     upgrade_click_sound();
     save();
+    $('.slide-in').toggleClass('show');
+    setTimeout(() => {
+        $('.slide-in').toggleClass('show');
+    },2000)
 }
 function preload(){
     upgrade_click_sound();
