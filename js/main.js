@@ -234,6 +234,7 @@ function deletesave(){
         location.reload();
     }
 }
+// Monitor size check
 function checkgate(){
     if(viewportHeight >= 950 && viewportWidth >= 1800){
         if(gate){
