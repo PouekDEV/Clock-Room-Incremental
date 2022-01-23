@@ -2,7 +2,7 @@
 // Function to load a mod
 // requires url to mod file and name
 var howmanymods = 0;
-var modnames = [];
+var modnames2 = [];
 function loadmod(url,name){
     // Initializing script
     let modscript = document.createElement("script");
@@ -21,8 +21,12 @@ function modloaded(url,name){
             throw new Error("[MODLOADER] Aborting loading mod function");
         }
         console.log("[MODLOADER] Loaded 1 new mod '" + name + "' from " + url);
+        $('.mod-in').toggleClass('show');
+        setTimeout(() => {
+            $('.mod-in').toggleClass('show');
+        },1000)
         howmanymods += 1;
-        modnames += [name + ","];
+        modnames2 += [name + ","];
     },1000)
 }
 function mods(){
@@ -36,5 +40,5 @@ function mods(){
         word = "is";
         word2 = "mod";
     }
-    console.log("[MODLOADER] There " + word + " " + howmanymods + " " + word2 + " (" + modnames + ")");
+    console.log("[MODLOADER] There " + word + " " + howmanymods + " " + word2 + " (" + modnames2 + ")");
 }

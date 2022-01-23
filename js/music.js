@@ -3,6 +3,7 @@
 function hide(){
     document.getElementById("ascendtree").style.display = "none";
     document.getElementById("ascend").style.display = "none";
+    document.getElementById("moddim").style.display = "none";
     document.getElementById("loading").style.display = "none";
     document.getElementById("everything").style.display = "none";
     document.getElementById("ap").style.display = "none";
@@ -19,7 +20,7 @@ loadsetting();
 var elevenload = 0;
 var gamemoment = 0;
 var internetspeed = 0;
-var localgame = true;
+var localgame = false;
 var musicon;
 var player = document.getElementById('audio');
 var el = document.querySelector('div');

@@ -30,6 +30,9 @@ var hu5 = false;
 var hu5b = false;
 var hu6 = false;
 var hu6b = false;
+// Mod data (counts as a thing to save)
+var modnames = [];
+var modlinks = [];
 // Gate phase values (they count as values for saving)
 var shards = 1;
 var dust = 0;
@@ -48,9 +51,49 @@ var onesoundofgate = false;
 var cansave = false;
 var importingsave = false;
 var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
-// Test values and stuff (to be removed)
-//currency = 10000
-//ticktocks = 100000
+// Mod stuff
+function showmodmenu(){
+    upgrade_click_sound();
+    document.getElementById("moddim").style.display = "block";
+}
+function hidemodmenu(){
+    upgrade_click_sound();
+    document.getElementById("moddim").style.display = "none";
+}
+function loadnewmods(){
+    upgrade_click_sound();
+    var url = prompt("Paste mod url here");
+    var name = prompt("Paste short mod name here");
+    var r = confirm("Is this correct? \n Mod name: " + name + " \n Mod url: " + url);
+    if(r){
+        loadmod(url,name);
+        modnames.push(name);
+        modlinks.push(url);
+    }
+}
+function startmods(){
+    var howmuchmods = modnames.length;
+    if(howmuchmods == 0){
+        console.log("No past used mods");
+    }
+    while(howmuchmods > 0){
+        howmuchmods -= 1;
+        loadmod(modlinks[howmuchmods],modnames[howmuchmods]);
+        if(howmuchmods == 0){
+            console.log("Loaded all past used mods " + modnames.length);
+        }
+    }
+}
+function deletemoddata(){
+    upgrade_click_sound();
+    var r = confirm("Are you sure you want to delete ALL of mod data?");
+    if(r){
+        modnames = [];
+        modlinks = [];
+        save();
+        location.reload();
+    }
+}
 // All save functions
 function save(){
     var clocksave = {
@@ -90,7 +133,9 @@ function save(){
         iskey: iskey,
         timeleftinseconds: timeleftinseconds,
         issmelteravailable: issmelteravailable,
-        versionsave: GameID.version
+        versionsave: GameID.version,
+        modnames: modnames,
+        modlinks: modlinks
     }
     localStorage.setItem("clockroomsave",JSON.stringify(clocksave));
 }
@@ -151,7 +196,10 @@ function loadsave(){
             iskey = loadedclocksave.iskey
             timeleftinseconds = loadedclocksave.timeleftinseconds
             issmelteravailable = loadedclocksave.issmelteravailable
+            modnames = loadedclocksave.modnames
+            modlinks = loadedclocksave.modlinks
             cansave = true;
+            startmods();
             save();
         }
         else if(loadedclocksave.versionsave <= GameID.version && importingsave){
@@ -193,6 +241,8 @@ function loadsave(){
                 iskey = loadedclocksave.iskey
                 timeleftinseconds = loadedclocksave.timeleftinseconds
                 issmelteravailable = loadedclocksave.issmelteravailable
+                modnames = loadedclocksave.modnames
+                modlinks = loadedclocksave.modlinks
                 save();
                 location.reload();
             }

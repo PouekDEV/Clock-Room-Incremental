@@ -1,6 +1,6 @@
 // Example mod for Clock Room
 function initializemod(name){
-    if(name == "example"){ // Mod name
+    if(name == "example"){ // Shor mod name
         alertme();
     }
 }

@@ -26,12 +26,19 @@
             <p style="font-size: 20px;">Game Saved</p>
         </div>
       </div>
+    <br><br>
+    <div class="mod-in from-right saveanim">
+      <div class="mod-in-content glow">
+          <p style="font-size: 20px;">Loaded mod(s)</p>
+      </div>
+    </div>
     <div class="ap" id="ap">
         <img src="src/hourglass.gif" width="100" height="100" title="Rewinding time...">
         <br>
         Rewinding Time...
     </div>
     <div class="everything" id="everything">
+        <img src="src/wrench.png" width="75" height="75" style="position: absolute; top: 0px; left: 150px;" onclick="showmodmenu()">
         <p style="font-size: 35px; text-align: left; position: absolute; top: 0px;" class="glow">Upgrades</p>
         <br><br><br><br><br><br><br><br><br><br><br>
         <div class="upgrades glow">
@@ -113,11 +120,16 @@
                 <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
                 <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
                 <p style="font-size: 15px;"><a href="./credits.html" target="_blank">Credits</a></p>
+                <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/blob/main/Moding/README.md#how-to-load-mods" target="_blank">Mods (guide)</a></p>
             </div>
             <br>
             <div class="multi">
                 <p style="font-size: 30px;">SoundCloud</p>
                 <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1344965158%3Fsecret_token%3Ds-AEwML54DIrm&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/pouek" title="Pouek_" target="_blank" style="color: #cccccc; text-decoration: none;">Pouek_</a> · <a href="https://soundcloud.com/pouek/sets/clock-room-original-soundtrack/s-AEwML54DIrm" title="Clock Room Original Soundtrack" target="_blank" style="color: #cccccc; text-decoration: none;">Clock Room Original Soundtrack</a></div>
+            </div>
+            <br><br>
+            <div class="formods" id="formods">
+
             </div>
         </div>
         <div class="values static">
@@ -176,11 +188,16 @@
                 <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
                 <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
                 <p style="font-size: 15px;"><a href="./credits.html" target="_blank">Credits</a></p>
+                <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/blob/main/Moding/README.md#how-to-load-mods" target="_blank">Mods (guide)</a></p>
             </div>
             <br>
             <div class="multi">
                 <p style="font-size: 30px;">SoundCloud</p>
                 <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1344965158%3Fsecret_token%3Ds-AEwML54DIrm&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/pouek" title="Pouek_" target="_blank" style="color: #cccccc; text-decoration: none;">Pouek_</a> · <a href="https://soundcloud.com/pouek/sets/clock-room-original-soundtrack/s-AEwML54DIrm" title="Clock Room Original Soundtrack" target="_blank" style="color: #cccccc; text-decoration: none;">Clock Room Original Soundtrack</a></div>
+            </div>
+            <br><br>
+            <div class="formods" id="formods">
+
             </div>
         </div>
     </div>
@@ -225,10 +242,27 @@
         <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
         <p style="position: fixed; top: 300px; left: 500px;">Do you really want to Rewind Time?</p>
         <button style="position: absolute; top: 400px; left: 800px;" onclick="beforeascendscrren()">
-            <span class="glow" style="font-size: 20px;">YES</span>
+            <span class="glow" style="font-size: 20px;">yes</span>
         </button>
         <button style="position: absolute; top: 500px; left: 800px;" onclick="noascend()">
             <span class="glow" style="font-size: 20px;">no</span>
+        </button>
+    </div>
+    <div class="ascend staticnes" id="moddim">
+        <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
+        <p style="position: fixed; top: 250px; left: 770px;">Mod settings</p>
+        <p style="position: fixed; top: 500px; left: 500px;">Mod configurations automatically load and save</p>
+        <button style="position: absolute; top: 400px; left: 600px;" onclick="deletemoddata()">
+            <span class="glow" style="font-size: 20px;">delete mods</span>
+        </button>
+        <button style="position: absolute; top: 400px; left: 800px;" onclick="save()">
+            <span class="glow" style="font-size: 20px;">save mods</span>
+        </button>
+        <button style="position: absolute; top: 400px; left: 1000px;" onclick="loadnewmods()">
+            <span class="glow" style="font-size: 20px;">load new</span>
+        </button>
+        <button style="position: absolute; top: 400px; left: 1200px;" onclick="hidemodmenu()">
+            <span class="glow" style="font-size: 20px;">close</span>
         </button>
     </div>
     <div class="ascendtree" id="ascendtree">
@@ -303,11 +337,6 @@
     </div>
     </div>
     <audio id="audio" autoplay style="display: none;" controls>
-        <source src="" type="audio/mpeg">
-            Your browser does not support the
-            <code>audio</code> element.
-    </audio>
-    <audio id="sounds" autoplay style="display: none;" controls>
         <source src="" type="audio/mpeg">
             Your browser does not support the
             <code>audio</code> element.

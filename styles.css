@@ -168,3 +168,30 @@ a:visited {
   transform: translateX(0);
   -webkit-transform: translateX(0);
 }
+.mod-in {
+  z-index: 10;
+  overflow: hidden;
+}
+.mod-in.from-left {
+  left: 0;
+}
+.mod-in.from-right {
+  right: 0;
+}
+.mod-in-content {
+  padding: 5px 20px;
+  background: #0a0a0a;
+  transition: transform .5s ease;
+}
+.mod-in.from-left .mod-in-content {
+  transform: translateX(-100%);
+  -webkit-transform: translateX(-100%);
+}
+.mod-in.from-right .mod-in-content {
+  transform: translateX(100%);
+  -webkit-transform: translateX(100%);
+}
+.mod-in.show .mod-in-content {
+  transform: translateX(0);
+  -webkit-transform: translateX(0);
+}
