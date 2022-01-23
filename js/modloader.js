@@ -27,7 +27,7 @@ function modloaded(url,name){
         },1000)
         howmanymods += 1;
         modnames2 += [name + ","];
-    },1000)
+    },5000)
 }
 function mods(){
     var word;
