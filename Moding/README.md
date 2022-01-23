@@ -14,10 +14,19 @@ function someactivationfunction(){
 ```
 Mod name is required for loader to call your mod after loading it
 ## How to load mods
-Use this code in console
+### Use this code in console (doesn't work on gamejolt or itch.io)
 ```js
 loadmod("https://example.com/mymod.js","mymod");
 ```
+### Loading mods method 2 (compatible with every version)
+1. Click the wrench icon near upgrades\
+![wrench](https://github.com/PouekDEV/Clock-Room-Incremental/blob/main/Moding/image_2022-01-23_161903.png?raw=true)
+2. From the menu click "Load New" button\
+![menu](https://github.com/PouekDEV/Clock-Room-Incremental/blob/main/Moding/image_2022-01-23_161922.png?raw=true)
+3. Follow the instructions\
+![instructionexample](https://github.com/PouekDEV/Clock-Room-Incremental/blob/main/Moding/image_2022-01-23_161940.png?raw=true)
+### More explanation
+Short mod name is used to call the mod and should be exactly the same as in the mods code
 ## Example mods
 I wrote some example mods for better understanding how they work
 
@@ -25,7 +34,7 @@ This mod after loading asks you a question if the number is equal to 1
 ```js
 // Example mod for Clock Room
 function initializemod(name){
-    if(name == "example"){ // Mod name
+    if(name == "example"){ // Short mod name
         alertme();
     }
 }
@@ -46,7 +55,7 @@ This mod after loading and pressing space will alert you that you pressed space
 // Example mod for Clock Room
 var check = false;
 function initializemod(name){
-    if(name == "example2"){ // Mod name
+    if(name == "example2"){ // Short mod name
         check = true;
     }
 }
