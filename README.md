@@ -18,6 +18,7 @@ or here -
 - [ ] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
 - [ ] finish the beta tests
 - [x] prepare itch.io page
+- [ ] prepare gamejolt page
 - [ ] make trailer
 - [ ] Make soundcloud soundtrack public
 - [ ] Release the game 🎉
