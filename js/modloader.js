@@ -1,4 +1,4 @@
-// Modloader script very similiar to Cookie Clicker mod loading (except you can write a script that will totally change the game or add a new game endings)
+// Modloader script is inspired by Cookie Clicker mod loading
 // Function to load a mod
 // requires url to mod file and name
 var howmanymods = 0;
