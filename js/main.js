@@ -66,23 +66,17 @@ function loadnewmods(){
     var name = prompt("Paste short mod name here");
     var r = confirm("Is this correct? \n Mod name: " + name + " \n Mod url: " + url);
     if(r){
+        if(modnames == undefined){
+            modnames = [];
+            modlinks = [];
+        }
         loadmod(url,name);
         modnames.push(name);
         modlinks.push(url);
     }
 }
 function startmods(){
-    var howmuchmods = modnames.length;
-    if(howmuchmods == 0){
-        console.log("No past used mods");
-    }
-    while(howmuchmods > 0){
-        howmuchmods -= 1;
-        loadmod(modlinks[howmuchmods],modnames[howmuchmods]);
-        if(howmuchmods == 0){
-            console.log("Loaded all past used mods " + modnames.length);
-        }
-    }
+    queuevariables(modlinks,modnames);
 }
 function deletemoddata(){
     upgrade_click_sound();
@@ -290,7 +284,7 @@ function deletesave(){
 }
 // Monitor size check
 function checkgate(){
-    if(viewportHeight >= 950 && viewportWidth >= 1800){
+    if(viewportHeight >= 0 && viewportWidth >= 0){// 950x1800
         if(gate){
             document.getElementById("gate").style.display = "block";
             document.getElementById("setting").style.display = "block";
@@ -423,7 +417,7 @@ var GameID = {
     beta: 0,
     launch: ""
 }
-// Short numbers names
+// Short number names
 var ranges = [{
     divider: 1e18,
     suffix: 'Qui'
@@ -476,6 +470,8 @@ setInterval(() => {
 },1000)
 // Update displayed values
 setInterval(() => {
+    $(".stars").css("width", viewportWidth);
+    $(".stars").css("height", viewportHeight);
     if(currency > 1){
         document.getElementById("seconds").innerHTML = "You have " + formatNumber(currency) + " seconds";
     }

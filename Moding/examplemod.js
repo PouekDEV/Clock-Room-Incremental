@@ -1,6 +1,7 @@
 // Example mod for Clock Room
 function initializemod(name){
     if(name == "example"){ // Shor mod name
+        modready("example"); // Let modloader know that this mod is working
         alertme();
     }
 }

@@ -1,6 +1,7 @@
 var appended = false
 function initializemod(name){
     if(name == "rick"){
+        modready("rick");
         youtube();
     }
 }
