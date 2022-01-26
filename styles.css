@@ -108,6 +108,13 @@ br {
     width: 340px;
     height: 340px;
 }
+.stars{
+  width: 1000px;
+  height: 1000px;
+  position: fixed;
+  top: 0px;
+  z-index:-1;
+}
 a:link {
     color: white;
 }

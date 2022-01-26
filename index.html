@@ -10,6 +10,48 @@
     <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Mono:ital,wght@1,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="js/paper-full.js"></script>
+    <script type="text/paperscript" canvas="stars">
+        var stars = [];
+        var velocity = 0.5;
+        var generateRate = 50
+        var newRandom;
+        function randomInt(min,max)
+        {
+            return Math.floor(Math.random()*(max-min+1)+min);
+        }
+        for(var i = 0; i <= 500; i++) {
+        	var star = new Path.Circle(new Point(view.size.width, view.size.height) * Point.random(), randomInt(0.5, 2))
+        	stars.push(star)
+        }
+        for(var i = 0; i < stars.length; i++) {
+        	var chance = Math.random()
+        	if(chance < 0.025) {
+        		stars[i].fillColor = "#ffae00";
+        	}
+        	else if(chance < 0.6) {
+        		stars[i].fillColor = "#fffc61";
+        	}
+        	else {
+        		stars[i].fillColor = "#00c0ce";
+        	}
+        }
+        for(var i = 0; i < stars.length; i++) {
+        	var assignedRate = Math.random() * velocity + 0.1
+        	stars[i].rate = assignedRate;
+        }
+        function onFrame(event) {
+        	for(var i = 0; i < stars.length; i++) {
+        		stars[i].translate(stars[i].rate, 0)
+        		if(stars[i].position.x > view.size.width) {
+        				stars[i].position.x = 0;
+        	}
+        	else if(stars[i].position.x < 0) {
+        		stars[i].position.x = view.size.width;
+        	}
+        	}
+        }
+    </script>
 </head>
 <body id="body">
     <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
@@ -29,7 +71,7 @@
     <br><br>
     <div class="mod-in from-right saveanim">
       <div class="mod-in-content glow">
-          <p style="font-size: 20px;">Loaded mod(s)</p>
+          <p style="font-size: 20px;">Loaded mod</p>
       </div>
     </div>
     <div class="ap" id="ap">
@@ -279,7 +321,7 @@
             <div class="upgrades glow" id="prestigeupgrades">
                 <br><br><br><br>
                 <div class="upg">
-                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
                     <img src="src/squircle.png" width="50" height="50"><br>
                     Gate - 1 prestige point<br>
                     "Your pass to those sweet upgrades"<br>
@@ -342,9 +384,12 @@
             Your browser does not support the
             <code>audio</code> element.
     </audio>
+    <canvas id="stars" class="stars" id="stars">
 </body>
+</script>
 <script src="js/console.js"></script>
 <script src="js/modloader.js"></script>
+<script type="text/paperscript" canvas="stars" src="js/effects.js"></script>
 <script src="js/bandwidthspeed.js"></script>
 <script src="js/music.js"></script>
 <script src="js/howler.js"></script>
