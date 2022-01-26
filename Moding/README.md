@@ -5,6 +5,7 @@ Just follow a few things every mod needs to have
 ```js
 function initializemod(name){
   if(name == "yourmodnameinshort"){
+    modready("yourmodnameinshort");
     someactivationfunction();
   }
 }
@@ -35,6 +36,7 @@ This mod after loading asks you a question if the number is equal to 1
 // Example mod for Clock Room
 function initializemod(name){
     if(name == "example"){ // Short mod name
+        modready("example"); // Let modloader know that this mod is working
         alertme();
     }
 }
@@ -56,6 +58,7 @@ This mod after loading and pressing space will alert you that you pressed space
 var check = false;
 function initializemod(name){
     if(name == "example2"){ // Short mod name
+        modready("example"); // Let modloader know that this mod is working
         check = true;
     }
 }
