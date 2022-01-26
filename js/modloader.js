@@ -1,5 +1,4 @@
 // Modloader script is inspired by Cookie Clicker mod loading
-// Function to load a mod
 // requires url to mod file and name
 var howmanymods = 0;
 var modnames2 = [];
@@ -51,6 +50,7 @@ function modloaded(url,name){
             console.log("[MODLOADER] Error loading mod '" + name +"' Error: " + e + "\n Does mod name and url is right?");
             $("script").last().remove()
             canload = true;
+            timeoutlever = false;
         }
         timeout(name);
         timeoutlever = true;
