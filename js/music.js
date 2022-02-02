@@ -13,6 +13,7 @@ function hide(){
     document.getElementById("endtext").style.display = "none";
     document.getElementById("endtext2").style.display = "none";
     document.getElementById("smelter").style.display = "none";
+    document.getElementById("liquidcontainerascend").style.display = "none";
 }
 hide();
 loadsetting();
@@ -22,6 +23,7 @@ var gamemoment = 0;
 var internetspeed = 0;
 var localgame = true;
 var musicon;
+var effecton;
 var player = document.getElementById('audio');
 var el = document.querySelector('div');
 el.scrollTop = el.scrollHeight;
@@ -43,19 +45,42 @@ function loadsetting(){
     var loadedmusic = JSON.parse(localStorage.getItem("clockroomsettings"));
     if(loadedmusic == null){
         var savemusic = {
-            musicon: true
+            musicon: true,
+            effecton: true
         }
         localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
     }
     else{
         musicon = loadedmusic.musicon;
+        effecton = loadedmusic.effecton;
     }
 }
 function savesetting(settingvalue){
     var savemusic = {
-        musicon: settingvalue
+        musicon: settingvalue,
+        effecton: effecton
     }
     localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
+}
+function savesettingeffect(settingvalue){
+    var savemusic = {
+        musicon: musicon,
+        effecton: settingvalue
+    }
+    localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
+}
+function changeeffectstate(){
+    upgrade_click_sound();
+    if(effecton){
+        effecton = false;
+        savesettingeffect(false);
+    }
+    else{
+        effecton = true;
+        savesettingeffect(true);
+        save();
+        location.reload();
+    }
 }
 function changemusicstate(){
     upgrade_click_sound();
@@ -95,6 +120,16 @@ setInterval(() => {
         player.volume = 0;
         document.getElementById("musicswitch").innerHTML = "off";
         document.getElementById("musicswitch2").innerHTML = "off";
+    }
+    if(effecton){
+        document.getElementById("bgeffect").innerHTML = "on";
+        document.getElementById("bgeffect2").innerHTML = "on";
+        document.getElementById("stars").style.display = "block";
+    }
+    if(!effecton){
+        document.getElementById("bgeffect").innerHTML = "off";
+        document.getElementById("bgeffect2").innerHTML = "off";
+        document.getElementById("stars").style.display = "none";
     }
 },10)
 function checkinternetspeed(){

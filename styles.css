@@ -115,11 +115,42 @@ br {
   top: 0px;
   z-index:-1;
 }
+.liquid{
+  width: 270px;
+  height: 210px;
+  border-radius: 500px;
+}
 a:link {
-    color: white;
+  color: white;
 }
 a:visited {
   color: white;
+}
+/* https://stackoverflow.com/questions/27253263/position-div-inside-a-image-responsive */
+.col-lg-3{
+  width: 25%;
+  min-width: 230px;
+  float: left;
+  position: relative;
+  min-height: 1px;
+  padding-left: 15px;
+  padding-right: 15px;
+  text-align: center;
+}
+.col-lg-3 img {
+  max-width: 100%;
+}
+.img-container {
+  display: inline-block;
+  position: fixed;
+  top: 500px;
+  left: 770px;
+}
+.positioning{
+  position: absolute;
+  right: 11px;
+  bottom: 0px;
+  padding: 4px;
 }
 /* https://www.w3schools.com/css/tryit.asp?filename=trycss_tooltip_left */
 .tooltip {

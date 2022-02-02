@@ -3,7 +3,6 @@ var inserted_detail_thing = false;
 var seconds = 0;
 function initializemod(name){
     if(name == "ultradetail"){
-        modready("ultradetail");
         canupdate = true;
         var detailthing = document.createElement("P");
         var text = document.createTextNode("Ultra Detail Mod v0.1");

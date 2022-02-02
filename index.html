@@ -52,6 +52,140 @@
         	}
         }
     </script>
+    <script type="text/paperscript" canvas="liquid">
+        // kynd.info 2014
+// http://paperjs.org/examples/candy-crash/
+function Ball(r, p, v) {
+	this.radius = r;
+	this.point = p;
+	this.vector = v;
+	this.maxVec = 15;
+	this.numSegment = Math.floor(r / 3 + 2);
+	this.boundOffset = [];
+	this.boundOffsetBuff = [];
+	this.sidePoints = [];
+	this.path = new Path({
+		fillColor: {
+			hue: Math.random() * 360,
+			saturation: 1,
+			brightness: 1
+		},
+		blendMode: 'lighter'
+	});
+
+	for (var i = 0; i < this.numSegment; i ++) {
+		this.boundOffset.push(this.radius);
+		this.boundOffsetBuff.push(this.radius);
+		this.path.add(new Point());
+		this.sidePoints.push(new Point({
+			angle: 360 / this.numSegment * i,
+			length: 1
+		}));
+	}
+}
+Ball.prototype = {
+	iterate: function() {
+		this.checkBorders();
+		if (this.vector.length > this.maxVec)
+			this.vector.length = this.maxVec;
+		this.point += this.vector;
+		this.updateShape();
+	},
+
+	checkBorders: function() {
+		var size = view.size;
+		if (this.point.x < -this.radius)
+			this.point.x = size.width + this.radius;
+		if (this.point.x > size.width + this.radius)
+			this.point.x = -this.radius;
+		if (this.point.y < -this.radius)
+			this.point.y = size.height + this.radius;
+		if (this.point.y > size.height + this.radius)
+			this.point.y = -this.radius;
+	},
+
+	updateShape: function() {
+		var segments = this.path.segments;
+		for (var i = 0; i < this.numSegment; i ++)
+			segments[i].point = this.getSidePoint(i);
+
+		this.path.smooth();
+		for (var i = 0; i < this.numSegment; i ++) {
+			if (this.boundOffset[i] < this.radius / 4)
+				this.boundOffset[i] = this.radius / 4;
+			var next = (i + 1) % this.numSegment;
+			var prev = (i > 0) ? i - 1 : this.numSegment - 1;
+			var offset = this.boundOffset[i];
+			offset += (this.radius - offset) / 15;
+			offset += ((this.boundOffset[next] + this.boundOffset[prev]) / 2 - offset) / 3;
+			this.boundOffsetBuff[i] = this.boundOffset[i] = offset;
+		}
+	},
+
+	react: function(b) {
+		var dist = this.point.getDistance(b.point);
+		if (dist < this.radius + b.radius && dist != 0) {
+			var overlap = this.radius + b.radius - dist;
+			var direc = (this.point - b.point).normalize(overlap * 0.015);
+			this.vector += direc;
+			b.vector -= direc;
+
+			this.calcBounds(b);
+			b.calcBounds(this);
+			this.updateBounds();
+			b.updateBounds();
+		}
+	},
+
+	getBoundOffset: function(b) {
+		var diff = this.point - b;
+		var angle = (diff.angle + 180) % 360;
+		return this.boundOffset[Math.floor(angle / 360 * this.boundOffset.length)];
+	},
+
+	calcBounds: function(b) {
+		for (var i = 0; i < this.numSegment; i ++) {
+			var tp = this.getSidePoint(i);
+			var bLen = b.getBoundOffset(tp);
+			var td = tp.getDistance(b.point);
+			if (td < bLen) {
+				this.boundOffsetBuff[i] -= (bLen  - td) / 2;
+			}
+		}
+	},
+
+	getSidePoint: function(index) {
+		return this.point + this.sidePoints[index] * this.boundOffset[index];
+	},
+
+	updateBounds: function() {
+		for (var i = 0; i < this.numSegment; i ++)
+			this.boundOffset[i] = this.boundOffsetBuff[i];
+	}
+};
+//--------------------- main ---------------------
+var balls = [];
+var numBalls = 5;
+for (var i = 0; i < numBalls; i++) {
+	var position = Point.random() * view.size;
+	var vector = new Point({
+		angle: 360 * Math.random(),
+		length: Math.random() * 10
+	});
+	var radius = Math.random() * 60 + 60;
+	balls.push(new Ball(radius, position, vector));
+}
+function onFrame() {
+	for (var i = 0; i < balls.length - 1; i++) {
+		for (var j = i + 1; j < balls.length; j++) {
+			balls[i].react(balls[j]);
+		}
+	}
+	for (var i = 0, l = balls.length; i < l; i++) {
+		balls[i].iterate();
+	}
+}
+    </script>
 </head>
 <body id="body">
     <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
@@ -135,6 +269,14 @@
             </div>
             <br>
             <div class="multi">
+                <p style="font-size: 30px;">Background effect</p>
+                <p style="font-size: 15px;">When turned off may reduce CPU usage (requires reload when turned on)</p>
+                <button onclick="changeeffectstate()">
+                    <span class="glow" style="font-size: 15px;" id="bgeffect">on</span>
+                </button>
+            </div>
+            <br>
+            <div class="multi">
                 <p style="font-size: 30px;">Save</p>
                 <p style="font-size: 15px;">Set of things you can do with your save</p>
                 <p style="font-size: 15px;">Keep in mind that game is saved every 30 seconds</p>
@@ -200,6 +342,14 @@
                 <p style="font-size: 15px;">By deafult turned on to feel the ambient</p>
                 <button onclick="changemusicstate()">
                     <span class="glow" style="font-size: 15px;" id="musicswitch2">on</span>
+                </button>
+            </div>
+            <br>
+            <div class="multi">
+                <p style="font-size: 30px;">Background effect</p>
+                <p style="font-size: 15px;">When turned off may reduce CPU usage (requires reload when turned on)</p>
+                <button onclick="changeeffectstate()">
+                    <span class="glow" style="font-size: 15px;" id="bgeffect2">on</span>
                 </button>
             </div>
             <br>
@@ -317,13 +467,13 @@
         <br>
         <p style="font-size: 15px;" class="glow" id="showprestige">You have 0 prestige points</p>
         <br><br><br><br><br>
-        <div class="ascendupgrades">
+        <div class="ascendupgrades" id="ascendupgrades">
             <div class="upgrades glow" id="prestigeupgrades">
                 <br><br><br><br>
                 <div class="upg">
                     ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
                     <img src="src/squircle.png" width="50" height="50"><br>
-                    Gate - 1 prestige point<br>
+                    Ticket - 1 prestige point<br>
                     "Your pass to those sweet upgrades"<br>
                     <button onclick="buyhu1()" id="hu1b">
                         <span class="glow" style="font-size: 20px;">BUY</span>
@@ -378,18 +528,27 @@
             </div>
         </div>
     </div>
+    <div id="liquidcontainerascend" class="col-lg-3">
+        <div class="img-container">
+            <div class="positioning">
+                <canvas id="liquid" class="liquid">
+            </div>
+            <img src="src/Flask.png" width="300" height="300">
+        </div>
     </div>
     <audio id="audio" autoplay style="display: none;" controls>
         <source src="" type="audio/mpeg">
             Your browser does not support the
             <code>audio</code> element.
     </audio>
-    <canvas id="stars" class="stars" id="stars">
+    <canvas id="stars" class="stars">
 </body>
 </script>
 <script src="js/console.js"></script>
 <script src="js/modloader.js"></script>
-<script type="text/paperscript" canvas="stars" src="js/effects.js"></script>
+<script src="js/grained.js"></script>
+<script type="text/paperscript" canvas="stars" src="js/stars.js"></script>
+<script type="text/paperscript" canvas="liquid" src="js/bottle.js"></script>
 <script src="js/bandwidthspeed.js"></script>
 <script src="js/music.js"></script>
 <script src="js/howler.js"></script>

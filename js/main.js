@@ -43,6 +43,14 @@ var currentmessage = 0;
 var iskey = false;
 var timeleftinseconds = 3602;
 var issmelteravailable = false;
+// Last bottle phase values (yes they count as values for saving too)
+var isbottlefilled = false;
+var bottlepercent = 0;
+var bottlecapacity = 10;
+var isbottlephase = false;
+var capacityincreascecost = 10000;
+var gainingfromticks = 1;
+var gainingincreasecost = 100000;
 // Values that are not saved
 var viewportHeight = window.innerHeight;
 var viewportWidth = window.innerWidth;
@@ -129,7 +137,14 @@ function save(){
         issmelteravailable: issmelteravailable,
         versionsave: GameID.version,
         modnames: modnames,
-        modlinks: modlinks
+        modlinks: modlinks,
+        isbottlefilled: isbottlefilled,
+        bottlepercent: bottlepercent,
+        bottlecapacity: bottlecapacity,
+        isbottlephase: isbottlephase,
+        capacityincreascecost: capacityincreascecost,
+        gainingfromticks: gainingfromticks,
+        gainingincreasecost: gainingincreasecost
     }
     localStorage.setItem("clockroomsave",JSON.stringify(clocksave));
 }
@@ -192,6 +207,13 @@ function loadsave(){
             issmelteravailable = loadedclocksave.issmelteravailable
             modnames = loadedclocksave.modnames
             modlinks = loadedclocksave.modlinks
+            isbottlefilled = loadedclocksave.isbottlefilled
+            bottlepercent = loadedclocksave.bottlepercent
+            bottlecapacity = loadedclocksave.bottlecapacity
+            isbottlephase = loadedclocksave.isbottlephase
+            capacityincreascecost = loadedclocksave.capacityincreascecost
+            gainingfromticks = loadedclocksave.gainingfromticks
+            gainingincreasecost = loadedclocksave.gainingincreasecost
             cansave = true;
             startmods();
             save();
@@ -237,6 +259,13 @@ function loadsave(){
                 issmelteravailable = loadedclocksave.issmelteravailable
                 modnames = loadedclocksave.modnames
                 modlinks = loadedclocksave.modlinks
+                isbottlefilled = loadedclocksave.isbottlefilled
+                bottlepercent = loadedclocksave.bottlepercent
+                bottlecapacity = loadedclocksave.bottlecapacity
+                isbottlephase = loadedclocksave.isbottlephase
+                capacityincreascecost = loadedclocksave.capacityincreascecost
+                gainingfromticks = loadedclocksave.gainingfromticks
+                gainingincreasecost = loadedclocksave.gainingincreasecost
                 save();
                 location.reload();
             }
@@ -335,16 +364,25 @@ function ascendstuff(){
     cheaperticktockscost = 1000;
     cheaperticktockslv = 0;
     // Show tree
-    document.getElementById("ascendtree").style.display = "block";
-    document.getElementById("ap").style.display = "none";
-    document.getElementById("setting").style.display = "none";
+    if(!isbottlephase){
+        document.getElementById("ascendtree").style.display = "block";
+        document.getElementById("ap").style.display = "none";
+        document.getElementById("setting").style.display = "none";
+    }
+    else{
+        document.getElementById("ap").style.display = "none";
+        document.getElementById("setting").style.display = "none";
+        document.getElementById("ascendtree").style.display = "block";
+        document.getElementById("ascendupgrades").style.display = "none";
+        document.getElementById("liquidcontainerascend").style.display = "block";
+    }
 }
 // Go back from ascend tree
 function goback(){
     upgrade_click_sound();
     menumusic();
     // Set variables
-    if(hu6b){
+    if(hu6b && !isbottlephase){
         gate = true;
     }
     multiplier = startingmultiplier;
@@ -460,7 +498,7 @@ setInterval(() => {
 },30000)//30000 - 3s
 // Simulate Ticks
 setInterval(() => {
-    if(!isascending){
+    if(!isascending && !gate){
         currency += (1 * multiplier);
         tickleft -= (1 * multiplier);
     }
@@ -745,4 +783,3 @@ String.prototype.toHHMMSS = function () {
     if (seconds < 10) {seconds = "0"+seconds;}
     return hours+':'+minutes+':'+seconds;
 }
-//alert("5678".toHHMMSS());
