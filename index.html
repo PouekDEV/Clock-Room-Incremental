@@ -172,7 +172,7 @@ for (var i = 0; i < numBalls; i++) {
 		angle: 360 * Math.random(),
 		length: Math.random() * 10
 	});
-	var radius = Math.random() * 60 + 60;
+	var radius = Math.random() + 30;
 	balls.push(new Ball(radius, position, vector));
 }
 function onFrame() {
@@ -234,6 +234,26 @@ function onFrame() {
                 </button>
             </div>
         </div>
+        <br><br>
+        <div class="upgrades glow" id="flaskupgrades">
+            <p class="glow" style="font-size: 40px;">Flask upgrades</p>
+            <div class="multi">
+                <p style="font-size: 30px;">Flask capacity</p>
+                <p style="font-size: 15px;" id="fclv">Increase capacity of flask <br> LV.1</p>
+                <button onclick="upgradecapacity()">
+                    <span class="glow" style="font-size: 15px;" id="fccost">Upgrade</span>
+                </button>
+            </div>
+            <br>
+            <div class="multi">
+                <p style="font-size: 30px;">More gaining</p>
+                <p style="font-size: 15px;" id="fglv">Gain more fillage to flask <br> LV.1</p>
+                <button onclick="upgradegainage()">
+                    <span class="glow" style="font-size: 15px;" id="fgcost">Upgrade</span>
+                </button>
+            </div>
+        </div>
+        <br><br>
         <div class="upgrades glow" id="shop">
             <p class="glow">Shop</p>
             <div class="multi">
@@ -459,7 +479,7 @@ function onFrame() {
         </button>
     </div>
     <div class="ascendtree" id="ascendtree">
-        <p class="glow" style="font-size: 30px;">Pick your desired upgrades and go back in time for more prestige</p>
+        <p class="glow" style="font-size: 30px;" id="ascendinstructions">Pick your desired upgrades and go back in time for more prestige</p>
         <br>
         <button onclick="goback()">
             <span class="glow" style="font-size: 20px;">Go back</span>
@@ -535,6 +555,18 @@ function onFrame() {
             </div>
             <img src="src/Flask.png" width="300" height="300">
         </div>
+        <div class="valuesflask glow">
+            <p id="capacity" style="font-size: 30px;">Flask capacity is: 10</p>
+            <p id="fillpercentage" style="font-size: 30px;">Required percent of fill: 100%</p>
+            <p id="depositedprestige" style="font-size: 30px;">Flask contains 0 prestige</p>
+            <p id="flaskready" style="font-size: 30px;">Flask is not ready</p>
+            <button onclick="depositprestige()">
+                <span class="glow" style="font-size: 20px;">Deposit Prestige</span>
+            </button>
+            <button onclick="drink()" id="drinkflask">
+                <span class="glow" style="font-size: 20px;">Drink</span>
+            </button>
+        </div>
     </div>
     <audio id="audio" autoplay style="display: none;" controls>
         <source src="" type="audio/mpeg">
@@ -546,7 +578,6 @@ function onFrame() {
 </script>
 <script src="js/console.js"></script>
 <script src="js/modloader.js"></script>
-<script src="js/grained.js"></script>
 <script type="text/paperscript" canvas="stars" src="js/stars.js"></script>
 <script type="text/paperscript" canvas="liquid" src="js/bottle.js"></script>
 <script src="js/bandwidthspeed.js"></script>

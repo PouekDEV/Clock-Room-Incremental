@@ -44,8 +44,10 @@ var iskey = false;
 var timeleftinseconds = 3602;
 var issmelteravailable = false;
 // Last bottle phase values (yes they count as values for saving too)
+// You need 5000 ascend points deposited to end the game
 var isbottlefilled = false;
 var bottlepercent = 0;
+var filledbottlenotpercent = 0;
 var bottlecapacity = 10;
 var isbottlephase = false;
 var capacityincreascecost = 10000;
@@ -144,7 +146,8 @@ function save(){
         isbottlephase: isbottlephase,
         capacityincreascecost: capacityincreascecost,
         gainingfromticks: gainingfromticks,
-        gainingincreasecost: gainingincreasecost
+        gainingincreasecost: gainingincreasecost,
+        filledbottlenotpercent: filledbottlenotpercent
     }
     localStorage.setItem("clockroomsave",JSON.stringify(clocksave));
 }
@@ -214,6 +217,7 @@ function loadsave(){
             capacityincreascecost = loadedclocksave.capacityincreascecost
             gainingfromticks = loadedclocksave.gainingfromticks
             gainingincreasecost = loadedclocksave.gainingincreasecost
+            filledbottlenotpercent = loadedclocksave.filledbottlenotpercent
             cansave = true;
             startmods();
             save();
@@ -266,6 +270,7 @@ function loadsave(){
                 capacityincreascecost = loadedclocksave.capacityincreascecost
                 gainingfromticks = loadedclocksave.gainingfromticks
                 gainingincreasecost = loadedclocksave.gainingincreasecost
+                filledbottlenotpercent = loadedclocksave.filledbottlenotpercent
                 save();
                 location.reload();
             }
@@ -456,7 +461,16 @@ var GameID = {
     launch: ""
 }
 // Short number names
-var ranges = [{
+var ranges = [
+ {
+    divider: 1e24,
+    suffix: 'Sep'
+ },
+ {
+    divider: 1e21,
+    suffix: 'Sex'
+ },
+ {
     divider: 1e18,
     suffix: 'Qui'
  },
@@ -617,6 +631,29 @@ setInterval(() => {
             gate_open_sound();
         }
     }
+    if(isbottlephase){
+        document.getElementById("flaskupgrades").style.display = "block";
+        document.getElementById("ascendinstructions").innerHTML = "Deposit your prestige into flask and go back in time for more prestige";
+        document.getElementById("capacity").innerHTML = "Flask capacity is: " + formatNumber(bottlecapacity);
+        document.getElementById("fillpercentage").innerHTML = "Left percent to fill: " + (100 - bottlepercent) + "%";
+        document.getElementById("depositedprestige").innerHTML = "Flask contains " + formatNumber(filledbottlenotpercent) + " prestige";
+        document.getElementById("fclv").innerHTML = "Increase capacity of flask <br> Current capacity: " + formatNumber(bottlecapacity);
+        document.getElementById("fglv").innerHTML = "Gain more fillage to flask <br> Current gainage:  " + parseFloat(gainingfromticks.toFixed(2));
+        document.getElementById("fgcost").innerHTML = "Upgrade " + formatNumber(gainingincreasecost);
+        document.getElementById("fccost").innerHTML = "Upgrade " + formatNumber(capacityincreascecost);
+        if(isbottlefilled){
+            document.getElementById("flaskready").innerHTML = "Flask is ready";
+            document.getElementById("drinkflask").style.display = "block";
+        }
+        else{
+            document.getElementById("flaskready").innerHTML = "Flask is not ready";
+            document.getElementById("drinkflask").style.display = "none";
+        }
+    }
+    else{
+        document.getElementById("flaskupgrades").style.display = "none";
+        document.getElementById("ascendinstructions").innerHTML = "Pick your desired upgrades and go back in time for more prestige";
+    }
 },100)
 // Update the look of ascend upgrades when looking at tree
 function updateascendupgrades(){
@@ -743,12 +780,79 @@ function smeltdust(){
 function endofdagame(){
     upgrade_click_sound();
     if(timeleftinseconds == 0){
-        hide();
-        document.getElementById("endtext").style.display = "block";
-        document.getElementById("endtext2").style.display = "block";
+        var r = confirm("Do you want to enter the gate?")
+        if(r){
+            hide();
+            document.getElementById("endtext").style.display = "block";
+            document.getElementById("endtext2").style.display = "block";
+        }
+        else{
+            gate = false;
+            isbottlephase = true;
+            document.getElementById("everything").style.display = "block";
+            document.getElementById("ascendtree").style.display = "none";
+            document.getElementById("gate").style.display = "none";
+            document.getElementById("setting").style.display = "none";
+            document.getElementById("muchnews").style.display = "none";
+            document.getElementById("ascendtree").style.display = "none";
+        }
     }
     else if(iskey && timeleftinseconds != 0){
         timeleftinseconds = 0;
+    }
+}
+function depositprestige(){
+    if(isbottlephase && ascendpoints > 0){
+        var r = confirm("This action will consume all of your prestige points. \n Proceed?")
+        if(r){
+            prestige_upgrade_click_sound();
+            filledbottlenotpercent += (ascendpoints * gainingfromticks);
+            ascendpoints = 0;
+            if(filledbottlenotpercent > bottlecapacity){
+                filledbottlenotpercent = bottlecapacity;
+                bottlepercent = (filledbottlenotpercent / 5000) * 100;
+            }
+            else{
+                bottlepercent = (filledbottlenotpercent / 5000) * 100;
+            }
+            if(bottlepercent = 100){
+                isbottlefilled = true;
+            }
+        }
+    }
+    else{
+        upgrade_click_sound();
+    }
+}
+function upgradecapacity(){
+    upgrade_click_sound();
+    if(bottlecapacity < 5000){
+        if(currency >= capacityincreascecost){
+            currency -= capacityincreascecost;
+            capacityincreascecost += 1000;
+            bottlecapacity += 10;
+        }
+    }
+    else{
+        alert("Cannot buy this upgrade becuase it's maxed out")
+    }
+}
+function upgradegainage(){
+    upgrade_click_sound();
+    if(currency >= gainingincreasecost){
+        currency -= gainingincreasecost;
+        gainingincreasecost += 10000;
+        gainingfromticks += 0.1;
+    }
+}
+function drink(){
+    upgrade_click_sound();
+    if(isbottlefilled){
+        hide();
+        $('#endtext2').css('left', '100px');
+        document.getElementById("endtext").style.display = "block";
+        document.getElementById("endtext2").innerHTML = "By drinking fluid from the flask you teleported to your reality and lived your whole life in peace";
+        document.getElementById("endtext2").style.display = "block";
     }
 }
 // Ascend screen

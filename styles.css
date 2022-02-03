@@ -119,6 +119,7 @@ br {
   width: 270px;
   height: 210px;
   border-radius: 500px;
+  background-color: rgb(0, 0, 0);
 }
 a:link {
   color: white;
@@ -143,7 +144,7 @@ a:visited {
 .img-container {
   display: inline-block;
   position: fixed;
-  top: 500px;
+  top: 300px;
   left: 770px;
 }
 .positioning{

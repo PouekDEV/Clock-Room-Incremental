@@ -117,7 +117,7 @@ for (var i = 0; i < numBalls; i++) {
 		angle: 360 * Math.random(),
 		length: Math.random() * 10
 	});
-	var radius = Math.random() * 60 + 60;
+	var radius = Math.random() + 30;
 	balls.push(new Ball(radius, position, vector));
 }
 function onFrame() {
