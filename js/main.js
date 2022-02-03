@@ -404,6 +404,9 @@ function goback(){
         document.getElementById("muchnews").style.display = "block";
         document.getElementById("ascendtree").style.display = "none";
     }
+    if(isbottlephase){
+        document.getElementById("liquidcontainerascend").style.display = "none";
+    }
 }
 // Ascending buy upgrades functions
 function buyhu1(){
@@ -815,7 +818,7 @@ function depositprestige(){
             else{
                 bottlepercent = (filledbottlenotpercent / 5000) * 100;
             }
-            if(bottlepercent = 100){
+            if(bottlepercent == 100){
                 isbottlefilled = true;
             }
         }
