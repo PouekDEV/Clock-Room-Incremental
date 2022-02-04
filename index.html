@@ -246,7 +246,7 @@ function onFrame() {
             </div>
             <br>
             <div class="multi">
-                <p style="font-size: 30px;">More gaining</p>
+                <p style="font-size: 30px;">Pure magic</p>
                 <p style="font-size: 15px;" id="fglv">Gain more fillage to flask <br> LV.1</p>
                 <button onclick="upgradegainage()">
                     <span class="glow" style="font-size: 15px;" id="fgcost">Upgrade</span>
@@ -468,7 +468,7 @@ function onFrame() {
         <button style="position: absolute; top: 400px; left: 600px;" onclick="deletemoddata()">
             <span class="glow" style="font-size: 20px;">delete mods</span>
         </button>
-        <button style="position: absolute; top: 400px; left: 800px;" onclick="save()">
+        <button style="position: absolute; top: 400px; left: 800px;" onclick="presave()">
             <span class="glow" style="font-size: 20px;">save mods</span>
         </button>
         <button style="position: absolute; top: 400px; left: 1000px;" onclick="loadnewmods()">
@@ -477,6 +477,10 @@ function onFrame() {
         <button style="position: absolute; top: 400px; left: 1200px;" onclick="hidemodmenu()">
             <span class="glow" style="font-size: 20px;">close</span>
         </button>
+    </div>
+    <div class="ascend staticnes" id="reloaddim">
+        <img src="src/dim.png" style="position: absolute; opacity: 100%; top: 0px;" id="dim" width="1920" height="1080">
+        <p style="position: fixed; top: 250px; left: 770px;">Reloading...</p>
     </div>
     <div class="ascendtree" id="ascendtree">
         <p class="glow" style="font-size: 30px;" id="ascendinstructions">Pick your desired upgrades and go back in time for more prestige</p>
@@ -581,6 +585,7 @@ function onFrame() {
 <script src="js/modloader.js"></script>
 <script type="text/paperscript" canvas="stars" src="js/stars.js"></script>
 <script type="text/paperscript" canvas="liquid" src="js/bottle.js"></script>
+<script defer src="js/benchmark.js"></script>
 <script src="js/bandwidthspeed.js"></script>
 <script src="js/music.js"></script>
 <script src="js/howler.js"></script>

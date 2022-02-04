@@ -14,6 +14,7 @@ function hide(){
     document.getElementById("endtext2").style.display = "none";
     document.getElementById("smelter").style.display = "none";
     document.getElementById("liquidcontainerascend").style.display = "none";
+    document.getElementById("reloaddim").style.display = "none";
 }
 hide();
 loadsetting();
@@ -35,12 +36,6 @@ el.onclick = function () {
         fullload();
     }
 }
-//document.onkeydown = function(evt) {
-//    evt = evt || window.event;
-//    if (evt.keyCode == 32 && elevenload > 0) {
-//        end();
-//    }
-//};
 function loadsetting(){
     var loadedmusic = JSON.parse(localStorage.getItem("clockroomsettings"));
     if(loadedmusic == null){
@@ -79,6 +74,7 @@ function changeeffectstate(){
         effecton = true;
         savesettingeffect(true);
         save();
+        document.getElementById("reloaddim").style.display = "block";
         location.reload();
     }
 }

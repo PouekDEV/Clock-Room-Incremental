@@ -61,6 +61,13 @@ var onesoundofgate = false;
 var cansave = false;
 var importingsave = false;
 var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
+// Some game info
+var GameID = {
+    version: 0.9,
+    vname: "Before launch",
+    beta: 0,
+    launch: ""
+}
 // Mod stuff
 function showmodmenu(){
     upgrade_click_sound();
@@ -95,6 +102,7 @@ function deletemoddata(){
         modnames = [];
         modlinks = [];
         save();
+        document.getElementById("reloaddim").style.display = "block";
         location.reload();
     }
 }
@@ -272,6 +280,7 @@ function loadsave(){
                 gainingincreasecost = loadedclocksave.gainingincreasecost
                 filledbottlenotpercent = loadedclocksave.filledbottlenotpercent
                 save();
+                document.getElementById("reloaddim").style.display = "block";
                 location.reload();
             }
         }   
@@ -313,6 +322,7 @@ function deletesave(){
     var r = confirm("Do you want to delete save?")
     if(r){
         localStorage.removeItem("clockroomsave");
+        document.getElementById("reloaddim").style.display = "block";
         location.reload();
     }
 }
@@ -456,13 +466,6 @@ function buyhu6(){
         hu6b = true;
     }
 }
-// Some game info
-var GameID = {
-    version: 0.8,
-    vname: "Polishing",
-    beta: 0,
-    launch: ""
-}
 // Short number names
 var ranges = [
  {
@@ -527,6 +530,8 @@ setInterval(() => {
 setInterval(() => {
     $(".stars").css("width", viewportWidth);
     $(".stars").css("height", viewportHeight);
+    $("#dim").css("width", viewportWidth);
+    $("#dim").css("height", viewportHeight);
     if(currency > 1){
         document.getElementById("seconds").innerHTML = "You have " + formatNumber(currency) + " seconds";
     }
@@ -641,7 +646,7 @@ setInterval(() => {
         document.getElementById("fillpercentage").innerHTML = "Left percent to fill: " + (100 - bottlepercent) + "%";
         document.getElementById("depositedprestige").innerHTML = "Flask contains " + formatNumber(filledbottlenotpercent) + " prestige";
         document.getElementById("fclv").innerHTML = "Increase capacity of flask <br> Current capacity: " + formatNumber(bottlecapacity);
-        document.getElementById("fglv").innerHTML = "Gain more fillage to flask <br> Current gainage:  " + parseFloat(gainingfromticks.toFixed(2));
+        document.getElementById("fglv").innerHTML = "Multiply your prestige that is going into flask <br> Current multiplier:  " + parseFloat(gainingfromticks.toFixed(2));
         document.getElementById("fgcost").innerHTML = "Upgrade " + formatNumber(gainingincreasecost);
         document.getElementById("fccost").innerHTML = "Upgrade " + formatNumber(capacityincreascecost);
         if(isbottlefilled){
