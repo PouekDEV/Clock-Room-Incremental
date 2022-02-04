@@ -15,7 +15,6 @@ or here -
 - [x] make sound effects (different for clicking, buying upgrades, buying heaven upgrades, crushing shards, smelting shards, clicking shard, opening gate)
 - [x] fix sacrificial multiplier button showing when upgrade is not owned by player
 - [x] allow for moding
-- [ ] benchmark cpu and decide whether to turn on the stars BG effect
 - [x] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
 - [ ] finish the beta tests
 - [x] prepare itch.io page
