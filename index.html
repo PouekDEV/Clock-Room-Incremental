@@ -11,181 +11,6 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/paper-full.js"></script>
-    <script type="text/paperscript" canvas="stars">
-        var stars = [];
-        var velocity = 0.5;
-        var generateRate = 50
-        var newRandom;
-        function randomInt(min,max)
-        {
-            return Math.floor(Math.random()*(max-min+1)+min);
-        }
-        for(var i = 0; i <= 500; i++) {
-        	var star = new Path.Circle(new Point(view.size.width, view.size.height) * Point.random(), randomInt(0.5, 2))
-        	stars.push(star)
-        }
-        for(var i = 0; i < stars.length; i++) {
-        	var chance = Math.random()
-        	if(chance < 0.025) {
-        		stars[i].fillColor = "#ffae00";
-        	}
-        	else if(chance < 0.6) {
-        		stars[i].fillColor = "#fffc61";
-        	}
-        	else {
-        		stars[i].fillColor = "#00c0ce";
-        	}
-        }
-        for(var i = 0; i < stars.length; i++) {
-        	var assignedRate = Math.random() * velocity + 0.1
-        	stars[i].rate = assignedRate;
-        }
-        function onFrame(event) {
-        	for(var i = 0; i < stars.length; i++) {
-        		stars[i].translate(stars[i].rate, 0)
-        		if(stars[i].position.x > view.size.width) {
-        				stars[i].position.x = 0;
-        	}
-        	else if(stars[i].position.x < 0) {
-        		stars[i].position.x = view.size.width;
-        	}
-        	}
-        }
-    </script>
-    <script type="text/paperscript" canvas="liquid">
-        // kynd.info 2014
-// http://paperjs.org/examples/candy-crash/
-function Ball(r, p, v) {
-	this.radius = r;
-	this.point = p;
-	this.vector = v;
-	this.maxVec = 15;
-	this.numSegment = Math.floor(r / 3 + 2);
-	this.boundOffset = [];
-	this.boundOffsetBuff = [];
-	this.sidePoints = [];
-	this.path = new Path({
-		fillColor: {
-			hue: Math.random() * 360,
-			saturation: 1,
-			brightness: 1
-		},
-		blendMode: 'lighter'
-	});
-
-	for (var i = 0; i < this.numSegment; i ++) {
-		this.boundOffset.push(this.radius);
-		this.boundOffsetBuff.push(this.radius);
-		this.path.add(new Point());
-		this.sidePoints.push(new Point({
-			angle: 360 / this.numSegment * i,
-			length: 1
-		}));
-	}
-}
-Ball.prototype = {
-	iterate: function() {
-		this.checkBorders();
-		if (this.vector.length > this.maxVec)
-			this.vector.length = this.maxVec;
-		this.point += this.vector;
-		this.updateShape();
-	},
-
-	checkBorders: function() {
-		var size = view.size;
-		if (this.point.x < -this.radius)
-			this.point.x = size.width + this.radius;
-		if (this.point.x > size.width + this.radius)
-			this.point.x = -this.radius;
-		if (this.point.y < -this.radius)
-			this.point.y = size.height + this.radius;
-		if (this.point.y > size.height + this.radius)
-			this.point.y = -this.radius;
-	},
-
-	updateShape: function() {
-		var segments = this.path.segments;
-		for (var i = 0; i < this.numSegment; i ++)
-			segments[i].point = this.getSidePoint(i);
-
-		this.path.smooth();
-		for (var i = 0; i < this.numSegment; i ++) {
-			if (this.boundOffset[i] < this.radius / 4)
-				this.boundOffset[i] = this.radius / 4;
-			var next = (i + 1) % this.numSegment;
-			var prev = (i > 0) ? i - 1 : this.numSegment - 1;
-			var offset = this.boundOffset[i];
-			offset += (this.radius - offset) / 15;
-			offset += ((this.boundOffset[next] + this.boundOffset[prev]) / 2 - offset) / 3;
-			this.boundOffsetBuff[i] = this.boundOffset[i] = offset;
-		}
-	},
-
-	react: function(b) {
-		var dist = this.point.getDistance(b.point);
-		if (dist < this.radius + b.radius && dist != 0) {
-			var overlap = this.radius + b.radius - dist;
-			var direc = (this.point - b.point).normalize(overlap * 0.015);
-			this.vector += direc;
-			b.vector -= direc;
-
-			this.calcBounds(b);
-			b.calcBounds(this);
-			this.updateBounds();
-			b.updateBounds();
-		}
-	},
-
-	getBoundOffset: function(b) {
-		var diff = this.point - b;
-		var angle = (diff.angle + 180) % 360;
-		return this.boundOffset[Math.floor(angle / 360 * this.boundOffset.length)];
-	},
-
-	calcBounds: function(b) {
-		for (var i = 0; i < this.numSegment; i ++) {
-			var tp = this.getSidePoint(i);
-			var bLen = b.getBoundOffset(tp);
-			var td = tp.getDistance(b.point);
-			if (td < bLen) {
-				this.boundOffsetBuff[i] -= (bLen  - td) / 2;
-			}
-		}
-	},
-
-	getSidePoint: function(index) {
-		return this.point + this.sidePoints[index] * this.boundOffset[index];
-	},
-
-	updateBounds: function() {
-		for (var i = 0; i < this.numSegment; i ++)
-			this.boundOffset[i] = this.boundOffsetBuff[i];
-	}
-};
-//--------------------- main ---------------------
-var balls = [];
-var numBalls = 5;
-for (var i = 0; i < numBalls; i++) {
-	var position = Point.random() * view.size;
-	var vector = new Point({
-		angle: 360 * Math.random(),
-		length: Math.random() * 10
-	});
-	var radius = Math.random() + 30;
-	balls.push(new Ball(radius, position, vector));
-}
-function onFrame() {
-	for (var i = 0; i < balls.length - 1; i++) {
-		for (var j = i + 1; j < balls.length; j++) {
-			balls[i].react(balls[j]);
-		}
-	}
-	for (var i = 0, l = balls.length; i < l; i++) {
-		balls[i].iterate();
-	}
-}
-    </script>
 </head>
 <body id="body">
     <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
@@ -451,13 +276,23 @@ function onFrame() {
             </div>
         </div>
     </div>
-    <div class="ascend staticnes" id="ascend">
+        <div class="ascend staticnes" id="ascend">
         <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
         <p style="position: fixed; top: 300px; left: 500px;">Do you really want to Rewind Time?</p>
         <button style="position: absolute; top: 400px; left: 800px;" onclick="beforeascendscrren()">
             <span class="glow" style="font-size: 20px;">yes</span>
         </button>
         <button style="position: absolute; top: 500px; left: 800px;" onclick="noascend()">
+            <span class="glow" style="font-size: 20px;">no</span>
+        </button>
+    </div>
+    <div class="ascend staticnes" id="gateprompt">
+        <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
+        <p style="position: fixed; top: 300px; left: 500px;">Do you want to enter the gate?</p>
+        <button style="position: absolute; top: 400px; left: 800px;" onclick="endofdagameo1()">
+            <span class="glow" style="font-size: 20px;">yes</span>
+        </button>
+        <button style="position: absolute; top: 500px; left: 800px;" onclick="endofdagameo2()">
             <span class="glow" style="font-size: 20px;">no</span>
         </button>
     </div>
@@ -585,7 +420,6 @@ function onFrame() {
 <script src="js/modloader.js"></script>
 <script type="text/paperscript" canvas="stars" src="js/stars.js"></script>
 <script type="text/paperscript" canvas="liquid" src="js/bottle.js"></script>
-<script defer src="js/benchmark.js"></script>
 <script src="js/bandwidthspeed.js"></script>
 <script src="js/music.js"></script>
 <script src="js/howler.js"></script>

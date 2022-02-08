@@ -14,6 +14,7 @@ function hide(){
     document.getElementById("endtext2").style.display = "none";
     document.getElementById("smelter").style.display = "none";
     document.getElementById("liquidcontainerascend").style.display = "none";
+    document.getElementById("gateprompt").style.display = "none";
     document.getElementById("reloaddim").style.display = "none";
 }
 hide();
@@ -22,7 +23,7 @@ loadsetting();
 var elevenload = 0;
 var gamemoment = 0;
 var internetspeed = 0;
-var localgame = true;
+var localgame = false;
 var musicon;
 var effecton;
 var player = document.getElementById('audio');

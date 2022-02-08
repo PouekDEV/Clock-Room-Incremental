@@ -166,9 +166,15 @@ function loadsave(){
     else{
         cansave = false;
         var savecrypted = prompt("Paste your save here");
-        if(savecrypted != null){
+        if(savecrypted != null && savecrypted != "DOABARRELROLL"){
             var savestringed = atob(savecrypted);
             var loadedclocksave = JSON.parse(savestringed)
+        }
+        else if(savecrypted == "DOABARRELROLL"){
+            var a="-webkit-",b='transform:rotate(1turn);',c='transition:4s;';document.head.innerHTML+='<style>body{'+a+b+a+c+b+c
+            setTimeout(() => {
+                $('style').remove();
+            },4500)
         }
     }
     if(loadedclocksave == null){
@@ -788,26 +794,26 @@ function smeltdust(){
 function endofdagame(){
     upgrade_click_sound();
     if(timeleftinseconds == 0){
-        var r = confirm("Do you want to enter the gate?")
-        if(r){
-            hide();
-            document.getElementById("endtext").style.display = "block";
-            document.getElementById("endtext2").style.display = "block";
-        }
-        else{
-            gate = false;
-            isbottlephase = true;
-            document.getElementById("everything").style.display = "block";
-            document.getElementById("ascendtree").style.display = "none";
-            document.getElementById("gate").style.display = "none";
-            document.getElementById("setting").style.display = "none";
-            document.getElementById("muchnews").style.display = "none";
-            document.getElementById("ascendtree").style.display = "none";
-        }
+        document.getElementById("gateprompt").style.display = "block";
     }
     else if(iskey && timeleftinseconds != 0){
         timeleftinseconds = 0;
     }
+}
+function endofdagameo1(){
+    hide();
+    document.getElementById("endtext").style.display = "block";
+    document.getElementById("endtext2").style.display = "block";
+}
+function endofdagameo2(){
+    gate = false;
+    isbottlephase = true;
+    document.getElementById("everything").style.display = "block";
+    document.getElementById("ascendtree").style.display = "none";
+    document.getElementById("gate").style.display = "none";
+    document.getElementById("setting").style.display = "none";
+    document.getElementById("muchnews").style.display = "none";
+    document.getElementById("ascendtree").style.display = "none";
 }
 function depositprestige(){
     if(isbottlephase && ascendpoints > 0){
