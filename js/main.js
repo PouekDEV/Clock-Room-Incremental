@@ -808,6 +808,7 @@ function endofdagameo1(){
 function endofdagameo2(){
     gate = false;
     isbottlephase = true;
+    document.getElementById("gateprompt").style.display = "none";
     document.getElementById("everything").style.display = "block";
     document.getElementById("ascendtree").style.display = "none";
     document.getElementById("gate").style.display = "none";
