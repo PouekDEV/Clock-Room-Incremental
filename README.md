@@ -20,9 +20,9 @@ or here -
 - [x] fix sacrificial multiplier button showing when upgrade is not owned by player
 - [x] allow for moding
 - [x] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
-- [ ] finish the beta tests
 - [x] prepare itch.io page
 - [x] prepare gamejolt page
+- [ ] finish the beta tests
 - [ ] make trailer
 - [ ] Make soundcloud soundtrack public
 - [ ] Release the game 🎉
