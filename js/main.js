@@ -79,32 +79,57 @@ function hidemodmenu(){
 }
 function loadnewmods(){
     upgrade_click_sound();
-    var url = prompt("Paste mod url here");
-    var name = prompt("Paste short mod name here");
-    var r = confirm("Is this correct? \n Mod name: " + name + " \n Mod url: " + url);
-    if(r){
-        if(modnames == undefined){
-            modnames = [];
-            modlinks = [];
+    var url;
+    var name;
+    vex.dialog.open({
+        message: 'Paste mod data here',
+        input: [
+            '<input name="url" type="text" placeholder="URL" required />',
+            '<input name="smodname" type="text" placeholder="Short mod name" required />'
+        ].join(''),
+        buttons: [
+            $.extend({}, vex.dialog.buttons.YES, { text: 'Load' }),
+            $.extend({}, vex.dialog.buttons.NO, { text: 'Back' })
+        ],
+        callback: function (data) {
+            if (data) {
+                url = data.url;
+                name = data.smodname;
+                vex.dialog.confirm({
+                    message: "Is this correct? \n Mod name: " + name + " \n Mod url: " + url,
+                    callback: function (value) {
+                        if (value) {
+                            if(modnames == undefined){
+                                modnames = [];
+                                modlinks = [];
+                            }
+                            loadmod(url,name);
+                            modnames.push(name);
+                            modlinks.push(url);
+                        }
+                    }
+                })
+            }
         }
-        loadmod(url,name);
-        modnames.push(name);
-        modlinks.push(url);
-    }
+    })
 }
 function startmods(){
     queuevariables(modlinks,modnames);
 }
 function deletemoddata(){
     upgrade_click_sound();
-    var r = confirm("Are you sure you want to delete ALL of mod data?");
-    if(r){
-        modnames = [];
-        modlinks = [];
-        save();
-        document.getElementById("reloaddim").style.display = "block";
-        location.reload();
-    }
+    vex.dialog.confirm({
+        message: "Are you sure you want to delete ALL of mod data?",
+        callback: function (value) {
+            if (value) {
+                modnames = [];
+                modlinks = [];
+                save();
+                document.getElementById("reloaddim").style.display = "block";
+                location.reload();
+            }
+        }
+    })
 }
 // All save functions
 function save(){
@@ -165,24 +190,39 @@ function loadsave(){
     }
     else{
         cansave = false;
-        var savecrypted = prompt("Paste your save here");
-        if(savecrypted != null && savecrypted != "DOABARRELROLL"){
-            var savestringed = atob(savecrypted);
-            var loadedclocksave = JSON.parse(savestringed)
-        }
-        else if(savecrypted == "DOABARRELROLL"){
-            var a="-webkit-",b='transform:rotate(1turn);',c='transition:4s;';document.head.innerHTML+='<style>body{'+a+b+a+c+b+c
-            setTimeout(() => {
-                $('style').remove();
-            },4500)
-        }
+        var savecrypted;
+        vex.dialog.open({
+            message: 'Paste your save',
+            input: [
+                '<input name="pastedsave" type="text" placeholder="paste here" required />'
+            ].join(''),
+            buttons: [
+                $.extend({}, vex.dialog.buttons.YES, { text: 'Load' }),
+                $.extend({}, vex.dialog.buttons.NO, { text: 'Back' })
+            ],
+            callback: function (data) {
+                if (data) {
+                    savecrypted = data.pastedsave;
+                    if(savecrypted != null && savecrypted != "DOABARRELROLL"){
+                        var savestringed = atob(savecrypted);
+                        var loadedclocksave = JSON.parse(savestringed)
+                    }
+                    else if(savecrypted == "DOABARRELROLL"){
+                        var a="-webkit-",b='transform:rotate(1turn);',c='transition:4s;';document.head.innerHTML+='<style>body{'+a+b+a+c+b+c
+                        setTimeout(() => {
+                            $('style').remove();
+                        },4500)
+                    }
+                }
+            }
+        })
     }
     if(loadedclocksave == null){
         console.log("No save found starting new game")
     }
     else{
         if(loadedclocksave.versionsave > GameID.version && importingsave){
-            alert("This save file was saved in newer version of the game")
+            vex.dialog.alert('This save file was saved in newer version of the game')
         }
         else if(loadedclocksave.versionsave <= GameID.version && !importingsave){
             cansave = false;
@@ -237,58 +277,62 @@ function loadsave(){
             save();
         }
         else if(loadedclocksave.versionsave <= GameID.version && importingsave){
-            var r = confirm("Save file is correct. Do you want to load it? \n WARNING Loading this save will overwrite your current one")
-            if(r){
-                currency = loadedclocksave.currency
-                currency10percent = loadedclocksave.currency10percent
-                percentgot = loadedclocksave.percentgot
-                multiplier = loadedclocksave.multiplier
-                startingmultiplier = loadedclocksave.startingmultiplier
-                multiplierlevel = loadedclocksave.multiplierlevel
-                upgrademultivalue = loadedclocksave.upgrademultivalue
-                ticktocks = loadedclocksave.ticktocks
-                renewticks = loadedclocksave.renewticks
-                tickleft = loadedclocksave.tickleft
-                cheaperticktockscost = loadedclocksave.cheaperticktockscost
-                cheaperticktockslv = loadedclocksave.cheaperticktockslv
-                ascendpoints = loadedclocksave.ascendpoints
-                sacrificemultipliercost = loadedclocksave.sacrificemultipliercost
-                isascending = loadedclocksave.isascending
-                gate = loadedclocksave.gate
-                hu1b = loadedclocksave.hu1b
-                hu2 = loadedclocksave.hu2
-                hu2b = loadedclocksave.hu2b
-                hu3 = loadedclocksave.hu3
-                hu3b = loadedclocksave.hu3b
-                hu4 = loadedclocksave.hu4
-                hu4b = loadedclocksave.hu4b
-                hu5 = loadedclocksave.hu5
-                hu5b = loadedclocksave.hu5b
-                hu6 = loadedclocksave.hu6
-                hu6b = loadedclocksave.hu6b
-                shards = loadedclocksave.shards
-                dust = loadedclocksave.dust
-                shardcrushingcost = loadedclocksave.shardcrushingcost
-                dustsmeltingcost = loadedclocksave.dustsmeltingcost
-                completiontowardskey = loadedclocksave.completiontowardskey
-                currentmessage = loadedclocksave.currentmessage
-                iskey = loadedclocksave.iskey
-                timeleftinseconds = loadedclocksave.timeleftinseconds
-                issmelteravailable = loadedclocksave.issmelteravailable
-                modnames = loadedclocksave.modnames
-                modlinks = loadedclocksave.modlinks
-                isbottlefilled = loadedclocksave.isbottlefilled
-                bottlepercent = loadedclocksave.bottlepercent
-                bottlecapacity = loadedclocksave.bottlecapacity
-                isbottlephase = loadedclocksave.isbottlephase
-                capacityincreascecost = loadedclocksave.capacityincreascecost
-                gainingfromticks = loadedclocksave.gainingfromticks
-                gainingincreasecost = loadedclocksave.gainingincreasecost
-                filledbottlenotpercent = loadedclocksave.filledbottlenotpercent
-                save();
-                document.getElementById("reloaddim").style.display = "block";
-                location.reload();
-            }
+            vex.dialog.confirm({
+                message: "Save file is correct. Do you want to load it? \n WARNING Loading this save will overwrite your current one",
+                callback: function (value) {
+                    if (value) {
+                        currency = loadedclocksave.currency
+                        currency10percent = loadedclocksave.currency10percent
+                        percentgot = loadedclocksave.percentgot
+                        multiplier = loadedclocksave.multiplier
+                        startingmultiplier = loadedclocksave.startingmultiplier
+                        multiplierlevel = loadedclocksave.multiplierlevel
+                        upgrademultivalue = loadedclocksave.upgrademultivalue
+                        ticktocks = loadedclocksave.ticktocks
+                        renewticks = loadedclocksave.renewticks
+                        tickleft = loadedclocksave.tickleft
+                        cheaperticktockscost = loadedclocksave.cheaperticktockscost
+                        cheaperticktockslv = loadedclocksave.cheaperticktockslv
+                        ascendpoints = loadedclocksave.ascendpoints
+                        sacrificemultipliercost = loadedclocksave.sacrificemultipliercost
+                        isascending = loadedclocksave.isascending
+                        gate = loadedclocksave.gate
+                        hu1b = loadedclocksave.hu1b
+                        hu2 = loadedclocksave.hu2
+                        hu2b = loadedclocksave.hu2b
+                        hu3 = loadedclocksave.hu3
+                        hu3b = loadedclocksave.hu3b
+                        hu4 = loadedclocksave.hu4
+                        hu4b = loadedclocksave.hu4b
+                        hu5 = loadedclocksave.hu5
+                        hu5b = loadedclocksave.hu5b
+                        hu6 = loadedclocksave.hu6
+                        hu6b = loadedclocksave.hu6b
+                        shards = loadedclocksave.shards
+                        dust = loadedclocksave.dust
+                        shardcrushingcost = loadedclocksave.shardcrushingcost
+                        dustsmeltingcost = loadedclocksave.dustsmeltingcost
+                        completiontowardskey = loadedclocksave.completiontowardskey
+                        currentmessage = loadedclocksave.currentmessage
+                        iskey = loadedclocksave.iskey
+                        timeleftinseconds = loadedclocksave.timeleftinseconds
+                        issmelteravailable = loadedclocksave.issmelteravailable
+                        modnames = loadedclocksave.modnames
+                        modlinks = loadedclocksave.modlinks
+                        isbottlefilled = loadedclocksave.isbottlefilled
+                        bottlepercent = loadedclocksave.bottlepercent
+                        bottlecapacity = loadedclocksave.bottlecapacity
+                        isbottlephase = loadedclocksave.isbottlephase
+                        capacityincreascecost = loadedclocksave.capacityincreascecost
+                        gainingfromticks = loadedclocksave.gainingfromticks
+                        gainingincreasecost = loadedclocksave.gainingincreasecost
+                        filledbottlenotpercent = loadedclocksave.filledbottlenotpercent
+                        save();
+                        document.getElementById("reloaddim").style.display = "block";
+                        location.reload();
+                    }
+                }
+            })
         }   
     }
     if(importingsave){
@@ -320,17 +364,21 @@ function exportsave(){
     var basesave = btoa(stringsave);
     navigator.clipboard.writeText(basesave)
     setTimeout(() => {
-        alert("Copied save to clipboard")
+        vex.dialog.alert('Copied save to clipboard')
     },1000)
 }
 function deletesave(){
     upgrade_click_sound();
-    var r = confirm("Do you want to delete save?")
-    if(r){
-        localStorage.removeItem("clockroomsave");
-        document.getElementById("reloaddim").style.display = "block";
-        location.reload();
+    vex.dialog.confirm({
+    message: "Do you want to delete save?",
+    callback: function (value) {
+        if (value) {
+            localStorage.removeItem("clockroomsave");
+            document.getElementById("reloaddim").style.display = "block";
+            location.reload();
+        }
     }
+    })
 }
 // Monitor size check
 function checkgate(){
@@ -345,7 +393,7 @@ function checkgate(){
         }
     }
     else{
-        alert("Sorry but your screen is too small \n Come back when you will have acces to a bigger screen")
+        vex.dialog.alert('Sorry but your screen is too small \n Come back when you will have acces to a bigger screen')
     }
 }
 // Ascend blank screen
@@ -740,7 +788,7 @@ function cheaperticks(){
             cheaperticktockscost += (cheaperticktockscost * 0.10)
         }
         else{
-            alert("Cannot buy this upgrade because it's maxed out");
+            vex.dialog.alert("Cannot buy this upgrade because it's maxed out")
         }
     }
 }
@@ -818,8 +866,10 @@ function endofdagameo2(){
 }
 function depositprestige(){
     if(isbottlephase && ascendpoints > 0){
-        var r = confirm("This action will consume all of your prestige points. \n Proceed?")
-        if(r){
+        vex.dialog.confirm({
+            message: "This action will consume all of your prestige points. \n Proceed?",
+        callback: function (value) {
+        if (value) {
             prestige_upgrade_click_sound();
             filledbottlenotpercent += (ascendpoints * gainingfromticks);
             ascendpoints = 0;
@@ -834,6 +884,8 @@ function depositprestige(){
                 isbottlefilled = true;
             }
         }
+        }
+        })
     }
     else{
         upgrade_click_sound();
@@ -849,7 +901,7 @@ function upgradecapacity(){
         }
     }
     else{
-        alert("Cannot buy this upgrade becuase it's maxed out")
+        vex.dialog.alert("Cannot buy this upgrade because it's maxed out")
     }
 }
 function upgradegainage(){
