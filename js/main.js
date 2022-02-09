@@ -185,6 +185,7 @@ function save(){
     localStorage.setItem("clockroomsave",JSON.stringify(clocksave));
 }
 function loadsave(){
+    var loadedclocksave;
     if(!importingsave){
         var loadedclocksave = JSON.parse(localStorage.getItem("clockroomsave"));
     }
@@ -205,7 +206,70 @@ function loadsave(){
                     savecrypted = data.pastedsave;
                     if(savecrypted != null && savecrypted != "DOABARRELROLL"){
                         var savestringed = atob(savecrypted);
-                        var loadedclocksave = JSON.parse(savestringed)
+                        loadedclocksave = JSON.parse(savestringed)
+                        if(loadedclocksave.versionsave > GameID.version && importingsave){
+                            vex.dialog.alert('This save file was saved in newer version of the game')
+                            importingsave = false;
+                        }
+                        else if(loadedclocksave.versionsave <= GameID.version && importingsave){
+                            vex.dialog.confirm({
+                                message: "Save file is correct. Do you want to load it? \n WARNING Loading this save will overwrite your current one",
+                                callback: function (value) {
+                                    if (value) {
+                                        currency = loadedclocksave.currency
+                                        currency10percent = loadedclocksave.currency10percent
+                                        percentgot = loadedclocksave.percentgot
+                                        multiplier = loadedclocksave.multiplier
+                                        startingmultiplier = loadedclocksave.startingmultiplier
+                                        multiplierlevel = loadedclocksave.multiplierlevel
+                                        upgrademultivalue = loadedclocksave.upgrademultivalue
+                                        ticktocks = loadedclocksave.ticktocks
+                                        renewticks = loadedclocksave.renewticks
+                                        tickleft = loadedclocksave.tickleft
+                                        cheaperticktockscost = loadedclocksave.cheaperticktockscost
+                                        cheaperticktockslv = loadedclocksave.cheaperticktockslv
+                                        ascendpoints = loadedclocksave.ascendpoints
+                                        sacrificemultipliercost = loadedclocksave.sacrificemultipliercost
+                                        isascending = loadedclocksave.isascending
+                                        gate = loadedclocksave.gate
+                                        hu1b = loadedclocksave.hu1b
+                                        hu2 = loadedclocksave.hu2
+                                        hu2b = loadedclocksave.hu2b
+                                        hu3 = loadedclocksave.hu3
+                                        hu3b = loadedclocksave.hu3b
+                                        hu4 = loadedclocksave.hu4
+                                        hu4b = loadedclocksave.hu4b
+                                        hu5 = loadedclocksave.hu5
+                                        hu5b = loadedclocksave.hu5b
+                                        hu6 = loadedclocksave.hu6
+                                        hu6b = loadedclocksave.hu6b
+                                        shards = loadedclocksave.shards
+                                        dust = loadedclocksave.dust
+                                        shardcrushingcost = loadedclocksave.shardcrushingcost
+                                        dustsmeltingcost = loadedclocksave.dustsmeltingcost
+                                        completiontowardskey = loadedclocksave.completiontowardskey
+                                        currentmessage = loadedclocksave.currentmessage
+                                        iskey = loadedclocksave.iskey
+                                        timeleftinseconds = loadedclocksave.timeleftinseconds
+                                        issmelteravailable = loadedclocksave.issmelteravailable
+                                        modnames = loadedclocksave.modnames
+                                        modlinks = loadedclocksave.modlinks
+                                        isbottlefilled = loadedclocksave.isbottlefilled
+                                        bottlepercent = loadedclocksave.bottlepercent
+                                        bottlecapacity = loadedclocksave.bottlecapacity
+                                        isbottlephase = loadedclocksave.isbottlephase
+                                        capacityincreascecost = loadedclocksave.capacityincreascecost
+                                        gainingfromticks = loadedclocksave.gainingfromticks
+                                        gainingincreasecost = loadedclocksave.gainingincreasecost
+                                        filledbottlenotpercent = loadedclocksave.filledbottlenotpercent
+                                        importingsave = false;
+                                        save();
+                                        document.getElementById("reloaddim").style.display = "block";
+                                        location.reload();
+                                    }
+                                }
+                            })
+                        }
                     }
                     else if(savecrypted == "DOABARRELROLL"){
                         var a="-webkit-",b='transform:rotate(1turn);',c='transition:4s;';document.head.innerHTML+='<style>body{'+a+b+a+c+b+c
@@ -214,6 +278,9 @@ function loadsave(){
                         },4500)
                     }
                 }
+                else{
+                    importingsave = false;
+                }
             }
         })
     }
@@ -221,10 +288,7 @@ function loadsave(){
         console.log("No save found starting new game")
     }
     else{
-        if(loadedclocksave.versionsave > GameID.version && importingsave){
-            vex.dialog.alert('This save file was saved in newer version of the game')
-        }
-        else if(loadedclocksave.versionsave <= GameID.version && !importingsave){
+        if(loadedclocksave.versionsave <= GameID.version && !importingsave){
             cansave = false;
             currency = loadedclocksave.currency
             currency10percent = loadedclocksave.currency10percent
@@ -275,68 +339,7 @@ function loadsave(){
             cansave = true;
             startmods();
             save();
-        }
-        else if(loadedclocksave.versionsave <= GameID.version && importingsave){
-            vex.dialog.confirm({
-                message: "Save file is correct. Do you want to load it? \n WARNING Loading this save will overwrite your current one",
-                callback: function (value) {
-                    if (value) {
-                        currency = loadedclocksave.currency
-                        currency10percent = loadedclocksave.currency10percent
-                        percentgot = loadedclocksave.percentgot
-                        multiplier = loadedclocksave.multiplier
-                        startingmultiplier = loadedclocksave.startingmultiplier
-                        multiplierlevel = loadedclocksave.multiplierlevel
-                        upgrademultivalue = loadedclocksave.upgrademultivalue
-                        ticktocks = loadedclocksave.ticktocks
-                        renewticks = loadedclocksave.renewticks
-                        tickleft = loadedclocksave.tickleft
-                        cheaperticktockscost = loadedclocksave.cheaperticktockscost
-                        cheaperticktockslv = loadedclocksave.cheaperticktockslv
-                        ascendpoints = loadedclocksave.ascendpoints
-                        sacrificemultipliercost = loadedclocksave.sacrificemultipliercost
-                        isascending = loadedclocksave.isascending
-                        gate = loadedclocksave.gate
-                        hu1b = loadedclocksave.hu1b
-                        hu2 = loadedclocksave.hu2
-                        hu2b = loadedclocksave.hu2b
-                        hu3 = loadedclocksave.hu3
-                        hu3b = loadedclocksave.hu3b
-                        hu4 = loadedclocksave.hu4
-                        hu4b = loadedclocksave.hu4b
-                        hu5 = loadedclocksave.hu5
-                        hu5b = loadedclocksave.hu5b
-                        hu6 = loadedclocksave.hu6
-                        hu6b = loadedclocksave.hu6b
-                        shards = loadedclocksave.shards
-                        dust = loadedclocksave.dust
-                        shardcrushingcost = loadedclocksave.shardcrushingcost
-                        dustsmeltingcost = loadedclocksave.dustsmeltingcost
-                        completiontowardskey = loadedclocksave.completiontowardskey
-                        currentmessage = loadedclocksave.currentmessage
-                        iskey = loadedclocksave.iskey
-                        timeleftinseconds = loadedclocksave.timeleftinseconds
-                        issmelteravailable = loadedclocksave.issmelteravailable
-                        modnames = loadedclocksave.modnames
-                        modlinks = loadedclocksave.modlinks
-                        isbottlefilled = loadedclocksave.isbottlefilled
-                        bottlepercent = loadedclocksave.bottlepercent
-                        bottlecapacity = loadedclocksave.bottlecapacity
-                        isbottlephase = loadedclocksave.isbottlephase
-                        capacityincreascecost = loadedclocksave.capacityincreascecost
-                        gainingfromticks = loadedclocksave.gainingfromticks
-                        gainingincreasecost = loadedclocksave.gainingincreasecost
-                        filledbottlenotpercent = loadedclocksave.filledbottlenotpercent
-                        save();
-                        document.getElementById("reloaddim").style.display = "block";
-                        location.reload();
-                    }
-                }
-            })
         }   
-    }
-    if(importingsave){
-        importingsave = false;
     }
 }
 function presave(){
