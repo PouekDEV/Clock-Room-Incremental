@@ -1,0 +1,1 @@
+electron-packager ./ clockroom --platform=win32 --arch=x64 --overwrite --icon=src/favicon-32x32.ico

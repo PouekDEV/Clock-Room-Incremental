@@ -23,7 +23,7 @@ loadsetting();
 var elevenload = 0;
 var gamemoment = 0;
 var internetspeed = 0;
-var localgame = false;
+var localgame = true;
 var musicon;
 var effecton;
 var player = document.getElementById('audio');

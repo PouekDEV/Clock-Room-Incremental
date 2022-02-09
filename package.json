@@ -1,0 +1,16 @@
+{
+  "name": "clockroom",
+  "version": "1.0.0",
+  "description": "incremental game",
+  "main": "createwindow.js",
+  "dependencies": {
+    "electron": "^16.0.6",
+    "electron-packager": "^15.4.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Pouek_",
+  "license": "DBAD"
+}
