@@ -365,10 +365,7 @@ function exportsave(){
     var loadedclocksave = JSON.parse(localStorage.getItem("clockroomsave"));
     var stringsave = JSON.stringify(loadedclocksave);
     var basesave = btoa(stringsave);
-    navigator.clipboard.writeText(basesave)
-    setTimeout(() => {
-        vex.dialog.alert('Copied save to clipboard')
-    },1000)
+    navigator.clipboard.writeText(basesave).then(() => {vex.dialog.alert('Copied save to clipboard')}).catch(() => {vex.dialog.alert("Something went wrong and save couldn't be copied to clipboard")})
 }
 function deletesave(){
     upgrade_click_sound();
