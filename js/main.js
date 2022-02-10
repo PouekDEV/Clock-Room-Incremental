@@ -63,10 +63,10 @@ var importingsave = false;
 var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
 // Some game info
 var GameID = {
-    version: 0.9,
-    vname: "Before launch",
+    version: 1.0,
+    vname: "Launch",
     beta: 0,
-    launch: ""
+    launch: "10.02.2022"
 }
 // Mod stuff
 function showmodmenu(){
@@ -318,10 +318,7 @@ function exportsave(){
     var loadedclocksave = JSON.parse(localStorage.getItem("clockroomsave"));
     var stringsave = JSON.stringify(loadedclocksave);
     var basesave = btoa(stringsave);
-    navigator.clipboard.writeText(basesave)
-    setTimeout(() => {
-        alert("Copied save to clipboard")
-    },1000)
+    navigator.clipboard.writeText(basesave).then(() => {alert("Copied save to clipboard")}).catch(() => {alert("Something went wrong and save couldn't be copied to clipboard")})
 }
 function deletesave(){
     upgrade_click_sound();
