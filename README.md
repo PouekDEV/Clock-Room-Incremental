@@ -22,7 +22,7 @@ or here - https://pouek.itch.io/clock-room
 - [x] make one more way to end the game (going back from gate to normal gameplay and add special upgrades)
 - [x] prepare itch.io page
 - [x] prepare gamejolt page
-- [ ] finish the beta tests
+- [x] finish the beta tests
 - [ ] make trailer
-- [ ] Make soundcloud soundtrack public
+- [x] Make soundcloud soundtrack public
 - [ ] Release the game 🎉
