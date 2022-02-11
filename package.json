@@ -5,7 +5,8 @@
   "main": "createwindow.js",
   "dependencies": {
     "electron": "^16.0.6",
-    "electron-packager": "^15.4.0"
+    "electron-packager": "^15.4.0",
+    "vex-js": "^4.1.0"
   },
   "devDependencies": {},
   "scripts": {
