@@ -63,10 +63,10 @@ var importingsave = false;
 var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
 // Some game info
 var GameID = {
-    version: 1.0,
-    vname: "Launch",
+    version: 1.1,
+    vname: "Minor Fixes",
     beta: 0,
-    launch: "10.02.2022"
+    launch: "06.03.2022"
 }
 // Mod stuff
 function showmodmenu(){
