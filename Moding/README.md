@@ -15,7 +15,7 @@ function someactivationfunction(){
 ```
 Mod name is required for loader to call your mod after loading it
 ## How to load mods
-### Use this code in console (doesn't work on gamejolt or itch.io)
+### Use this code in console (doesn't work on itch.io)
 ```js
 loadmod("https://example.com/mymod.js","mymod");
 ```
