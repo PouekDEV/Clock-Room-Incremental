@@ -63,10 +63,10 @@ var importingsave = false;
 var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
 // Some game info
 var GameID = {
-    version: 0.9,
-    vname: "Before launch",
+    version: 1.2,
+    vname: "Big fix and reskin",
     beta: 0,
-    launch: ""
+    launch: "18.04.2022"
 }
 // Mod stuff
 function showmodmenu(){

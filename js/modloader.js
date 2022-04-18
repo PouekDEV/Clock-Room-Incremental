@@ -47,8 +47,13 @@ function modloaded(url,name){
         try{
             initializemod(name);
         }catch(e){
+            document.getElementById("modtextinfo").innerHTML = "Mod Error";
             console.log("[MODLOADER] Error loading mod '" + name +"' Error: " + e + "\n Does mod name and url is right?");
             $("script").last().remove()
+            $('.mod-in').toggleClass('show');
+            setTimeout(() => {
+                $('.mod-in').toggleClass('show');
+            },3000)
             canload = true;
             timeoutlever = false;
         }
@@ -61,6 +66,10 @@ function timeout(name){
         if(timeoutlever){
             console.log("[MODLOADER] Error loading mod '" + name +"' Error: Timeout error. Mod not responded in 5 seconds \n Does mod name and url is right?");
             $("script").last().remove()
+            $('.mod-in').toggleClass('show');
+            setTimeout(() => {
+                $('.mod-in').toggleClass('show');
+            },3000)
             canload = true;
         }
     },5000)
@@ -69,6 +78,7 @@ function timeout(name){
 function modready(name){
     if(name == modname){
         timeoutlever = false;
+        document.getElementById("modtextinfo").innerHTML = "Loaded mod";
         console.log("[MODLOADER] Loaded 1 new mod '" + name + "' from " + infourl);
         $('.mod-in').toggleClass('show');
         setTimeout(() => {
@@ -80,7 +90,12 @@ function modready(name){
     }
     else{
         timeoutlever = false;
+        document.getElementById("modtextinfo").innerHTML = "Mod Error";
         console.log("[MODLOADER] Error loading mod '" + name +"' Error: Unknown mod name reported");
+        $('.mod-in').toggleClass('show');
+        setTimeout(() => {
+            $('.mod-in').toggleClass('show');
+        },3000)
         $("script").last().remove()
         canload = true;
     }
