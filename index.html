@@ -11,412 +11,419 @@
     <link rel="stylesheet" href="styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="js/paper-full.js"></script>
+    <script src="js/vex.combined.min.js"></script>
+    <script>vex.defaultOptions.className = 'vex-theme-os'</script>
+    <link rel="stylesheet" href="vex.css" />
+    <link rel="stylesheet" href="vex-theme-os.css" />
 </head>
 <body id="body">
-    <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
-    <p style="position: absolute; top: 500px; left: 700px; font-size: 30px;" id="loadingtext" class="glow">Loading crucial game files...</p>
-    <p style="position: absolute; top: 300px; left: 700px; font-size: 70px;" id="endtext" class="glow">You escaped!</p>
-    <p style="position: absolute; top: 450px; left: 700px; font-size: 30px;" id="endtext2" class="glow">But where did you end up?</p>
-    <div class="glow static" id="muchnews">
-        <div class="news multi">
-            <p id="news">Wow message such entertain</p>
-        </div>
-    </div>
-    <div class="slide-in from-right saveanim">
-        <div class="slide-in-content glow">
-            <p style="font-size: 20px;">Game Saved</p>
-        </div>
-      </div>
-    <br><br>
-    <div class="mod-in from-right saveanim">
-      <div class="mod-in-content glow">
-          <p style="font-size: 20px;">Loaded mod</p>
-      </div>
-    </div>
-    <div class="ap" id="ap">
-        <img src="src/hourglass.gif" width="100" height="100" title="Rewinding time...">
-        <br>
-        Rewinding Time...
-    </div>
-    <div class="everything" id="everything">
-        <img src="src/wrench.png" width="75" height="75" style="position: absolute; top: 0px; left: 150px;" onclick="showmodmenu()">
-        <p style="font-size: 35px; text-align: left; position: absolute; top: 0px;" class="glow">Upgrades</p>
-        <br><br><br><br><br><br><br><br><br><br><br>
-        <div class="upgrades glow">
-            <div class="multi">
-                <p style="font-size: 30px;">Upgrade multiplier</p>
-                <p style="font-size: 15px;" id="multilv">LV. 0</p>
-                <button onclick="upgrademulti()">
-                    <span class="glow" style="font-size: 15px;" id="upgradevalue">Upgrade</span>
-                </button>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">Less time consuming Tick Tocks</p>
-                <p style="font-size: 15px;" id="tocklv">LV. 0</p>
-                <button onclick="cheaperticks()">
-                    <span class="glow" style="font-size: 15px;" id="tockupgradevalue">Upgrade</span>
-                </button>
+    <div class="every" id="every">
+        <img src="src/loading.gif" style="position: absolute; top: 400px; left: 900px;" id="loading" width="100" height="100">
+        <p style="position: absolute; top: 500px; left: 700px; font-size: 30px;" id="loadingtext" class="glow">Loading crucial game files...</p>
+        <p style="position: absolute; top: 300px; left: 700px; font-size: 70px;" id="endtext" class="glow">You escaped!</p>
+        <p style="position: absolute; top: 450px; left: 700px; font-size: 30px;" id="endtext2" class="glow">But where did you end up?</p>
+        <div class="glow static" id="muchnews">
+            <div class="news multi">
+                <p id="news">Wow message such entertain</p>
             </div>
         </div>
+        <div class="slide-in from-right saveanim">
+            <div class="slide-in-content glow">
+                <p style="font-size: 20px;">Game Saved</p>
+            </div>
+          </div>
         <br><br>
-        <div class="upgrades glow" id="flaskupgrades">
-            <p class="glow" style="font-size: 40px;">Flask upgrades</p>
-            <div class="multi">
-                <p style="font-size: 30px;">Flask capacity</p>
-                <p style="font-size: 15px;" id="fclv">Increase capacity of flask <br> LV.1</p>
-                <button onclick="upgradecapacity()">
-                    <span class="glow" style="font-size: 15px;" id="fccost">Upgrade</span>
-                </button>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">Pure magic</p>
-                <p style="font-size: 15px;" id="fglv">Gain more fillage to flask <br> LV.1</p>
-                <button onclick="upgradegainage()">
-                    <span class="glow" style="font-size: 15px;" id="fgcost">Upgrade</span>
-                </button>
-            </div>
+        <div class="mod-in from-right saveanim">
+          <div class="mod-in-content glow">
+              <p style="font-size: 20px;" id="modtextinfo">Loaded mod</p>
+          </div>
         </div>
-        <br><br>
-        <div class="upgrades glow" id="shop">
-            <p class="glow">Shop</p>
-            <div class="multi">
-                <p style="font-size: 30px;">Sacrificial Multiplier</p>
-                <p style="font-size: 15px;">You'll get a reward...</p>
-                <p style="font-size: 15px;" id="sacrificetext">You don't have this upgrade yet</p>
-                <div class="special" id="sacrificebutton">
-                    <button onclick="sacrificemultiplier()">
-                        <span class="glow" style="font-size: 15px;" id="sacrificemulti">Sacrifice</span>
+        <div class="ap" id="ap">
+            <img src="src/hourglass.gif" width="100" height="100" title="Rewinding time...">
+            <br>
+            Rewinding Time...
+        </div>
+        <div class="everything" id="everything">
+            <img src="src/wrench.png" width="75" height="75" style="position: absolute; top: 0px; left: 150px;" onclick="showmodmenu()">
+            <p style="font-size: 35px; text-align: left; position: absolute; top: 0px;" class="glow">Upgrades</p>
+            <br><br><br><br><br><br><br><br><br><br><br>
+            <div class="upgrades glow">
+                <div class="multi">
+                    <p style="font-size: 30px;">Upgrade multiplier</p>
+                    <p style="font-size: 15px;" id="multilv">LV. 0</p>
+                    <button onclick="upgrademulti()">
+                        <span class="glow" style="font-size: 15px;" id="upgradevalue">Upgrade</span>
                     </button>
                 </div>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">Past money</p>
-                <p style="font-size: 15px;">Get 10% of seconds you had before rewinding time</p>
-                <p style="font-size: 15px;" id="showhowmuch"></p>
-                <button onclick="get10percent()" class="getitbutton" id="onerewindpastmoney">
-                    <span class="glow" style="font-size: 15px;">Get it</span>
-                </button>
-            </div>
-        </div>
-        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-        <div class="upgrades glow">
-            <p class="glow" style="font-size: 50px;">Settings &</p>
-            <p class="glow" style="font-size: 50px;">Info</p>
-            <div class="multi">
-                <p style="font-size: 30px;">Music</p>
-                <p style="font-size: 15px;">By deafult turned on to feel the ambient</p>
-                <button onclick="changemusicstate()">
-                    <span class="glow" style="font-size: 15px;" id="musicswitch">on</span>
-                </button>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">Background effect</p>
-                <p style="font-size: 15px;">When turned off may reduce CPU usage (requires reload when turned on)</p>
-                <button onclick="changeeffectstate()">
-                    <span class="glow" style="font-size: 15px;" id="bgeffect">on</span>
-                </button>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">Save</p>
-                <p style="font-size: 15px;">Set of things you can do with your save</p>
-                <p style="font-size: 15px;">Keep in mind that game is saved every 30 seconds</p>
-                <button onclick="presave()">
-                    <span class="glow" style="font-size: 15px;">Save</span>
-                </button>
-                <button onclick="preload()">
-                    <span class="glow" style="font-size: 15px;">Load</span>
-                </button>
-                <button onclick="deletesave()">
-                    <span class="glow" style="font-size: 15px;">Delete</span>
-                </button>
-                <button onclick="exportsave()">
-                    <span class="glow" style="font-size: 15px;">Export</span>
-                </button>
-                <button onclick="importsave()">
-                    <span class="glow" style="font-size: 15px;">Import</span>
-                </button>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">Other things</p>
-                <a href="https://www.pouekdev.one" style="font-size: 15px;" target="_blank">Main website</a>
-                <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
-                <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
-                <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
-                <p style="font-size: 15px;"><a href="./credits.html" target="_blank">Credits</a></p>
-                <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/blob/main/Moding/README.md#how-to-load-mods" target="_blank">Mods (guide)</a></p>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">SoundCloud</p>
-                <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1344965158%3Fsecret_token%3Ds-AEwML54DIrm&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/pouek" title="Pouek_" target="_blank" style="color: #cccccc; text-decoration: none;">Pouek_</a> · <a href="https://soundcloud.com/pouek/sets/clock-room-original-soundtrack/s-AEwML54DIrm" title="Clock Room Original Soundtrack" target="_blank" style="color: #cccccc; text-decoration: none;">Clock Room Original Soundtrack</a></div>
-            </div>
-            <br><br>
-            <div class="formods" id="formods">
-
-            </div>
-        </div>
-        <div class="values static">
-            <p style="text-align: center;" class="glow" id="seconds">You have 0 seconds</p>
-            <p style="text-align: center; font-size: 30px;" id="multiplier" class="glow">0x multiplier</p>
-            <br><br>
-            <p style="text-align: center; font-size: 20px;" class="glow" id="showticks">0 tick tocks</p>
-            <div class="center">
-                <img src="src/hourglass.gif" width="100" height="100" title="Time is passing by... Focus!">
-                <p style="text-align: center; font-size: 15px;" id="nexttick">Time left until next Tick Tock</p>
                 <br>
-                <button onclick="triggerascendscreen()">
-                    <span class="glow" style="font-size: 15px;">Rewind Time</span>
-                </button>
-            </div>
-        </div>
-    </div>
-    <!--GATE-->
-    <div class="setting" id="setting">
-        <img src="src/wrench.png" width="75" height="75" style="position: absolute; top: 70px; left: 70px;" onclick="showmodmenu()">
-        <div class="upgrades glow">
-            <p class="glow" style="font-size: 50px;">Settings &</p>
-            <p class="glow" style="font-size: 50px;">Info</p>
-            <div class="multi">
-                <p style="font-size: 30px;">Music</p>
-                <p style="font-size: 15px;">By deafult turned on to feel the ambient</p>
-                <button onclick="changemusicstate()">
-                    <span class="glow" style="font-size: 15px;" id="musicswitch2">on</span>
-                </button>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">Background effect</p>
-                <p style="font-size: 15px;">When turned off may reduce CPU usage (requires reload when turned on)</p>
-                <button onclick="changeeffectstate()">
-                    <span class="glow" style="font-size: 15px;" id="bgeffect2">on</span>
-                </button>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">Save</p>
-                <p style="font-size: 15px;">Set of things you can do with your save</p>
-                <p style="font-size: 15px;">Keep in mind that game is saved every 30 seconds</p>
-                <button onclick="presave()">
-                    <span class="glow" style="font-size: 15px;">Save</span>
-                </button>
-                <button onclick="preload()">
-                    <span class="glow" style="font-size: 15px;">Load</span>
-                </button>
-                <button onclick="deletesave()">
-                    <span class="glow" style="font-size: 15px;">Delete</span>
-                </button>
-                <button onclick="exportsave()">
-                    <span class="glow" style="font-size: 15px;">Export</span>
-                </button>
-                <button onclick="importsave()">
-                    <span class="glow" style="font-size: 15px;">Import</span>
-                </button>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">Other things</p>
-                <a href="https://www.pouekdev.one" style="font-size: 15px;" target="_blank">Main website</a>
-                <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
-                <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
-                <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
-                <p style="font-size: 15px;"><a href="./credits.html" target="_blank">Credits</a></p>
-                <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/blob/main/Moding/README.md#how-to-load-mods" target="_blank">Mods (guide)</a></p>
-            </div>
-            <br>
-            <div class="multi">
-                <p style="font-size: 30px;">SoundCloud</p>
-                <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1344965158%3Fsecret_token%3Ds-AEwML54DIrm&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/pouek" title="Pouek_" target="_blank" style="color: #cccccc; text-decoration: none;">Pouek_</a> · <a href="https://soundcloud.com/pouek/sets/clock-room-original-soundtrack/s-AEwML54DIrm" title="Clock Room Original Soundtrack" target="_blank" style="color: #cccccc; text-decoration: none;">Clock Room Original Soundtrack</a></div>
+                <div class="multi">
+                    <p style="font-size: 30px;">Less time consuming Tick Tocks</p>
+                    <p style="font-size: 15px;" id="tocklv">LV. 0</p>
+                    <button onclick="cheaperticks()">
+                        <span class="glow" style="font-size: 15px;" id="tockupgradevalue">Upgrade</span>
+                    </button>
+                </div>
             </div>
             <br><br>
-            <div class="formodsgate" id="formodsgate">
-
-            </div>
-        </div>
-    </div>
-    <br>
-    <div class="stuff2 staticnes" id="gate">
-        <div class="gate center">
-            <p style="text-align: fixed; left: 800px;" class="glow" id="timeleft"></p>
-            <p style="text-align: center; font-size: 30px;" class="glow" id="untilgateopens">Until gate opens</p>
-            <div class="tooltip">
-                <img style="text-align: fixed; right: 300px;" src="src/gate.png" width="300" height="300" onclick="endofdagame()" class="gatebutton">
-                <span class="tooltiptext glow" style="font-size: 15px;">Click it when you will have a key to open it or when time reaches 00:00:00 click to enter it</span>
-            </div>
-            <br><br><br><br>
-            <div class="tooltip">
-                <img src="src/shard.png" width="100" height="200" onclick="clickshard()" class="shardbutton">
-                <span class="tooltiptext glow" style="font-size: 15px;">Click it to get crystals</span>
-            </div>
-            <p style="text-align: center; font-size: 20px;" id="shardsamount">Shards</p>
-            <p style="text-align: center; font-size: 20px;" id="dustamount">Dust</p>
-        </div>
-        <div class="smelter glow">
-            <div class="multi">
-                <p style="font-size: 30px;">Crush Shards</p>
-                <p style="font-size: 15px;">Crushing shards gives you 100 dust</p>
-                <button onclick="crushshards()">
-                    <span class="glow" style="font-size: 15px;" id="shardcrushingcost">100k Shards</span>
-                </button>
-            </div>
-        </div>
-        <div class="smelter2 glow" id="smelter">
-            <div class="multi">
-                <p style="font-size: 30px;">Smelt Dust</p>
-                <p style="font-size: 15px;">Smelting dust gives you 0.5% of required mass for key</p>
-                <p style="font-size: 15px;" id="howmuchkeydone">0.0% Key done</p>
-                <button onclick="smeltdust()">
-                    <span class="glow" style="font-size: 15px;" id="smeltindustcost">10k Dust</span>
-                </button>
-            </div>
-        </div>
-    </div>
-        <div class="ascend staticnes" id="ascend">
-        <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
-        <p style="position: fixed; top: 300px; left: 500px;">Do you really want to Rewind Time?</p>
-        <button style="position: absolute; top: 400px; left: 800px;" onclick="beforeascendscrren()">
-            <span class="glow" style="font-size: 20px;">yes</span>
-        </button>
-        <button style="position: absolute; top: 500px; left: 800px;" onclick="noascend()">
-            <span class="glow" style="font-size: 20px;">no</span>
-        </button>
-    </div>
-    <div class="ascend staticnes" id="gateprompt">
-        <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
-        <p style="position: fixed; top: 300px; left: 500px;">Do you want to enter the gate?</p>
-        <button style="position: absolute; top: 400px; left: 800px;" onclick="endofdagameo1()">
-            <span class="glow" style="font-size: 20px;">yes</span>
-        </button>
-        <button style="position: absolute; top: 500px; left: 800px;" onclick="endofdagameo2()">
-            <span class="glow" style="font-size: 20px;">no</span>
-        </button>
-    </div>
-    <div class="ascend staticnes" id="moddim">
-        <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
-        <p style="position: fixed; top: 250px; left: 770px;">Mod settings</p>
-        <p style="position: fixed; top: 500px; left: 500px;">Mod configurations automatically load and save</p>
-        <button style="position: absolute; top: 400px; left: 600px;" onclick="deletemoddata()">
-            <span class="glow" style="font-size: 20px;">delete mods</span>
-        </button>
-        <button style="position: absolute; top: 400px; left: 800px;" onclick="presave()">
-            <span class="glow" style="font-size: 20px;">save mods</span>
-        </button>
-        <button style="position: absolute; top: 400px; left: 1000px;" onclick="loadnewmods()">
-            <span class="glow" style="font-size: 20px;">load new</span>
-        </button>
-        <button style="position: absolute; top: 400px; left: 1200px;" onclick="hidemodmenu()">
-            <span class="glow" style="font-size: 20px;">close</span>
-        </button>
-    </div>
-    <div class="ascend staticnes" id="reloaddim">
-        <img src="src/dim.png" style="position: absolute; opacity: 100%; top: 0px;" id="dim" width="1920" height="1080">
-        <p style="position: fixed; top: 250px; left: 770px;">Reloading...</p>
-    </div>
-    <div class="ascendtree" id="ascendtree">
-        <p class="glow" style="font-size: 30px;" id="ascendinstructions">Pick your desired upgrades and go back in time for more prestige</p>
-        <br>
-        <button onclick="goback()">
-            <span class="glow" style="font-size: 20px;">Go back</span>
-        </button>
-        <br>
-        <p style="font-size: 15px;" class="glow" id="showprestige">You have 0 prestige points</p>
-        <br><br><br><br><br>
-        <div class="ascendupgrades" id="ascendupgrades">
-            <div class="upgrades glow" id="prestigeupgrades">
-                <br><br><br><br>
-                <div class="upg">
-                    ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
-                    <img src="src/squircle.png" width="50" height="50"><br>
-                    Ticket - 1 prestige point<br>
-                    "Your pass to those sweet upgrades"<br>
-                    <button onclick="buyhu1()" id="hu1b">
-                        <span class="glow" style="font-size: 20px;">BUY</span>
+            <div class="upgrades glow" id="flaskupgrades">
+                <p class="glow" style="font-size: 40px;">Flask upgrades</p>
+                <div class="multi">
+                    <p style="font-size: 30px;">Flask capacity</p>
+                    <p style="font-size: 15px;" id="fclv">Increase capacity of flask <br> LV.1</p>
+                    <button onclick="upgradecapacity()">
+                        <span class="glow" style="font-size: 15px;" id="fccost">Upgrade</span>
                     </button>
-                    <br><br>
-                    <div id="hu2">
-                        <img src="src/squircle.png" width="50" height="50"><br>
-                        Shop - 25 prestige points<br>
-                        "New things"<br>
-                        <button onclick="buyhu2()" id="hu2b">
-                            <span class="glow" style="font-size: 20px;">BUY</span>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">Pure magic</p>
+                    <p style="font-size: 15px;" id="fglv">Gain more fillage to flask <br> LV.1</p>
+                    <button onclick="upgradegainage()">
+                        <span class="glow" style="font-size: 15px;" id="fgcost">Upgrade</span>
+                    </button>
+                </div>
+            </div>
+            <br><br>
+            <div class="upgrades glow" id="shop">
+                <p class="glow">Shop</p>
+                <div class="multi">
+                    <p style="font-size: 30px;">Sacrificial Multiplier</p>
+                    <p style="font-size: 15px;">You'll get a reward...</p>
+                    <p style="font-size: 15px;" id="sacrificetext">You don't have this upgrade yet</p>
+                    <div class="special" id="sacrificebutton">
+                        <button onclick="sacrificemultiplier()">
+                            <span class="glow" style="font-size: 15px;" id="sacrificemulti">Sacrifice</span>
                         </button>
                     </div>
-                    <br><br>
-                    <div id="hu3">
-                        <img src="src/squircle.png" width="50" height="50"><br>
-                        Sacrificial multiplier - 100 prestige points<br>
-                        "Sacrifice some multiplier for huge amount of seconds"<br>
-                        <button onclick="buyhu3()" id="hu3b">
-                            <span class="glow" style="font-size: 20px;">BUY</span>
-                        </button>
-                    </div>
-                    <br><br>
-                    <div id="hu4">
-                        <img src="src/squircle.png" width="50" height="50"><br>
-                        Time Travel - 100 prestige points<br>
-                        "Get 10% of your seconds that you had before rewinding time"<br>
-                        <button onclick="buyhu4()" id="hu4b">
-                            <span class="glow" style="font-size: 20px;">BUY</span>
-                        </button>
-                    </div>
-                    <br><br>
-                    <div id="hu5">
-                        <img src="src/squircle.png" width="50" height="50"><br>
-                        Gate - 500 prestige points<br>
-                        "Gate to a portal to somewhere..."<br>
-                        <button onclick="buyhu5()" id="hu5b">
-                            <span class="glow" style="font-size: 20px;">BUY</span>
-                        </button>
-                    </div>
-                    <br><br>
-                    <div id="hu6">
-                        <img src="src/squircle.png" width="50" height="50"><br>
-                        Time Shard - 1000 prestige points<br>
-                        "You can see your whole life in it"<br>
-                        <button onclick="buyhu6()" id="hu6b">
-                            <span class="glow" style="font-size: 20px;">BUY</span>
-                        </button>
-                    </div>
-                    <br><br><br><br>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">Past money</p>
+                    <p style="font-size: 15px;">Get 10% of seconds you had before rewinding time</p>
+                    <p style="font-size: 15px;" id="showhowmuch"></p>
+                    <button onclick="get10percent()" class="getitbutton" id="onerewindpastmoney">
+                        <span class="glow" style="font-size: 15px;">Get it</span>
+                    </button>
+                </div>
+            </div>
+            <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            <div class="upgrades glow">
+                <p class="glow" style="font-size: 50px;">Settings &</p>
+                <p class="glow" style="font-size: 50px;">Info</p>
+                <div class="multi">
+                    <p style="font-size: 30px;">Music</p>
+                    <p style="font-size: 15px;">By deafult turned on to feel the ambient</p>
+                    <button onclick="changemusicstate()">
+                        <span class="glow" style="font-size: 15px;" id="musicswitch">on</span>
+                    </button>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">Background effect</p>
+                    <p style="font-size: 15px;">When turned off may reduce CPU usage (requires reload when turned on)</p>
+                    <button onclick="changeeffectstate()">
+                        <span class="glow" style="font-size: 15px;" id="bgeffect">on</span>
+                    </button>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">Save</p>
+                    <p style="font-size: 15px;">Set of things you can do with your save</p>
+                    <p style="font-size: 15px;">Keep in mind that game is saved every 30 seconds</p>
+                    <button onclick="presave()">
+                        <span class="glow" style="font-size: 15px;">Save</span>
+                    </button>
+                    <button onclick="preload()">
+                        <span class="glow" style="font-size: 15px;">Load</span>
+                    </button>
+                    <button onclick="deletesave()">
+                        <span class="glow" style="font-size: 15px;">Delete</span>
+                    </button>
+                    <button onclick="exportsave()">
+                        <span class="glow" style="font-size: 15px;">Export</span>
+                    </button>
+                    <button onclick="importsave()">
+                        <span class="glow" style="font-size: 15px;">Import</span>
+                    </button>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">Other things</p>
+                    <a href="https://www.pouekdev.one" style="font-size: 15px;" target="_blank">Main website</a>
+                    <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
+                    <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
+                    <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
+                    <p style="font-size: 15px;"><a href="./credits.html" target="_blank">Credits</a></p>
+                    <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/blob/main/Moding/README.md#how-to-load-mods" target="_blank">Mods (guide)</a></p>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">SoundCloud</p>
+                    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1344965158%3Fsecret_token%3Ds-AEwML54DIrm&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/pouek" title="Pouek_" target="_blank" style="color: #cccccc; text-decoration: none;">Pouek_</a> · <a href="https://soundcloud.com/pouek/sets/clock-room-original-soundtrack/s-AEwML54DIrm" title="Clock Room Original Soundtrack" target="_blank" style="color: #cccccc; text-decoration: none;">Clock Room Original Soundtrack</a></div>
+                </div>
+                <br><br>
+                <div class="formods" id="formods">
+
+                </div>
+            </div>
+            <div class="values static">
+                <p style="text-align: center;" class="glow" id="seconds">You have 0 seconds</p>
+                <p style="text-align: center; font-size: 30px;" id="multiplier" class="glow">0x multiplier</p>
+                <br><br>
+                <p style="text-align: center; font-size: 20px;" class="glow" id="showticks">0 tick tocks</p>
+                <div class="center">
+                    <img src="src/hourglass.gif" width="100" height="100" title="Time is passing by... Focus!">
+                    <p style="text-align: center; font-size: 15px;" id="nexttick">Time left until next Tick Tock</p>
+                    <br>
+                    <button onclick="triggerascendscreen()">
+                        <span class="glow" style="font-size: 15px;">Rewind Time</span>
+                    </button>
                 </div>
             </div>
         </div>
-    </div>
-    <div id="liquidcontainerascend" class="col-lg-3">
-        <div class="img-container">
-            <div class="positioning">
-                <canvas id="liquid" class="liquid">
+        <!--GATE-->
+        <div class="setting" id="setting">
+            <img src="src/wrench.png" width="75" height="75" style="position: absolute; top: 70px; left: 70px;" onclick="showmodmenu()">
+            <div class="upgrades glow">
+                <p class="glow" style="font-size: 50px;">Settings &</p>
+                <p class="glow" style="font-size: 50px;">Info</p>
+                <div class="multi">
+                    <p style="font-size: 30px;">Music</p>
+                    <p style="font-size: 15px;">By deafult turned on to feel the ambient</p>
+                    <button onclick="changemusicstate()">
+                        <span class="glow" style="font-size: 15px;" id="musicswitch2">on</span>
+                    </button>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">Background effect</p>
+                    <p style="font-size: 15px;">When turned off may reduce CPU usage (requires reload when turned on)</p>
+                    <button onclick="changeeffectstate()">
+                        <span class="glow" style="font-size: 15px;" id="bgeffect2">on</span>
+                    </button>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">Save</p>
+                    <p style="font-size: 15px;">Set of things you can do with your save</p>
+                    <p style="font-size: 15px;">Keep in mind that game is saved every 30 seconds</p>
+                    <button onclick="presave()">
+                        <span class="glow" style="font-size: 15px;">Save</span>
+                    </button>
+                    <button onclick="preload()">
+                        <span class="glow" style="font-size: 15px;">Load</span>
+                    </button>
+                    <button onclick="deletesave()">
+                        <span class="glow" style="font-size: 15px;">Delete</span>
+                    </button>
+                    <button onclick="exportsave()">
+                        <span class="glow" style="font-size: 15px;">Export</span>
+                    </button>
+                    <button onclick="importsave()">
+                        <span class="glow" style="font-size: 15px;">Import</span>
+                    </button>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">Other things</p>
+                    <a href="https://www.pouekdev.one" style="font-size: 15px;" target="_blank">Main website</a>
+                    <a href="https://www.squarepatternstudio.com" style="font-size: 15px;" target="_blank">Studio website</a>
+                    <p style="font-size: 15px;"><a href="./changelog.html" target="_blank">Changelog</a></p>
+                    <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/issues/new" target="_blank">Report a bug</a></p>
+                    <p style="font-size: 15px;"><a href="./credits.html" target="_blank">Credits</a></p>
+                    <p style="font-size: 15px;"><a href="https://github.com/PouekDEV/Clock-Room-Incremental/blob/main/Moding/README.md#how-to-load-mods" target="_blank">Mods (guide)</a></p>
+                </div>
+                <br>
+                <div class="multi">
+                    <p style="font-size: 30px;">SoundCloud</p>
+                    <iframe width="100%" height="300" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/playlists/1344965158%3Fsecret_token%3Ds-AEwML54DIrm&color=%23ff5500&auto_play=false&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/pouek" title="Pouek_" target="_blank" style="color: #cccccc; text-decoration: none;">Pouek_</a> · <a href="https://soundcloud.com/pouek/sets/clock-room-original-soundtrack/s-AEwML54DIrm" title="Clock Room Original Soundtrack" target="_blank" style="color: #cccccc; text-decoration: none;">Clock Room Original Soundtrack</a></div>
+                </div>
+                <br><br>
+                <div class="formodsgate" id="formodsgate">
+
+                </div>
             </div>
-            <img src="src/Flask.png" width="300" height="300">
         </div>
-        <div class="valuesflask glow">
-            <p id="capacity" style="font-size: 30px;">Flask capacity is: 10</p>
-            <p id="fillpercentage" style="font-size: 30px;">Required percent of fill: 100%</p>
-            <p id="depositedprestige" style="font-size: 30px;">Flask contains 0 prestige</p>
-            <p id="flaskready" style="font-size: 30px;">Flask is not ready</p>
-            <button onclick="depositprestige()">
-                <span class="glow" style="font-size: 20px;">Deposit Prestige</span>
+        <br>
+        <div class="stuff2 staticnes" id="gate">
+            <div class="gate center">
+                <p style="text-align: fixed; left: 800px;" class="glow" id="timeleft"></p>
+                <p style="text-align: center; font-size: 30px;" class="glow" id="untilgateopens">Until gate opens</p>
+                <div class="tooltip">
+                    <img style="text-align: fixed; right: 300px;" src="src/gate.png" width="300" height="300" onclick="endofdagame()" class="gatebutton">
+                    <span class="tooltiptext glow" style="font-size: 15px;">Click it when you will have a key to open it or when time reaches 00:00:00 click to enter it</span>
+                </div>
+                <br><br><br><br>
+                <div class="tooltip">
+                    <img src="src/shard.png" width="100" height="200" onclick="clickshard()" class="shardbutton">
+                    <span class="tooltiptext glow" style="font-size: 15px;">Click it to get crystals</span>
+                </div>
+                <p style="text-align: center; font-size: 20px;" id="shardsamount">Shards</p>
+                <p style="text-align: center; font-size: 20px;" id="dustamount">Dust</p>
+            </div>
+            <div class="smelter glow">
+                <div class="multi">
+                    <p style="font-size: 30px;">Crush Shards</p>
+                    <p style="font-size: 15px;">Crushing shards gives you 100 dust</p>
+                    <button onclick="crushshards()">
+                        <span class="glow" style="font-size: 15px;" id="shardcrushingcost">100k Shards</span>
+                    </button>
+                </div>
+            </div>
+            <div class="smelter2 glow" id="smelter">
+                <div class="multi">
+                    <p style="font-size: 30px;">Smelt Dust</p>
+                    <p style="font-size: 15px;">Smelting dust gives you 0.5% of required mass for key</p>
+                    <p style="font-size: 15px;" id="howmuchkeydone">0.0% Key done</p>
+                    <button onclick="smeltdust()">
+                        <span class="glow" style="font-size: 15px;" id="smeltindustcost">10k Dust</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+            <div class="ascend staticnes" id="ascend">
+            <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
+            <p style="position: fixed; top: 300px; left: 500px;">Do you really want to Rewind Time?</p>
+            <button style="position: absolute; top: 400px; left: 800px;" onclick="beforeascendscrren()">
+                <span class="glow" style="font-size: 20px;">yes</span>
             </button>
-            <br><br>
-            <button onclick="drink()" id="drinkflask">
-                <span class="glow" style="font-size: 20px;">Drink</span>
+            <button style="position: absolute; top: 500px; left: 800px;" onclick="noascend()">
+                <span class="glow" style="font-size: 20px;">no</span>
             </button>
         </div>
+        <div class="ascend staticnes" id="gateprompt">
+            <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
+            <p style="position: fixed; top: 300px; left: 500px;">Do you want to enter the gate?</p>
+            <button style="position: absolute; top: 400px; left: 800px;" onclick="endofdagameo1()">
+                <span class="glow" style="font-size: 20px;">yes</span>
+            </button>
+            <button style="position: absolute; top: 500px; left: 800px;" onclick="endofdagameo2()">
+                <span class="glow" style="font-size: 20px;">no</span>
+            </button>
+        </div>
+        <div class="ascend staticnes" id="moddim">
+            <img src="src/dim.png" style="position: absolute; opacity: 90%; top: 0px;" id="dim" width="1920" height="1080">
+            <p style="position: fixed; top: 250px; left: 770px;">Mod settings</p>
+            <p style="position: fixed; top: 500px; left: 500px;">Mod configurations automatically load and save</p>
+            <button style="position: absolute; top: 400px; left: 600px;" onclick="deletemoddata()">
+                <span class="glow" style="font-size: 20px;">delete mods</span>
+            </button>
+            <button style="position: absolute; top: 400px; left: 800px;" onclick="presave()">
+                <span class="glow" style="font-size: 20px;">save mods</span>
+            </button>
+            <button style="position: absolute; top: 400px; left: 1000px;" onclick="loadnewmods()">
+                <span class="glow" style="font-size: 20px;">load new</span>
+            </button>
+            <button style="position: absolute; top: 400px; left: 1200px;" onclick="hidemodmenu()">
+                <span class="glow" style="font-size: 20px;">close</span>
+            </button>
+        </div>
+        <div class="ascend staticnes" id="reloaddim">
+            <img src="src/dim.png" style="position: absolute; opacity: 100%; top: 0px;" id="dim" width="1920" height="1080">
+            <p style="position: fixed; top: 250px; left: 770px;">Reloading...</p>
+        </div>
+        <div class="ascendtree" id="ascendtree">
+            <p class="glow" style="font-size: 30px;" id="ascendinstructions">Pick your desired upgrades and go back in time for more prestige</p>
+            <br>
+            <button onclick="goback()">
+                <span class="glow" style="font-size: 20px;">Go back</span>
+            </button>
+            <br>
+            <p style="font-size: 15px;" class="glow" id="showprestige">You have 0 prestige points</p>
+            <br><br><br><br><br>
+            <div class="ascendupgrades" id="ascendupgrades">
+                <div class="upgrades glow" id="prestigeupgrades">
+                    <br><br><br><br>
+                    <div class="upg">
+                        ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀<br>
+                        <img src="src/squircle.png" width="50" height="50"><br>
+                        Ticket - 1 prestige point<br>
+                        "Your pass to those sweet upgrades"<br>
+                        <button onclick="buyhu1()" id="hu1b">
+                            <span class="glow" style="font-size: 20px;">BUY</span>
+                        </button>
+                        <br><br>
+                        <div id="hu2">
+                            <img src="src/squircle.png" width="50" height="50"><br>
+                            Shop - 25 prestige points<br>
+                            "New things"<br>
+                            <button onclick="buyhu2()" id="hu2b">
+                                <span class="glow" style="font-size: 20px;">BUY</span>
+                            </button>
+                        </div>
+                        <br><br>
+                        <div id="hu3">
+                            <img src="src/squircle.png" width="50" height="50"><br>
+                            Sacrificial multiplier - 100 prestige points<br>
+                            "Sacrifice some multiplier for huge amount of seconds"<br>
+                            <button onclick="buyhu3()" id="hu3b">
+                                <span class="glow" style="font-size: 20px;">BUY</span>
+                            </button>
+                        </div>
+                        <br><br>
+                        <div id="hu4">
+                            <img src="src/squircle.png" width="50" height="50"><br>
+                            Time Travel - 100 prestige points<br>
+                            "Get 10% of your seconds that you had before rewinding time"<br>
+                            <button onclick="buyhu4()" id="hu4b">
+                                <span class="glow" style="font-size: 20px;">BUY</span>
+                            </button>
+                        </div>
+                        <br><br>
+                        <div id="hu5">
+                            <img src="src/squircle.png" width="50" height="50"><br>
+                            Gate - 500 prestige points<br>
+                            "Gate to a portal to somewhere..."<br>
+                            <button onclick="buyhu5()" id="hu5b">
+                                <span class="glow" style="font-size: 20px;">BUY</span>
+                            </button>
+                        </div>
+                        <br><br>
+                        <div id="hu6">
+                            <img src="src/squircle.png" width="50" height="50"><br>
+                            Time Shard - 1000 prestige points<br>
+                            "You can see your whole life in it"<br>
+                            <button onclick="buyhu6()" id="hu6b">
+                                <span class="glow" style="font-size: 20px;">BUY</span>
+                            </button>
+                        </div>
+                        <br><br><br><br>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="liquidcontainerascend" class="col-lg-3">
+            <div class="img-container">
+                <div class="positioning">
+                    <canvas id="liquid" class="liquid">
+                </div>
+                <img src="src/Flask.png" width="300" height="300">
+            </div>
+            <div class="valuesflask glow">
+                <p id="capacity" style="font-size: 30px;">Flask capacity is: 10</p>
+                <p id="fillpercentage" style="font-size: 30px;">Required percent of fill: 100%</p>
+                <p id="depositedprestige" style="font-size: 30px;">Flask contains 0 prestige</p>
+                <p id="flaskready" style="font-size: 30px;">Flask is not ready</p>
+                <button onclick="depositprestige()">
+                    <span class="glow" style="font-size: 20px;">Deposit Prestige</span>
+                </button>
+                <br><br>
+                <button onclick="drink()" id="drinkflask">
+                    <span class="glow" style="font-size: 20px;">Drink</span>
+                </button>
+            </div>
+        </div>
+        <audio id="audio" autoplay style="display: none;" controls>
+            <source src="" type="audio/mpeg">
+                Your browser does not support the
+                <code>audio</code> element.
+        </audio>
+        <canvas id="stars" class="stars">
     </div>
-    <audio id="audio" autoplay style="display: none;" controls>
-        <source src="" type="audio/mpeg">
-            Your browser does not support the
-            <code>audio</code> element.
-    </audio>
-    <canvas id="stars" class="stars">
 </body>
 </script>
 <script src="js/console.js"></script>
+<script src="js/scaler.js"></script>
 <script src="js/modloader.js"></script>
 <script type="text/paperscript" canvas="stars" src="js/stars.js"></script>
 <script type="text/paperscript" canvas="liquid" src="js/bottle.js"></script>

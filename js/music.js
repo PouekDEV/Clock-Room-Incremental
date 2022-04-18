@@ -35,6 +35,7 @@ el.onclick = function () {
     if(elevenload == 0){
         document.getElementById("loading").style.display = "block";
         fullload();
+        loadsoundsafterclick();
     }
 }
 function loadsetting(){
@@ -144,7 +145,7 @@ function continuecheckofinternet(){
         end();
     }
     else{
-        alert("It appears that you have a slow internet connection \n This can cause music to cut out")
+        vex.dialog.alert('It appears that you have a slow internet connection \n This can cause music to cut out');
         loadmusic();
     }
 }
