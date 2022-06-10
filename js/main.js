@@ -63,10 +63,10 @@ var importingsave = false;
 var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
 // Some game info
 var GameID = {
-    version: 1.2,
-    vname: "Big fix and reskin",
+    version: 1.3,
+    vname: "Security and scaling update",
     beta: 0,
-    launch: "18.04.2022"
+    launch: "10.06.2022"
 }
 // Mod stuff
 function showmodmenu(){
@@ -79,33 +79,40 @@ function hidemodmenu(){
 }
 function loadnewmods(){
     upgrade_click_sound();
-    var url;
-    var name;
-    vex.dialog.open({
-        message: 'Paste mod data here',
-        input: [
-            '<input name="url" type="text" placeholder="URL" required />',
-            '<input name="smodname" type="text" placeholder="Short mod name" required />'
-        ].join(''),
-        buttons: [
-            $.extend({}, vex.dialog.buttons.YES, { text: 'Load' }),
-            $.extend({}, vex.dialog.buttons.NO, { text: 'Back' })
-        ],
-        callback: function (data) {
-            if (data) {
-                url = data.url;
-                name = data.smodname;
-                vex.dialog.confirm({
-                    message: "Is this correct? \n Mod name: " + name + " \n Mod url: " + url,
-                    callback: function (value) {
-                        if (value) {
-                            if(modnames == undefined){
-                                modnames = [];
-                                modlinks = [];
-                            }
-                            loadmod(url,name);
-                            modnames.push(name);
-                            modlinks.push(url);
+    vex.dialog.confirm({
+        message: "WARNING! \n Check what mods you are loading before something stupid happens!",
+        callback: function (value) {
+            if (value) {
+                var url;
+                var name;
+                vex.dialog.open({
+                    message: 'Paste mod data here',
+                    input: [
+                        '<input name="url" type="text" placeholder="URL" required />',
+                        '<input name="smodname" type="text" placeholder="Short mod name" required />'
+                    ].join(''),
+                    buttons: [
+                        $.extend({}, vex.dialog.buttons.YES, { text: 'Load' }),
+                        $.extend({}, vex.dialog.buttons.NO, { text: 'Back' })
+                    ],
+                    callback: function (data) {
+                        if (data) {
+                            url = data.url;
+                            name = data.smodname;
+                            vex.dialog.confirm({
+                                message: "Is this correct? \n Mod name: " + name + " \n Mod url: " + url,
+                                callback: function (value) {
+                                    if (value) {
+                                        if(modnames == undefined){
+                                            modnames = [];
+                                            modlinks = [];
+                                        }
+                                        loadmod(url,name);
+                                        modnames.push(name);
+                                        modlinks.push(url);
+                                    }
+                                }
+                            })
                         }
                     }
                 })
