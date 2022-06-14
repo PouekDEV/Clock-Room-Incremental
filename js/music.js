@@ -143,7 +143,7 @@ function checkinternetspeed(){
         testConnectionSpeed.run(1.5, function(mbps){internetspeed = mbps; continuecheckofinternet();}, function(mbps){internetspeed = mbps; continuecheckofinternet();} )
     }
     else{
-        end();
+        loadmusic();
     }
 }
 function continuecheckofinternet(){
