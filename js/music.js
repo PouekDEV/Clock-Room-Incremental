@@ -1,4 +1,5 @@
-// My custom music loading script
+// My custom music loading script v2
+// Now uses howler.js
 // Loading page
 function hide(){
     document.getElementById("ascendtree").style.display = "none";
@@ -20,14 +21,16 @@ function hide(){
 hide();
 loadsetting();
 // Assigning variables
+var ambient;
+var welcome;
+var loopascend;
 var elevenload = 0;
 var gamemoment = 0;
 var internetspeed = 0;
 var localgame = false;
 var musicon;
 var effecton;
-var player = document.getElementById('audio');
-var el = document.querySelector('div');
+var el = document.querySelector('body')
 el.scrollTop = el.scrollHeight;
 document.onload = loading();
 var el = document.getElementById('body')
@@ -87,6 +90,7 @@ function changemusicstate(){
         savesetting(false);
     }
     else{
+        ambient.play();
         musicon = true;
         savesetting(true);
     }
@@ -110,12 +114,15 @@ setInterval(() => {
         elevenload = 12;
     }
     if(musicon){
-        player.volume = 1;
         document.getElementById("musicswitch").innerHTML = "on";
         document.getElementById("musicswitch2").innerHTML = "on";
     }
     if(!musicon){
-        player.volume = 0;
+        if(gamemoment > 0){
+            ambient.stop();
+            welcome.stop();
+            loopascend.stop();
+        }
         document.getElementById("musicswitch").innerHTML = "off";
         document.getElementById("musicswitch2").innerHTML = "off";
     }
@@ -129,7 +136,7 @@ setInterval(() => {
         document.getElementById("bgeffect2").innerHTML = "off";
         document.getElementById("stars").style.display = "none";
     }
-},10)
+},100)
 function checkinternetspeed(){
     if(!localgame){
         document.getElementById("loadingtext").innerHTML = "Measuring internet speed..."
@@ -142,10 +149,10 @@ function checkinternetspeed(){
 function continuecheckofinternet(){
     console.log("[Loader] " + (internetspeed/8) * 10 + "MB/s")
     if(internetspeed/8 >= 0.5){
-        end();
+        loadmusic();
     }
     else{
-        vex.dialog.alert('It appears that you have a slow internet connection \n This can cause music to cut out');
+        vex.dialog.alert('It appears that you have a slow internet connection \n Loading time will be longer');
         loadmusic();
     }
 }
@@ -155,34 +162,46 @@ function loadmusic(){
     load();
 }
 function load(){
-    player.volume = 0
     document.getElementById("loadingtext").innerHTML = "Loading ambient music (20.1MB)"
-    player.setAttribute('src', 'music/sittinginaroom.wav');
-    player.load();
-    player.play();
-    setTimeout(() =>{
-        afterambient();
-    },5000)
+    ambient = new Howl({
+        src: ['music/sittinginaroom.wav'],
+        onend: function(){
+            ambient.play();
+        },
+        onplay: function(){
+            gamemoment = 1;
+        },
+        onload: function(){
+            afterambient();
+        }
+    })
 }
 function afterambient(){
     console.log("[Loader] Ambient music loaded (20.1MB)")
     document.getElementById("loadingtext").innerHTML = "Loading welcoming ascend music (1.92MB)"
-    player.setAttribute('src','music/ascendstart.wav');
-    player.load();
-    player.play();
-    setTimeout(() => {
-        afterwelcomeascend();
-    },2000)
+    welcome = new Howl({
+        src: ['music/ascendstart.wav'],
+        onend: function(){
+            gamemoment = 3;
+            loopascend.play();
+        },
+        onload: function(){
+            afterwelcomeascend();
+        }
+    })
 }
 function afterwelcomeascend(){
     console.log("[Loader] Ascend music (loop) loaded (1.92MB)")
     document.getElementById("loadingtext").innerHTML = "Loading looping ascend music (2.79MB)"
-    player.setAttribute('src','music/ascendloop.wav');
-    player.load();
-    player.play();
-    setTimeout(() => {
-        end();
-    },2000)
+    loopascend = new Howl({
+        src: ['music/ascendloop.wav'],
+        onend: function(){
+            loopascend.play();
+        },
+        onload: function(){
+            end();
+        }
+    })
 }
 function end(){
     console.log("[Loader] Ascend music (loop) loaded (2.79MB)")
@@ -199,37 +218,20 @@ function end(){
 // Start main ambient
 function menumusic(){
     gamemoment = 1;
-    player.setAttribute('src', 'music/sittinginaroom.wav');
     if(musicon){
-        player.volume = 1
+        ambient.stop();
+        welcome.stop();
+        loopascend.stop();
+        ambient.play();
     }
-    player.load();
-    player.play();
 }
 // Start ascend music
 function ascendmusic(){
     gamemoment = 2;
-    player.setAttribute('src','music/ascendstart.wav');
     if(musicon){
-        player.volume = 0.2
+        ambient.stop();
+        welcome.stop();
+        loopascend.stop();
+        welcome.play();
     }
-    player.load();
-    player.load();
 }
-// Looper
-player.addEventListener("ended", function(){
-    if(gamemoment == 1){
-        player.currentTime = 0;
-        player.play();
-    }
-    if(gamemoment == 2){
-        gamemoment = 3;
-        player.setAttribute('src','music/ascendloop.wav');
-        player.load();
-        player.play();
-    }
-    if(gamemoment == 3){
-        player.currentTime = 0;
-        player.play();
-    }
-});
