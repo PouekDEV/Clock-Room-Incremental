@@ -1,7 +1,7 @@
 # Clock-Room-Incremental
 My second Incremental game. Much content and better gameplay guaranted!
 
-Play it here - https://pouekdev.one/Clock-Room-Incremental
+Play it here - https://www.pouekdev.one/Clock-Room-Incremental
 
 or here - https://pouek.itch.io/clock-room
 
