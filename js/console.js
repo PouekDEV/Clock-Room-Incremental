@@ -6,4 +6,4 @@ console.log("[Hello there are you going to do some cheating or what?]")
 function showfps(){
     javascript:(function(){var script=document.createElement('script');script.onload=function(){var fps=new FPS();fps.start();};script.src='js/fps.js';document.head.appendChild(script);})()
 }
-showfps();
+//showfps();
