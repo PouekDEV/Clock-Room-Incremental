@@ -63,10 +63,10 @@ var importingsave = false;
 var messages = ["You have one shard","You have two shards","Shards begin to duplicate","Shards surround you","You have a lot of dust","You think of smelting the dust","You have the key","Gate is open"]
 // Some game info
 var GameID = {
-    version: 1.4,
-    vname: "Music handling script rewrite",
+    version: 1.5,
+    vname: "The Final Update",
     beta: 0,
-    launch: "14.06.2022"
+    launch: "04.09.2022"
 }
 // Mod stuff
 function showmodmenu(){
@@ -381,6 +381,7 @@ function deletesave(){
     callback: function (value) {
         if (value) {
             localStorage.removeItem("clockroomsave");
+            localStorage.removeItem("clockroomsettings");
             document.getElementById("reloaddim").style.display = "block";
             location.reload();
         }
@@ -856,20 +857,34 @@ function endofdagame(){
     }
 }
 function endofdagameo1(){
-    hide();
-    document.getElementById("endtext").style.display = "block";
-    document.getElementById("endtext2").style.display = "block";
+    vex.dialog.confirm({
+        message: "Are you sure?",
+        callback: function (value) {
+            if (value) {
+                hide();
+                document.getElementById("endtext").style.display = "block";
+                document.getElementById("endtext2").style.display = "block";
+            }
+        }
+    })
 }
 function endofdagameo2(){
-    gate = false;
-    isbottlephase = true;
-    document.getElementById("gateprompt").style.display = "none";
-    document.getElementById("everything").style.display = "block";
-    document.getElementById("ascendtree").style.display = "none";
-    document.getElementById("gate").style.display = "none";
-    document.getElementById("setting").style.display = "none";
-    document.getElementById("muchnews").style.display = "none";
-    document.getElementById("ascendtree").style.display = "none";
+    vex.dialog.confirm({
+        message: "Are you sure?",
+        callback: function (value) {
+            if (value) {
+                gate = false;
+                isbottlephase = true;
+                document.getElementById("gateprompt").style.display = "none";
+                document.getElementById("everything").style.display = "block";
+                document.getElementById("ascendtree").style.display = "none";
+                document.getElementById("gate").style.display = "none";
+                document.getElementById("setting").style.display = "none";
+                document.getElementById("muchnews").style.display = "none";
+                document.getElementById("ascendtree").style.display = "none";          
+            }
+        }
+    })
 }
 function depositprestige(){
     if(isbottlephase && ascendpoints > 0){
