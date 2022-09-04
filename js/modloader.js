@@ -9,7 +9,7 @@ var queuenames = [];
 var onnumber;
 var infourl;
 var modname;
-var timeoutlever = true;
+var timeoutlever = "";
 function queuevariables(links,names){
     if(queuefinished){
         queuelinks = links;
@@ -40,6 +40,17 @@ function loadmod(url,name){
     document.body.appendChild(modscript);
     modscript.addEventListener("load", modloaded(url,name), false);
 }
+function timeout(name){
+    timeoutlever = setTimeout(() => {
+        console.log("[MODLOADER] Error loading mod '" + name +"' Error: Timeout error. Mod not responded in 5 seconds \n Does mod name and url is right? (Ignore if mod loaded properly and is working)");
+        $("script").last().remove()
+        $('.mod-in').toggleClass('show');
+        setTimeout(() => {
+            $('.mod-in').toggleClass('show');
+        },3000)
+        canload = true;
+    },5000)
+}
 function modloaded(url,name){
     infourl = url
     setTimeout(() => {
@@ -55,29 +66,15 @@ function modloaded(url,name){
                 $('.mod-in').toggleClass('show');
             },3000)
             canload = true;
-            timeoutlever = false;
+            clearTimeout(timeoutlever);
         }
         timeout(name);
-        timeoutlever = true;
     },1000)
-}
-function timeout(name){
-    setTimeout(() => {
-        if(timeoutlever){
-            console.log("[MODLOADER] Error loading mod '" + name +"' Error: Timeout error. Mod not responded in 5 seconds \n Does mod name and url is right?");
-            $("script").last().remove()
-            $('.mod-in').toggleClass('show');
-            setTimeout(() => {
-                $('.mod-in').toggleClass('show');
-            },3000)
-            canload = true;
-        }
-    },5000)
 }
 // This is called by a mod
 function modready(name){
     if(name == modname){
-        timeoutlever = false;
+        clearTimeout(timeoutlever);
         document.getElementById("modtextinfo").innerHTML = "Loaded mod";
         console.log("[MODLOADER] Loaded 1 new mod '" + name + "' from " + infourl);
         $('.mod-in').toggleClass('show');
@@ -89,7 +86,7 @@ function modready(name){
         canload = true;
     }
     else{
-        timeoutlever = false;
+        clearTimeout(timeoutlever);
         document.getElementById("modtextinfo").innerHTML = "Mod Error";
         console.log("[MODLOADER] Error loading mod '" + name +"' Error: Unknown mod name reported");
         $('.mod-in').toggleClass('show');

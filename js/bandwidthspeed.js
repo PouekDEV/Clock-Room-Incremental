@@ -2,7 +2,7 @@
 // Answer by https://stackoverflow.com/users/1712905/john-smith
 // Thank you for this amazing script!
 var testConnectionSpeed = {
-    imageAddr : "https://www.pouekdev.one/nothinsthere.gif",
+    imageAddr : "https://www.pouekdev.one/src/nothinsthere.gif",
     downloadSize : 988078,
     run:function(mbps_max,cb_gt,cb_lt){
       testConnectionSpeed.mbps_max = parseFloat(mbps_max) ? parseFloat(mbps_max) : 0;

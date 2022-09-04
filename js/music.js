@@ -29,6 +29,7 @@ var gamemoment = 0;
 var internetspeed = 0;
 var localgame = true;
 var musicon;
+var soundson;
 var effecton;
 var el = document.querySelector('body')
 el.scrollTop = el.scrollHeight;
@@ -46,26 +47,38 @@ function loadsetting(){
     if(loadedmusic == null){
         var savemusic = {
             musicon: true,
-            effecton: true
+            effecton: true,
+            soundson: true
         }
         localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
     }
     else{
         musicon = loadedmusic.musicon;
         effecton = loadedmusic.effecton;
+        soundson = loadedmusic.soundson;
     }
 }
 function savesetting(settingvalue){
     var savemusic = {
         musicon: settingvalue,
-        effecton: effecton
+        effecton: effecton,
+        soundson: soundson
     }
     localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
 }
 function savesettingeffect(settingvalue){
     var savemusic = {
         musicon: musicon,
-        effecton: settingvalue
+        effecton: settingvalue,
+        soundson: soundson
+    }
+    localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
+}
+function savesettingsound(settingvalue){
+    var savemusic = {
+        musicon: musicon,
+        effecton: effecton,
+        soundson: settingvalue
     }
     localStorage.setItem("clockroomsettings",JSON.stringify(savemusic));
 }
@@ -95,6 +108,17 @@ function changemusicstate(){
         savesetting(true);
     }
 }
+function changesoundstate(){
+    upgrade_click_sound();
+    if(soundson){
+        soundson = false;
+        savesettingsound(false);
+    }
+    else{
+        soundson = true;
+        savesettingsound(true);
+    }
+}
 function loading(){
     console.log("[Loader] Page loaded")
     document.getElementById("loadingtext").innerHTML = "Click anywhere to start"
@@ -116,6 +140,14 @@ setInterval(() => {
     if(musicon){
         document.getElementById("musicswitch").innerHTML = "on";
         document.getElementById("musicswitch2").innerHTML = "on";
+    }
+    if(soundson){
+        document.getElementById("soundswitch").innerHTML = "on";
+        document.getElementById("soundswitch2").innerHTML = "on";
+    }
+    if(!soundson){
+        document.getElementById("soundswitch").innerHTML = "off";
+        document.getElementById("soundswitch2").innerHTML = "off";
     }
     if(!musicon){
         if(gamemoment > 0){
@@ -147,7 +179,7 @@ function checkinternetspeed(){
     }
 }
 function continuecheckofinternet(){
-    console.log("[Loader] " + (internetspeed/8) * 10 + "MB/s")
+    console.log("[Loader] " + (internetspeed/8) * 10 + "Mb/s")
     if(internetspeed/8 >= 0.5){
         loadmusic();
     }
@@ -191,7 +223,7 @@ function afterambient(){
     })
 }
 function afterwelcomeascend(){
-    console.log("[Loader] Ascend music (loop) loaded (1.92MB)")
+    console.log("[Loader] Ascend music loaded (1.92MB)")
     document.getElementById("loadingtext").innerHTML = "Loading looping ascend music (2.79MB)"
     loopascend = new Howl({
         src: ['music/ascendloop.wav'],
@@ -233,5 +265,65 @@ function ascendmusic(){
         welcome.stop();
         loopascend.stop();
         welcome.play();
+    }
+}
+
+// Sound stuff migrated from sounds.js
+var cu;
+var cpu;
+var cs;
+var cus;
+var csd;
+var cog;
+// Load all sounds after clicking
+function loadsoundsafterclick(){
+    cu = new Howl({
+        src: ['src/click_upgrade.wav']
+    });
+    cpu = new Howl({
+        src: ['src/click_prestige_upgrade.wav']
+    });
+    cs = new Howl({
+        src: ['src/click_shard.wav']
+    });
+    cus = new Howl({
+        src: ['src/crush_shard.wav']
+    });
+    csd = new Howl({
+        src: ['src/click_smelting_dust.wav']
+    });
+    cog = new Howl({
+        src: ['src/click_open_gate.wav']
+    });
+}
+// Functions to play sounds
+function upgrade_click_sound(){
+    if(soundson){
+        cu.play();
+    }
+}
+function prestige_upgrade_click_sound(){
+    if(soundson){
+        cpu.play();   
+    }
+}
+function shard_click_sound(){
+    if(soundson){
+        cs.play();   
+    }
+}
+function crush_shard_sound(){
+    if(soundson){
+        cus.play();   
+    }
+}
+function smelt_dust_sound(){
+    if(soundson){
+        csd.play();   
+    }
+}
+function gate_open_sound(){
+    if(soundson){
+        cog.play();   
     }
 }
